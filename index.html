@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ServiCasa — Servicios para tu hogar</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #1B4332;
+    --brand-light: #40916C;
+    --brand-accent: #D8F3DC;
+    --gold: #F4A100;
+    --gold-light: #FFF3CD;
+    --bg: #F7F5F0;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --text-muted: #6B6B6B;
+    --text-light: #A0A0A0;
+    --border: #E0DDD6;
+    --card-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, .logo {
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* SCREENS */
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: flex; flex-direction: column; }
+
+  /* NAV */
+  nav {
+    background: var(--brand);
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--gold); }
+
+  nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-btn {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .nav-btn:hover { background: rgba(255,255,255,0.22); }
+  .nav-btn.active { background: var(--gold); color: var(--brand); }
+
+  /* HERO */
+  .hero {
+    background: var(--brand);
+    padding: 56px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .hero h1 {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero p {
+    color: rgba(255,255,255,0.72);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 340px;
+    margin: 0 auto 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* SEARCH BAR */
+  .search-bar {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 6px 6px 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: transparent;
+  }
+
+  .search-bar input::placeholder { color: var(--text-light); }
+
+  .btn-primary {
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+  }
+
+  .btn-primary:hover { background: var(--brand-light); }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--brand);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+
+  .btn-gold:hover { opacity: 0.88; }
+  .btn-gold:active { transform: scale(0.98); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--brand);
+    border: 1.5px solid var(--brand);
+    padding: 11px 24px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { background: var(--brand); color: #fff; }
+
+  /* CATEGORIES */
+  .section { padding: 28px 20px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .cat-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 14px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1.5px solid transparent;
+  }
+
+  .cat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow);
+    border-color: var(--brand-light);
+  }
+
+  .cat-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .cat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  /* CONTRACTOR CARDS */
+  .contractors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contractor-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.15s;
+    border: 1px solid var(--border);
+  }
+
+  .contractor-card:hover {
+    box-shadow: var(--card-shadow);
+    transform: translateY(-1px);
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .avatar.green { background: var(--brand-accent); color: var(--brand); }
+  .avatar.gold { background: var(--gold-light); color: #A06B00; }
+  .avatar.blue { background: #DBEAFE; color: #1D4ED8; }
+  .avatar.coral { background: #FFE4E1; color: #C0392B; }
+
+  .contractor-info { flex: 1; min-width: 0; }
+
+  .contractor-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .contractor-trade {
+    font-size: 12px;
+    color: var(--brand-light);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .stars .star { color: var(--gold); font-size: 13px; }
+
+  .contractor-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    background: var(--brand-accent);
+    color: var(--brand);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  .badge.gold { background: var(--gold-light); color: #A06B00; }
+
+  .price-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brand);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .price-tag span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  /* HOW IT WORKS */
+  .how-it-works {
+    background: var(--brand);
+    padding: 32px 20px;
+    margin: 8px 0;
+  }
+
+  .how-it-works .section-title { color: #fff; }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .step-num {
+    width: 34px;
+    height: 34px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--brand);
+    flex-shrink: 0;
+  }
+
+  .step-content h4 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .step-content p {
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* POST JOB FORM */
+  .form-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 16px 20px;
+    border: 1px solid var(--border);
+  }
+
+  .form-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: var(--text);
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--brand-light);
+    background: var(--white);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* PROFILE / CONTRACTOR DETAIL */
+  .profile-hero {
+    background: var(--brand);
+    padding: 28px 20px 32px;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--brand);
+    margin: 0 auto 12px;
+    border: 3px solid rgba(255,255,255,0.3);
+  }
+
+  .profile-name {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .profile-trade {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 16px;
+  }
+
+  .profile-stat-val {
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .profile-stat-label {
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+  }
+
+  /* REVIEWS */
+  .review-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .reviewer-name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .review-date {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  .review-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* TABS */
+  .tab-bar {
+    display: flex;
+    border-bottom: 1.5px solid var(--border);
+    padding: 0 20px;
+    background: var(--white);
+  }
+
+  .tab {
+    padding: 14px 16px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2.5px solid transparent;
+    margin-bottom: -1.5px;
+    transition: all 0.15s;
+  }
+
+  .tab.active {
+    color: var(--brand);
+    border-bottom-color: var(--brand);
+    font-weight: 600;
+  }
+
+  /* BACK BUTTON */
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 12px;
+    transition: color 0.15s;
+  }
+
+  .back-btn:hover { color: #fff; }
+
+  /* SUCCESS STATE */
+  .success-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    text-align: center;
+  }
+
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    background: var(--brand-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  /* BOTTOM CTA */
+  .bottom-cta {
+    position: sticky;
+    bottom: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .bottom-cta .btn-gold { flex: 1; }
+  .bottom-cta .btn-outline { flex: 1; }
+
+  /* CHIPS */
+  .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .chip:hover, .chip.active {
+    background: var(--brand);
+    color: #fff;
+    border-color: var(--brand);
+  }
+
+  /* TRUST BANNER */
+  .trust-banner {
+    background: var(--gold-light);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 20px 16px;
+    border: 1px solid #F4D47A;
+  }
+
+  .trust-banner p {
+    font-size: 12px;
+    color: #7A5800;
+    line-height: 1.4;
+  }
+
+  .trust-banner strong { font-weight: 600; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--brand);
+    padding: 28px 20px;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  .footer p {
+    color: rgba(255,255,255,0.45);
+    font-size: 12px;
+  }
+
+  .footer .logo { font-size: 18px; margin-bottom: 8px; display: block; }
+
+  /* CONTRACTOR SIGNUP */
+  .contractor-hero {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+    padding: 36px 20px;
+    text-align: center;
+  }
+
+  .contractor-hero h2 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .contractor-hero p {
+    color: rgba(255,255,255,0.72);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .earnings-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: -20px 20px 0;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+
+  .earning-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brand);
+  }
+
+  .earning-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  .perks-list {
+    padding: 0 20px;
+    margin-top: 24px;
+  }
+
+  .perk {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .perk:last-child { border-bottom: none; }
+
+  .perk-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--brand-accent);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .perk h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .perk p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ANIMATION */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .screen.active > * {
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .screen.active > *:nth-child(2) { animation-delay: 0.04s; }
+  .screen.active > *:nth-child(3) { animation-delay: 0.08s; }
+  .screen.active > *:nth-child(4) { animation-delay: 0.12s; }
+</style>
+</head>
+<body>
+
+<!-- ============ SCREEN 1: HOME ============ -->
+<div class="screen active" id="screen-home">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-contractors')">Soy Técnico</button>
+      <button class="nav-btn active" onclick="showScreen('screen-post')">Publicar Trabajo</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Encuentra técnicos <span>de confianza</span> cerca de ti</h1>
+    <p>Conectamos propietarios con los mejores profesionales para el hogar en Colombia</p>
+    <div class="search-bar">
+      <span style="color:#A0A0A0; font-size:16px;">🔍</span>
+      <input type="text" placeholder="¿Qué necesitas? Ej: pintura, plomería..." id="search-input">
+      <button class="btn-primary" onclick="doSearch()">Buscar</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">¿Qué necesitas hoy?</div>
+    <div class="categories-grid">
+      <div class="cat-card" onclick="filterCategory('Pintura')">
+        <div class="cat-icon">🎨</div>
+        <div class="cat-label">Pintura</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Plomería')">
+        <div class="cat-icon">🔧</div>
+        <div class="cat-label">Plomería</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Carpintería')">
+        <div class="cat-icon">🪚</div>
+        <div class="cat-label">Carpintería</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Limpieza')">
+        <div class="cat-icon">🧹</div>
+        <div class="cat-label">Limpieza</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Electricidad')">
+        <div class="cat-icon">⚡</div>
+        <div class="cat-label">Eléctrico</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Drywall')">
+        <div class="cat-icon">🏠</div>
+        <div class="cat-label">Drywall</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Pisos')">
+        <div class="cat-icon">⬛</div>
+        <div class="cat-label">Pisos</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Jardín')">
+        <div class="cat-icon">🌿</div>
+        <div class="cat-label">Jardín</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust-banner">
+    <span style="font-size:20px;">✅</span>
+    <p><strong>Técnicos verificados.</strong> Todos nuestros profesionales pasan por verificación de antecedentes y están asegurados.</p>
+  </div>
+
+  <div class="section" style="padding-top: 0;">
+    <div class="section-title">Técnicos mejor valorados</div>
+    <div class="chips">
+      <div class="chip active" onclick="setChip(this, 'all')">Todos</div>
+      <div class="chip" onclick="setChip(this, 'Bogotá')">Bogotá</div>
+      <div class="chip" onclick="setChip(this, 'Medellín')">Medellín</div>
+      <div class="chip" onclick="setChip(this, 'Cali')">Cali</div>
+    </div>
+    <div class="contractors-list" id="contractors-list">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <div class="how-it-works">
+    <div class="section-title">¿Cómo funciona?</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Publica tu trabajo gratis</h4>
+          <p>Describe lo que necesitas, tu ubicación y cuándo quieres que lo hagan.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Recibe cotizaciones</h4>
+          <p>Técnicos verificados te envían sus propuestas y precios en horas.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Elige y paga seguro</h4>
+          <p>Selecciona el mejor técnico y paga de forma segura a través de la app.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="logo">Servi<span style="color:var(--gold);">Casa</span></span>
+    <p>Bogotá · Medellín · Cali</p>
+    <p style="margin-top:6px;">© 2026 ServiCasa. Todos los derechos reservados.</p>
+  </div>
+</div>
+
+<!-- ============ SCREEN 2: SEARCH RESULTS ============ -->
+<div class="screen" id="screen-results">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">← Inicio</button>
+    </div>
+  </nav>
+
+  <div style="padding: 16px 20px 8px;">
+    <div style="font-size:13px; color: var(--text-muted); margin-bottom: 12px;" id="results-label">Resultados para "pintura"</div>
+    <div class="chips" id="results-chips">
+      <div class="chip active">Mejor valorados</div>
+      <div class="chip">Menor precio</div>
+      <div class="chip">Disponible hoy</div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="contractors-list" id="results-list"></div>
+  </div>
+</div>
+
+<!-- ============ SCREEN 3: CONTRACTOR PROFILE ============ -->
+<div class="screen" id="screen-profile">
+  <div class="profile-hero">
+    <button class="back-btn" onclick="goBack()">← Volver</button>
+    <div class="profile-avatar" id="profile-avatar">MR</div>
+    <div class="profile-name" id="profile-name">Mario Restrepo</div>
+    <div class="profile-trade" id="profile-trade">Pintor Profesional</div>
+    <div class="stars" style="justify-content:center; margin-bottom:4px;">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      <span style="color:rgba(255,255,255,0.7); margin-left:4px;" id="profile-rating">4.9</span>
+    </div>
+    <div class="profile-stats">
+      <div>
+        <div class="profile-stat-val" id="profile-jobs">127</div>
+        <div class="profile-stat-label">Trabajos</div>
+      </div>
+      <div>
+        <div class="profile-stat-val" id="profile-years">5</div>
+        <div class="profile-stat-label">Años exp.</div>
+      </div>
+      <div>
+        <div class="profile-stat-val" id="profile-rate">$85k</div>
+        <div class="profile-stat-label">por hora</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab(this,'tab-about')">Perfil</div>
+    <div class="tab" onclick="switchTab(this,'tab-reviews')">Reseñas</div>
+    <div class="tab" onclick="switchTab(this,'tab-portfolio')">Portafolio</div>
+  </div>
+
+  <div id="tab-about" style="padding: 16px 20px;">
+    <div style="font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:16px;" id="profile-bio">
+      Pintor profesional con más de 5 años de experiencia en interiores y exteriores. Especializado en acabados de alta calidad para apartamentos, casas y locales comerciales.
+    </div>
+    <div class="form-card" style="margin: 0 0 12px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div>
+          <div style="font-size:11px; color:var(--text-light); margin-bottom:3px; text-transform:uppercase; letter-spacing:0.5px;">Ciudad</div>
+          <div style="font-size:14px; font-weight:500;" id="profile-city">Bogotá</div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--text-light); margin-bottom:3px; text-transform:uppercase; letter-spacing:0.5px;">Disponibilidad</div>
+          <div style="font-size:14px; font-weight:500;">Inmediata</div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--text-light); margin-bottom:3px; text-transform:uppercase; letter-spacing:0.5px;">Responde en</div>
+          <div style="font-size:14px; font-weight:500;">~2 horas</div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--text-light); margin-bottom:3px; text-transform:uppercase; letter-spacing:0.5px;">Verificado</div>
+          <div style="font-size:14px; font-weight:500; color: var(--brand-light);">✓ Sí</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;" id="profile-badges"></div>
+  </div>
+
+  <div id="tab-reviews" style="padding: 16px 20px; display:none;">
+    <div class="review-card">
+      <div class="review-header">
+        <div class="reviewer-name">Ana García</div>
+        <div class="review-date">Hace 2 semanas</div>
+      </div>
+      <div class="stars" style="margin-bottom:6px;"><span class="star">★★★★★</span></div>
+      <div class="review-text">Excelente trabajo, muy puntual y profesional. Dejó todo limpio. Lo recomiendo ampliamente.</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header">
+        <div class="reviewer-name">Carlos Mendoza</div>
+        <div class="review-date">Hace 1 mes</div>
+      </div>
+      <div class="stars" style="margin-bottom:6px;"><span class="star">★★★★★</span></div>
+      <div class="review-text">El mejor pintor que he contratado. Terminó antes del plazo y el acabado es impecable.</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header">
+        <div class="reviewer-name">Lucía Torres</div>
+        <div class="review-date">Hace 2 meses</div>
+      </div>
+      <div class="stars" style="margin-bottom:6px;"><span class="star" style="color:var(--gold);">★★★★</span><span class="star" style="color:var(--border);">★</span></div>
+      <div class="review-text">Buen trabajo en general. Un poco tarde la primera mañana pero compensó con calidad.</div>
+    </div>
+  </div>
+
+  <div id="tab-portfolio" style="padding: 16px 20px; display:none;">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+      <div style="background:var(--brand-accent); border-radius:10px; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:32px;">🏠</div>
+      <div style="background:#FFF3E0; border-radius:10px; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:32px;">🎨</div>
+      <div style="background:#E3F2FD; border-radius:10px; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:32px;">🪟</div>
+      <div style="background:#F3E5F5; border-radius:10px; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:32px;">🏢</div>
+    </div>
+    <p style="font-size:12px; color:var(--text-light); text-align:center; margin-top:12px;">Fotos de trabajos recientes</p>
+  </div>
+
+  <div style="height: 80px;"></div>
+  <div class="bottom-cta">
+    <button class="btn-outline" onclick="showScreen('screen-home')">Enviar Mensaje</button>
+    <button class="btn-gold" onclick="showScreen('screen-post')">Contratar Ahora</button>
+  </div>
+</div>
+
+<!-- ============ SCREEN 4: POST A JOB ============ -->
+<div class="screen" id="screen-post">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">← Inicio</button>
+    </div>
+  </nav>
+
+  <div class="form-card">
+    <div class="form-title">📋 Publica tu trabajo gratis</div>
+
+    <div class="form-group">
+      <label>Tipo de servicio</label>
+      <select>
+        <option value="">Selecciona una categoría...</option>
+        <option>Pintura</option>
+        <option>Plomería</option>
+        <option>Carpintería</option>
+        <option>Limpieza</option>
+        <option>Drywall / Reparaciones</option>
+        <option>Pisos</option>
+        <option>Electricidad</option>
+        <option>Jardín</option>
+        <option>Otro</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Describe el trabajo</label>
+      <textarea placeholder="Ej: Necesito pintar sala y comedor de 40m². Paredes en buen estado, solo necesita una mano de pintura..."></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Ciudad</label>
+        <select>
+          <option>Bogotá</option>
+          <option>Medellín</option>
+          <option>Cali</option>
+          <option>Barranquilla</option>
+          <option>Otra</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>¿Cuándo?</label>
+        <select>
+          <option>Esta semana</option>
+          <option>Hoy o mañana</option>
+          <option>Este mes</option>
+          <option>Flexible</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Barrio / Dirección aproximada</label>
+      <input type="text" placeholder="Ej: Chapinero, Bogotá">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Tu nombre</label>
+        <input type="text" placeholder="Nombre completo">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="+57 300...">
+      </div>
+    </div>
+
+    <div style="margin-top:6px;">
+      <button class="btn-gold" style="width:100%; padding:14px;" onclick="submitJob()">
+        Publicar y Recibir Cotizaciones 🚀
+      </button>
+    </div>
+
+    <p style="font-size:11px; color:var(--text-light); text-align:center; margin-top:10px; line-height:1.5;">
+      Gratis y sin compromiso. Recibirás cotizaciones de técnicos verificados en tu zona.
+    </p>
+  </div>
+</div>
+
+<!-- ============ SCREEN 5: SUCCESS ============ -->
+<div class="screen" id="screen-success">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+  </nav>
+  <div class="success-screen">
+    <div class="success-icon">✅</div>
+    <h2 style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; margin-bottom:12px;">¡Trabajo Publicado!</h2>
+    <p style="color:var(--text-muted); font-size:14px; line-height:1.7; max-width:300px; margin-bottom:28px;">
+      Tu solicitud fue enviada a <strong>técnicos verificados</strong> en tu zona. Recibirás cotizaciones pronto por WhatsApp.
+    </p>
+    <div style="background:var(--brand-accent); border-radius:var(--radius); padding:16px 20px; margin-bottom:24px; width:100%; max-width:320px;">
+      <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">Tiempo promedio de respuesta</div>
+      <div style="font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--brand);">2–4 horas</div>
+    </div>
+    <button class="btn-gold" onclick="showScreen('screen-home')" style="width:100%; max-width:320px; padding:14px;">
+      Ver Técnicos Disponibles
+    </button>
+    <button class="btn-outline" style="width:100%; max-width:320px; margin-top:10px; padding:13px;" onclick="showScreen('screen-home')">
+      Volver al Inicio
+    </button>
+  </div>
+</div>
+
+<!-- ============ SCREEN 6: CONTRACTOR SIGNUP ============ -->
+<div class="screen" id="screen-contractors">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">← Inicio</button>
+    </div>
+  </nav>
+
+  <div class="contractor-hero">
+    <h2>Haz crecer tu<br>negocio con ServiCasa</h2>
+    <p>Únete a cientos de técnicos que ya generan ingresos adicionales cada semana</p>
+  </div>
+
+  <div class="earnings-card">
+    <div>
+      <div class="earning-val">$2.4M</div>
+      <div class="earning-label">Ingreso prom./mes</div>
+    </div>
+    <div style="width:1px; background:var(--border);"></div>
+    <div>
+      <div class="earning-val">340+</div>
+      <div class="earning-label">Técnicos activos</div>
+    </div>
+    <div style="width:1px; background:var(--border);"></div>
+    <div>
+      <div class="earning-val">4.8★</div>
+      <div class="earning-label">Calificación prom.</div>
+    </div>
+  </div>
+
+  <div class="perks-list" style="margin-top:28px;">
+    <div class="perk">
+      <div class="perk-icon">🎯</div>
+      <div>
+        <h4>Trabajos cerca de ti</h4>
+        <p>Solo recibes solicitudes en tu ciudad y especialidad. Sin viajes largos.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">💳</div>
+      <div>
+        <h4>Cobro garantizado</h4>
+        <p>El pago se procesa de forma segura antes de empezar el trabajo.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">📱</div>
+      <div>
+        <h4>Todo desde el celular</h4>
+        <p>Recibe cotizaciones, acepta trabajos y cobra sin papeleo.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">⭐</div>
+      <div>
+        <h4>Construye tu reputación</h4>
+        <p>Las buenas reseñas te consiguen más clientes automáticamente.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card" style="margin-top:16px;">
+    <div class="form-title">Regístrate como Técnico</div>
+    <div class="form-group">
+      <label>Nombre completo</label>
+      <input type="text" placeholder="Tu nombre">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Especialidad</label>
+        <select>
+          <option>Pintura</option>
+          <option>Plomería</option>
+          <option>Carpintería</option>
+          <option>Limpieza</option>
+          <option>Electricidad</option>
+          <option>Drywall</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Ciudad</label>
+        <select>
+          <option>Bogotá</option>
+          <option>Medellín</option>
+          <option>Cali</option>
+          <option>Otra</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>WhatsApp</label>
+      <input type="tel" placeholder="+57 300...">
+    </div>
+    <button class="btn-gold" style="width:100%; padding:14px;" onclick="showScreen('screen-success')">
+      Unirme a ServiCasa 🛠️
+    </button>
+    <p style="font-size:11px; color:var(--text-light); text-align:center; margin-top:10px;">
+      Sin cuotas de inscripción. Solo pagamos cuando tú ganas.
+    </p>
+  </div>
+
+  <div style="height:20px;"></div>
+</div>
+
+<script>
+const contractors = [
+  { id:1, name:'Mario Restrepo', initials:'MR', trade:'Pintura', city:'Bogotá', rating:4.9, reviews:47, jobs:127, years:5, rate:'$85k', avatar:'green', badges:['Verificado','Top Rated'], bio:'Pintor profesional con más de 5 años de experiencia en interiores y exteriores.' },
+  { id:2, name:'Sofía Vargas', initials:'SV', trade:'Limpieza Profunda', city:'Medellín', rating:4.8, reviews:62, jobs:203, years:4, rate:'$65k', avatar:'gold', badges:['Verificada','Disponible Hoy'], bio:'Especialista en limpieza de hogares y oficinas. Métodos ecológicos y materiales de alta calidad.' },
+  { id:3, name:'Juan Ospina', initials:'JO', trade:'Carpintería', city:'Bogotá', rating:4.7, reviews:31, jobs:88, years:7, rate:'$95k', avatar:'blue', badges:['Verificado'], bio:'Carpintero con 7 años fabricando e instalando muebles a medida, closets y cocinas.' },
+  { id:4, name:'Camila Ríos', initials:'CR', trade:'Drywall & Reparaciones', city:'Cali', rating:4.9, reviews:28, jobs:54, years:3, rate:'$75k', avatar:'coral', badges:['Verificada','Nuevo'], bio:'Técnica en drywall y reparaciones generales. Trabajo limpio y entrega a tiempo garantizada.' },
+  { id:5, name:'Diego Morales', initials:'DM', trade:'Pintura & Acabados', city:'Bogotá', rating:4.6, reviews:19, jobs:41, years:2, rate:'$70k', avatar:'green', badges:['Verificado'], bio:'Pintor especializado en acabados modernos y técnicas decorativas para el hogar.' },
+];
+
+let currentContractor = null;
+let prevScreen = 'screen-home';
+
+function renderContractors(list, targetId) {
+  const el = document.getElementById(targetId);
+  el.innerHTML = list.map(c => `
+    <div class="contractor-card" onclick="openProfile(${c.id})">
+      <div class="avatar ${c.avatar}">${c.initials}</div>
+      <div class="contractor-info">
+        <div class="contractor-name">${c.name}</div>
+        <div class="contractor-trade">${c.trade}</div>
+        <div class="stars">
+          <span class="star">★</span> ${c.rating} <span style="color:var(--text-light);">(${c.reviews} reseñas)</span>
+        </div>
+        <div class="contractor-meta">
+          ${c.badges.map(b => `<span class="badge ${b==='Top Rated'?'gold':''}">${b}</span>`).join('')}
+          <span style="font-size:11px; color:var(--text-light);">📍 ${c.city}</span>
+        </div>
+      </div>
+      <div class="price-tag">${c.rate}<span>por hora</span></div>
+    </div>
+  `).join('');
+}
+
+function openProfile(id) {
+  const c = contractors.find(x => x.id === id);
+  currentContractor = c;
+  document.getElementById('profile-avatar').textContent = c.initials;
+  document.getElementById('profile-avatar').className = `profile-avatar`;
+  document.getElementById('profile-name').textContent = c.name;
+  document.getElementById('profile-trade').textContent = c.trade;
+  document.getElementById('profile-rating').textContent = c.rating;
+  document.getElementById('profile-jobs').textContent = c.jobs;
+  document.getElementById('profile-years').textContent = c.years;
+  document.getElementById('profile-rate').textContent = c.rate;
+  document.getElementById('profile-city').textContent = c.city;
+  document.getElementById('profile-bio').textContent = c.bio;
+  document.getElementById('profile-badges').innerHTML = c.badges.map(b => `<span class="badge">${b}</span>`).join('');
+  prevScreen = document.querySelector('.screen.active').id;
+  showScreen('screen-profile');
+  switchTabById('tab-about');
+}
+
+function goBack() {
+  showScreen(prevScreen);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function doSearch() {
+  const q = document.getElementById('search-input').value || 'servicios';
+  document.getElementById('results-label').textContent = `Resultados para "${q}"`;
+  renderContractors(contractors, 'results-list');
+  showScreen('screen-results');
+}
+
+function filterCategory(cat) {
+  const filtered = contractors.filter(c => c.trade.toLowerCase().includes(cat.toLowerCase()));
+  const list = filtered.length ? filtered : contractors;
+  document.getElementById('results-label').textContent = `Técnicos de ${cat}`;
+  renderContractors(list, 'results-list');
+  showScreen('screen-results');
+}
+
+function setChip(el, filter) {
+  document.querySelectorAll('.chips .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  if (filter === 'all') {
+    renderContractors(contractors, 'contractors-list');
+  } else {
+    const filtered = contractors.filter(c => c.city === filter);
+    renderContractors(filtered.length ? filtered : contractors, 'contractors-list');
+  }
+}
+
+function submitJob() {
+  showScreen('screen-success');
+}
+
+function switchTab(el, tabId) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  switchTabById(tabId);
+}
+
+function switchTabById(tabId) {
+  ['tab-about','tab-reviews','tab-portfolio'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = id === tabId ? 'block' : 'none';
+  });
+}
+
+renderContractors(contractors, 'contractors-list');
+</script>
+</body>
+</html>
