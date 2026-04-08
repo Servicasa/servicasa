@@ -820,11 +820,11 @@
         <div class="cat-icon">🎨</div>
         <div class="cat-label">Pintura</div>
       </div>
-      <div class="cat-card" onclick="filterCategory('Plomería')">
+      <div class="cat-card" onclick="filterCategory('Plomeria')">
         <div class="cat-icon">🔧</div>
         <div class="cat-label">Plomería</div>
       </div>
-      <div class="cat-card" onclick="filterCategory('Carpintería')">
+      <div class="cat-card" onclick="filterCategory('Carpinteria')">
         <div class="cat-icon">🪚</div>
         <div class="cat-label">Carpintería</div>
       </div>
@@ -844,7 +844,7 @@
         <div class="cat-icon">⬛</div>
         <div class="cat-label">Pisos</div>
       </div>
-      <div class="cat-card" onclick="filterCategory('Jardín')">
+      <div class="cat-card" onclick="filterCategory('Jardin')">
         <div class="cat-icon">🌿</div>
         <div class="cat-label">Jardín</div>
       </div>
@@ -859,10 +859,10 @@
   <div class="section" style="padding-top: 0;">
     <div class="section-title">Técnicos mejor valorados</div>
     <div class="chips">
-      <div class="chip active" onclick="setChip(this, 'all')">Todos</div>
-      <div class="chip" onclick="setChip(this, 'Bogotá')">Bogotá</div>
-      <div class="chip" onclick="setChip(this, 'Medellín')">Medellín</div>
-      <div class="chip" onclick="setChip(this, 'Cali')">Cali</div>
+      <div class="chip active" onclick="setChip(this,'all')">Todos</div>
+      <div class="chip" onclick="setChip(this,'Bogota')">Bogotá</div>
+      <div class="chip" onclick="setChip(this,'Medellin')">Medellín</div>
+      <div class="chip" onclick="setChip(this,'Cali')">Cali</div>
     </div>
     <div class="contractors-list" id="contractors-list">
       <!-- populated by JS -->
@@ -1239,146 +1239,158 @@
 </div>
 
 <script>
-// ─── PHOTO LIBRARY ───────────────────────────────────────────
-// Real Unsplash photos per trade category
-const photoLibrary = {
+var photoLibrary = {
   'Pintura': [
-    { url: 'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=400&h=400&fit=crop', caption: 'Sala pintada - acabado mate' },
-    { url: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=400&fit=crop', caption: 'Fachada exterior' },
-    { url: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=400&h=400&fit=crop', caption: 'Habitacion - tono moderno' },
-    { url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop', caption: 'Cocina renovada' },
+    {url:'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=400&h=400&fit=crop',caption:'Sala pintada - acabado mate'},
+    {url:'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=400&fit=crop',caption:'Fachada exterior'},
+    {url:'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=400&h=400&fit=crop',caption:'Habitacion tono moderno'},
+    {url:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop',caption:'Cocina renovada'}
   ],
   'Limpieza Profunda': [
-    { url: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&h=400&fit=crop', caption: 'Limpieza de cocina' },
-    { url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop', caption: 'Bano impecable' },
-    { url: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=400&fit=crop', caption: 'Sala limpia y ordenada' },
-    { url: 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=400&fit=crop', caption: 'Limpieza de alfombras' },
+    {url:'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&h=400&fit=crop',caption:'Limpieza de cocina'},
+    {url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',caption:'Bano impecable'},
+    {url:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=400&fit=crop',caption:'Sala limpia y ordenada'},
+    {url:'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=400&fit=crop',caption:'Limpieza profunda'}
   ],
-  'Carpintería': [
-    { url: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=400&fit=crop', caption: 'Closet a medida' },
-    { url: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop', caption: 'Sala amueblada' },
-    { url: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400&h=400&fit=crop', caption: 'Cocina en madera' },
-    { url: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=400&fit=crop', caption: 'Mesa de comedor artesanal' },
+  'Carpinteria': [
+    {url:'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=400&fit=crop',caption:'Closet a medida'},
+    {url:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop',caption:'Sala amueblada'},
+    {url:'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400&h=400&fit=crop',caption:'Cocina en madera'},
+    {url:'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=400&fit=crop',caption:'Mesa artesanal'}
   ],
   'Drywall & Reparaciones': [
-    { url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop', caption: 'Instalacion de drywall' },
-    { url: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=400&h=400&fit=crop', caption: 'Techo terminado' },
-    { url: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=400&h=400&fit=crop', caption: 'Reparacion de pared' },
-    { url: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=400&fit=crop', caption: 'Acabado liso profesional' },
+    {url:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop',caption:'Instalacion drywall'},
+    {url:'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=400&h=400&fit=crop',caption:'Techo terminado'},
+    {url:'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=400&h=400&fit=crop',caption:'Reparacion de pared'},
+    {url:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=400&fit=crop',caption:'Acabado liso'}
   ],
   'default': [
-    { url: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=400&fit=crop', caption: 'Trabajo terminado' },
-    { url: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&h=400&fit=crop', caption: 'Proyecto completado' },
-    { url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&h=400&fit=crop', caption: 'Interior moderno' },
-    { url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop', caption: 'Renovacion completa' },
+    {url:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=400&fit=crop',caption:'Trabajo terminado'},
+    {url:'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&h=400&fit=crop',caption:'Proyecto completado'},
+    {url:'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&h=400&fit=crop',caption:'Interior moderno'},
+    {url:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop',caption:'Renovacion completa'}
   ]
 };
 
-// ─── REVIEWS LIBRARY ─────────────────────────────────────────
-const reviewsLibrary = {
-  1: [
-    { name: 'Ana Garcia', rating: 5, text: 'Excelente trabajo, muy puntual y profesional. Dejo todo limpio. Lo recomiendo.', date: 'Hace 2 semanas' },
-    { name: 'Carlos Mendoza', rating: 5, text: 'El mejor pintor que he contratado. Termino antes del plazo y el acabado es impecable.', date: 'Hace 1 mes' },
-    { name: 'Lucia Torres', rating: 4, text: 'Buen trabajo en general. Un poco tarde la primera manana pero compenso con calidad.', date: 'Hace 2 meses' },
+var reviewsLibrary = {
+  1:[
+    {name:'Ana Garcia',rating:5,text:'Excelente trabajo, muy puntual y profesional. Dejo todo limpio. Lo recomiendo.',date:'Hace 2 semanas'},
+    {name:'Carlos Mendoza',rating:5,text:'El mejor pintor que he contratado. Termino antes del plazo y el acabado es impecable.',date:'Hace 1 mes'},
+    {name:'Lucia Torres',rating:4,text:'Buen trabajo en general. Un poco tarde pero compenso con calidad.',date:'Hace 2 meses'}
   ],
-  2: [
-    { name: 'Laura Jimenez', rating: 5, text: 'Limpieza impecable y muy respetuosa con mis cosas. Volvere a contratar.', date: 'Hace 1 semana' },
-    { name: 'Roberto Silva', rating: 5, text: 'Dejo el apartamento como nuevo. Super recomendada.', date: 'Hace 3 semanas' },
-    { name: 'Maria Castillo', rating: 4, text: 'Muy buen servicio, puntual y detallista. Solo faltaron algunos rinconas.', date: 'Hace 1 mes' },
+  2:[
+    {name:'Laura Jimenez',rating:5,text:'Limpieza impecable y muy respetuosa con mis cosas. Volvere a contratar.',date:'Hace 1 semana'},
+    {name:'Roberto Silva',rating:5,text:'Dejo el apartamento como nuevo. Super recomendada.',date:'Hace 3 semanas'},
+    {name:'Maria Castillo',rating:4,text:'Muy buen servicio, puntual y detallista.',date:'Hace 1 mes'}
   ],
-  3: [
-    { name: 'Pedro Salcedo', rating: 4, text: 'Muebles de excelente calidad. Tardo un dia mas de lo previsto pero el resultado vale.', date: 'Hace 3 semanas' },
-    { name: 'Isabel Mora', rating: 5, text: 'El closet quedo perfecto. Muy profesional y cuidadoso.', date: 'Hace 1 mes' },
+  3:[
+    {name:'Pedro Salcedo',rating:4,text:'Muebles de excelente calidad. Tardo un dia mas pero el resultado vale.',date:'Hace 3 semanas'},
+    {name:'Isabel Mora',rating:5,text:'El closet quedo perfecto. Muy profesional y cuidadoso.',date:'Hace 1 mes'}
   ],
-  4: [
-    { name: 'Jorge Ramirez', rating: 5, text: 'Trabajo limpio y rapido. La pared quedo perfectamente lisa.', date: 'Hace 2 semanas' },
-    { name: 'Sandra Lopez', rating: 5, text: 'Muy profesional, llego puntual y dejo todo perfecto.', date: 'Hace 1 mes' },
+  4:[
+    {name:'Jorge Ramirez',rating:5,text:'Trabajo limpio y rapido. La pared quedo perfectamente lisa.',date:'Hace 2 semanas'},
+    {name:'Sandra Lopez',rating:5,text:'Muy profesional, llego puntual y dejo todo perfecto.',date:'Hace 1 mes'}
   ],
-  5: [
-    { name: 'Felipe Herrera', rating: 5, text: 'Excelente acabado, muy detallista. Recomendado 100%.', date: 'Hace 1 semana' },
-    { name: 'Patricia Nunez', rating: 4, text: 'Buen trabajo, precios justos. Llego un poco tarde pero compenso.', date: 'Hace 1 mes' },
+  5:[
+    {name:'Felipe Herrera',rating:5,text:'Excelente acabado, muy detallista. Recomendado 100%.',date:'Hace 1 semana'},
+    {name:'Patricia Nunez',rating:4,text:'Buen trabajo, precios justos.',date:'Hace 1 mes'}
   ]
 };
 
-// ─── CONTRACTORS DATA ─────────────────────────────────────────
-const contractors = [
-  { id:1, name:'Mario Restrepo', initials:'MR', trade:'Pintura', city:'Bogota', rating:4.9, reviews:47, jobs:127, years:5, rate:'$85k', rateNum:85, avatar:'green', badges:['Verificado','Top Rated'], bio:'Pintor profesional con mas de 5 anos de experiencia en interiores y exteriores. Especializado en acabados de alta calidad para apartamentos, casas y locales comerciales.', phone:'573101111111' },
-  { id:2, name:'Sofia Vargas', initials:'SV', trade:'Limpieza Profunda', city:'Medellin', rating:4.8, reviews:62, jobs:203, years:4, rate:'$65k', rateNum:65, avatar:'gold', badges:['Verificada','Disponible Hoy'], bio:'Especialista en limpieza de hogares y oficinas. Metodos ecologicos y materiales de alta calidad. Disponible 7 dias a la semana.', phone:'573102222222' },
-  { id:3, name:'Juan Ospina', initials:'JO', trade:'Carpinteria', city:'Bogota', rating:4.7, reviews:31, jobs:88, years:7, rate:'$95k', rateNum:95, avatar:'blue', badges:['Verificado'], bio:'Carpintero con 7 anos fabricando e instalando muebles a medida, closets y cocinas. Trabajo con madera solida y enchapes de alta calidad.', phone:'573103333333' },
-  { id:4, name:'Camila Rios', initials:'CR', trade:'Drywall & Reparaciones', city:'Cali', rating:4.9, reviews:28, jobs:54, years:3, rate:'$75k', rateNum:75, avatar:'coral', badges:['Verificada'], bio:'Tecnica en drywall y reparaciones generales. Trabajo limpio y entrega a tiempo garantizada. Experiencia en proyectos residenciales y comerciales.', phone:'573104444444' },
-  { id:5, name:'Diego Morales', initials:'DM', trade:'Pintura & Acabados', city:'Bogota', rating:4.6, reviews:19, jobs:41, years:2, rate:'$70k', rateNum:70, avatar:'green', badges:['Verificado'], bio:'Pintor especializado en acabados modernos y tecnicas decorativas para el hogar. Manejo de pintura texturizada, estuco y pintura epoxica.', phone:'573105555555' },
+var contractors = [
+  {id:1,name:'Mario Restrepo',initials:'MR',trade:'Pintura',city:'Bogota',rating:4.9,reviews:47,jobs:127,years:5,rate:'$85k',rateNum:85,avatar:'green',badges:['Verificado','Top Rated'],bio:'Pintor profesional con mas de 5 anos de experiencia en interiores y exteriores. Especializado en acabados de alta calidad.',phone:'573101111111'},
+  {id:2,name:'Sofia Vargas',initials:'SV',trade:'Limpieza Profunda',city:'Medellin',rating:4.8,reviews:62,jobs:203,years:4,rate:'$65k',rateNum:65,avatar:'gold',badges:['Verificada','Disponible Hoy'],bio:'Especialista en limpieza de hogares y oficinas. Metodos ecologicos y materiales de alta calidad. Disponible 7 dias.',phone:'573102222222'},
+  {id:3,name:'Juan Ospina',initials:'JO',trade:'Carpinteria',city:'Bogota',rating:4.7,reviews:31,jobs:88,years:7,rate:'$95k',rateNum:95,avatar:'blue',badges:['Verificado'],bio:'Carpintero con 7 anos fabricando muebles a medida, closets y cocinas. Trabajo con madera solida.',phone:'573103333333'},
+  {id:4,name:'Camila Rios',initials:'CR',trade:'Drywall & Reparaciones',city:'Cali',rating:4.9,reviews:28,jobs:54,years:3,rate:'$75k',rateNum:75,avatar:'coral',badges:['Verificada'],bio:'Tecnica en drywall y reparaciones generales. Trabajo limpio y entrega a tiempo garantizada.',phone:'573104444444'},
+  {id:5,name:'Diego Morales',initials:'DM',trade:'Pintura & Acabados',city:'Bogota',rating:4.6,reviews:19,jobs:41,years:2,rate:'$70k',rateNum:70,avatar:'green',badges:['Verificado'],bio:'Pintor especializado en acabados modernos y tecnicas decorativas. Pintura texturizada, estuco y epoxica.',phone:'573105555555'}
 ];
 
-let currentContractor = null;
-let prevScreen = 'screen-home';
-let currentResults = [...contractors];
+var currentContractor = null;
+var prevScreen = 'screen-home';
+var currentResults = contractors.slice();
 
-// ─── RENDER ───────────────────────────────────────────────────
+function showScreen(id) {
+  var screens = document.querySelectorAll('.screen');
+  for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  showScreen(prevScreen);
+}
+
 function renderContractors(list, targetId) {
-  const el = document.getElementById(targetId);
-  if (!list.length) {
-    el.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:32px 0;">No se encontraron tecnicos en esta ciudad.</p>';
+  var el = document.getElementById(targetId);
+  if (!el) return;
+  if (!list || !list.length) {
+    el.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:32px 0;">No se encontraron tecnicos.</p>';
     return;
   }
-  el.innerHTML = list.map(c => `
-    <div class="contractor-card" onclick="openProfile(${c.id})">
-      <div class="avatar ${c.avatar}">${c.initials}</div>
-      <div class="contractor-info">
-        <div class="contractor-name">${c.name}</div>
-        <div class="contractor-trade">${c.trade}</div>
-        <div class="stars">
-          <span class="star">★</span> ${c.rating} <span style="color:var(--text-light);">(${c.reviews} resenas)</span>
-        </div>
-        <div class="contractor-meta">
-          ${c.badges.map(b => `<span class="badge ${b==='Top Rated'?'gold':''}">${b}</span>`).join('')}
-          <span style="font-size:11px; color:var(--text-light);">📍 ${c.city}</span>
-        </div>
-      </div>
-      <div class="price-tag">${c.rate}<span>por hora</span></div>
-    </div>
-  `).join('');
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var c = list[i];
+    var badgeHtml = '';
+    for (var b = 0; b < c.badges.length; b++) {
+      var cls = c.badges[b] === 'Top Rated' ? 'badge gold' : 'badge';
+      badgeHtml += '<span class="' + cls + '">' + c.badges[b] + '</span>';
+    }
+    html += '<div class="contractor-card" onclick="openProfile(' + c.id + ')">' +
+      '<div class="avatar ' + c.avatar + '">' + c.initials + '</div>' +
+      '<div class="contractor-info">' +
+        '<div class="contractor-name">' + c.name + '</div>' +
+        '<div class="contractor-trade">' + c.trade + '</div>' +
+        '<div class="stars"><span class="star">&#9733;</span> ' + c.rating + ' <span style="color:var(--text-light);">(' + c.reviews + ' resenas)</span></div>' +
+        '<div class="contractor-meta">' + badgeHtml + '<span style="font-size:11px;color:var(--text-light);">&#128205; ' + c.city + '</span></div>' +
+      '</div>' +
+      '<div class="price-tag">' + c.rate + '<span>por hora</span></div>' +
+    '</div>';
+  }
+  el.innerHTML = html;
 }
 
-// ─── PORTFOLIO ────────────────────────────────────────────────
 function renderPortfolio(trade) {
-  const photos = photoLibrary[trade] || photoLibrary['default'];
-  const grid = document.getElementById('portfolio-grid');
-  grid.innerHTML = photos.map(p => `
-    <div style="border-radius:10px; overflow:hidden; aspect-ratio:1; position:relative; cursor:pointer;" onclick="openPhoto('${p.url}')">
-      <img src="${p.url}" alt="${p.caption}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.style.background='var(--brand-accent)';this.style.display='none'">
-      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.6));padding:8px 8px 6px;font-size:10px;color:#fff;line-height:1.3;">${p.caption}</div>
-    </div>
-  `).join('');
+  var grid = document.getElementById('portfolio-grid');
+  if (!grid) return;
+  var photos = photoLibrary[trade] || photoLibrary['default'];
+  var html = '';
+  for (var i = 0; i < photos.length; i++) {
+    var p = photos[i];
+    html += '<div style="border-radius:10px;overflow:hidden;aspect-ratio:1;position:relative;cursor:pointer;" onclick="window.open('' + p.url + '','_blank')">' +
+      '<img src="' + p.url + '" alt="' + p.caption + '" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.innerHTML='<div style=background:var(--brand-accent);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px>&#127968;</div>'">' +
+      '<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);padding:6px 8px;font-size:10px;color:#fff;">' + p.caption + '</div>' +
+    '</div>';
+  }
+  grid.innerHTML = html;
 }
 
-function openPhoto(url) {
-  window.open(url, '_blank');
-}
-
-// ─── REVIEWS ─────────────────────────────────────────────────
 function renderReviews(contractorId) {
-  const reviews = reviewsLibrary[contractorId] || [];
-  const container = document.getElementById('tab-reviews');
-  container.innerHTML = reviews.map(r => `
-    <div class="review-card">
-      <div class="review-header">
-        <div class="reviewer-name">${r.name}</div>
-        <div class="review-date">${r.date}</div>
-      </div>
-      <div class="stars" style="margin-bottom:6px;">
-        ${'<span class="star">★</span>'.repeat(r.rating)}${'<span class="star" style="color:var(--border);">★</span>'.repeat(5 - r.rating)}
-      </div>
-      <div class="review-text">${r.text}</div>
-    </div>
-  `).join('') + `
-    <div style="text-align:center; padding:12px 0;">
-      <button class="btn-outline" onclick="leaveReview()" style="font-size:13px; padding:9px 20px;">Dejar una resena ✍️</button>
-    </div>`;
+  var container = document.getElementById('tab-reviews');
+  if (!container) return;
+  var reviews = reviewsLibrary[contractorId] || [];
+  var html = '';
+  for (var i = 0; i < reviews.length; i++) {
+    var r = reviews[i];
+    var stars = '';
+    for (var s = 0; s < 5; s++) {
+      stars += '<span class="star" style="color:' + (s < r.rating ? 'var(--gold)' : 'var(--border)') + '">&#9733;</span>';
+    }
+    html += '<div class="review-card">' +
+      '<div class="review-header"><div class="reviewer-name">' + r.name + '</div><div class="review-date">' + r.date + '</div></div>' +
+      '<div class="stars" style="margin-bottom:6px;">' + stars + '</div>' +
+      '<div class="review-text">' + r.text + '</div>' +
+    '</div>';
+  }
+  html += '<div style="text-align:center;padding:12px 0;"><button class="btn-outline" onclick="leaveReview()" style="font-size:13px;padding:9px 20px;">Dejar una resena &#9997;</button></div>';
+  container.innerHTML = html;
 }
 
-// ─── PROFILE ──────────────────────────────────────────────────
 function openProfile(id) {
-  const c = contractors.find(x => x.id === id);
+  var c = null;
+  for (var i = 0; i < contractors.length; i++) {
+    if (contractors[i].id === id) { c = contractors[i]; break; }
+  }
+  if (!c) return;
   currentContractor = c;
   document.getElementById('profile-avatar').textContent = c.initials;
   document.getElementById('profile-avatar').className = 'profile-avatar';
@@ -1390,7 +1402,10 @@ function openProfile(id) {
   document.getElementById('profile-rate').textContent = c.rate;
   document.getElementById('profile-city').textContent = c.city;
   document.getElementById('profile-bio').textContent = c.bio;
-  document.getElementById('profile-badges').innerHTML = c.badges.map(b => `<span class="badge">${b}</span>`).join('');
+  var badgeEl = document.getElementById('profile-badges');
+  var bHtml = '';
+  for (var b = 0; b < c.badges.length; b++) bHtml += '<span class="badge">' + c.badges[b] + '</span>';
+  badgeEl.innerHTML = bHtml;
   renderPortfolio(c.trade);
   renderReviews(c.id);
   prevScreen = document.querySelector('.screen.active').id;
@@ -1400,142 +1415,119 @@ function openProfile(id) {
 
 function messageContractor() {
   if (!currentContractor) return;
-  const msg = encodeURIComponent(
-    'Hola ' + currentContractor.name + ', vi tu perfil en ServiCasa y me gustaria contratarte para un trabajo. Puedes darme mas informacion?'
-  );
+  var msg = encodeURIComponent('Hola ' + currentContractor.name + ', vi tu perfil en ServiCasa y me gustaria contratarte. Puedes darme mas informacion?');
   window.open('https://wa.me/' + currentContractor.phone + '?text=' + msg, '_blank');
 }
 
 function leaveReview() {
   if (!currentContractor) return;
-  const msg = encodeURIComponent(
-    'Hola, quiero dejar una resena para ' + currentContractor.name + ' en ServiCasa.'
-  );
+  var msg = encodeURIComponent('Hola, quiero dejar una resena para ' + currentContractor.name + ' en ServiCasa.');
   window.open('https://wa.me/16172021549?text=' + msg, '_blank');
 }
 
-// ─── NAVIGATION ───────────────────────────────────────────────
-function goBack() { showScreen(prevScreen); }
-
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-// ─── SEARCH ───────────────────────────────────────────────────
 function doSearch() {
-  const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
-  currentResults = q
-    ? contractors.filter(c =>
-        c.trade.toLowerCase().includes(q) ||
-        c.city.toLowerCase().includes(q) ||
-        c.name.toLowerCase().includes(q) ||
-        c.bio.toLowerCase().includes(q)
-      )
-    : [...contractors];
+  var q = document.getElementById('search-input').value.toLowerCase().trim();
+  if (q) {
+    currentResults = contractors.filter(function(c) {
+      return c.trade.toLowerCase().indexOf(q) !== -1 ||
+             c.city.toLowerCase().indexOf(q) !== -1 ||
+             c.name.toLowerCase().indexOf(q) !== -1 ||
+             c.bio.toLowerCase().indexOf(q) !== -1;
+    });
+  } else {
+    currentResults = contractors.slice();
+  }
   document.getElementById('results-label').textContent = q
     ? 'Resultados para "' + q + '" (' + currentResults.length + ')'
-    : 'Todos los tecnicos';
+    : 'Todos los tecnicos (' + currentResults.length + ')';
   renderContractors(currentResults, 'results-list');
   showScreen('screen-results');
 }
 
 function filterCategory(cat) {
-  currentResults = contractors.filter(c => c.trade.toLowerCase().includes(cat.toLowerCase()));
-  if (!currentResults.length) currentResults = [...contractors];
+  var q = cat.toLowerCase();
+  currentResults = contractors.filter(function(c) {
+    return c.trade.toLowerCase().indexOf(q) !== -1;
+  });
+  if (!currentResults.length) currentResults = contractors.slice();
   document.getElementById('results-label').textContent = 'Tecnicos de ' + cat + ' (' + currentResults.length + ')';
   renderContractors(currentResults, 'results-list');
   showScreen('screen-results');
 }
 
 function sortResults(el, type) {
-  document.querySelectorAll('#results-chips .chip').forEach(c => c.classList.remove('active'));
+  var chips = document.querySelectorAll('#results-chips .chip');
+  for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
   el.classList.add('active');
-  let sorted = [...currentResults];
-  if (type === 'rating') sorted.sort((a, b) => b.rating - a.rating);
-  else if (type === 'price') sorted.sort((a, b) => a.rateNum - b.rateNum);
-  else if (type === 'jobs') sorted.sort((a, b) => b.jobs - a.jobs);
+  var sorted = currentResults.slice();
+  if (type === 'rating') sorted.sort(function(a,b){ return b.rating - a.rating; });
+  else if (type === 'price') sorted.sort(function(a,b){ return a.rateNum - b.rateNum; });
+  else if (type === 'jobs') sorted.sort(function(a,b){ return b.jobs - a.jobs; });
   renderContractors(sorted, 'results-list');
 }
 
 function setChip(el, filter) {
-  document.querySelectorAll('#screen-home .chips .chip').forEach(c => c.classList.remove('active'));
+  var chips = document.querySelectorAll('#screen-home .chips .chip');
+  for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
   el.classList.add('active');
-  const list = filter === 'all'
+  var list = filter === 'all'
     ? contractors
-    : contractors.filter(c => c.city === filter);
+    : contractors.filter(function(c){ return c.city === filter; });
   renderContractors(list.length ? list : contractors, 'contractors-list');
 }
 
-// ─── FORMS ────────────────────────────────────────────────────
 function submitJob() {
-  const category = document.querySelector('#screen-post select').value;
-  const description = document.querySelector('#screen-post textarea').value;
-  const city = document.querySelectorAll('#screen-post select')[1]?.value || 'Bogota';
-  const name = document.querySelectorAll('#screen-post input')[1]?.value || '';
-  const phone = document.querySelectorAll('#screen-post input')[2]?.value || '';
-
+  var selects = document.querySelectorAll('#screen-post select');
+  var inputs = document.querySelectorAll('#screen-post input');
+  var textarea = document.querySelector('#screen-post textarea');
+  var category = selects[0] ? selects[0].value : '';
+  var city = selects[1] ? selects[1].value : 'Bogota';
+  var description = textarea ? textarea.value : '';
+  var name = inputs[1] ? inputs[1].value : '';
+  var phone = inputs[2] ? inputs[2].value : '';
   if (!category || !description || !phone) {
     alert('Por favor completa: tipo de servicio, descripcion y WhatsApp');
     return;
   }
-
-  const msg = encodeURIComponent(
-    '*Nuevo Trabajo - ServiCasa*
-
-' +
-    'Servicio: ' + category + '
-' +
-    'Ciudad: ' + city + '
-' +
-    'Descripcion: ' + description + '
-' +
-    'Cliente: ' + name + '
-' +
-    'Telefono: ' + phone
-  );
+  var msg = 'Nuevo Trabajo - ServiCasa%0A%0AServicio: ' + encodeURIComponent(category) +
+    '%0ACiudad: ' + encodeURIComponent(city) +
+    '%0ADescripcion: ' + encodeURIComponent(description) +
+    '%0ACliente: ' + encodeURIComponent(name) +
+    '%0ATelefono: ' + encodeURIComponent(phone);
   window.open('https://wa.me/16172021549?text=' + msg, '_blank');
   showScreen('screen-success');
 }
 
 function joinAsContractor() {
-  const name = document.querySelectorAll('#screen-contractors input')[0]?.value || '';
-  const trade = document.querySelector('#screen-contractors select').value;
-  const city = document.querySelectorAll('#screen-contractors select')[1]?.value || 'Bogota';
-  const phone = document.querySelectorAll('#screen-contractors input')[1]?.value || '';
-
-  const msg = encodeURIComponent(
-    '*Registro Tecnico - ServiCasa*
-
-' +
-    'Nombre: ' + name + '
-' +
-    'Especialidad: ' + trade + '
-' +
-    'Ciudad: ' + city + '
-' +
-    'WhatsApp: ' + phone
-  );
+  var inputs = document.querySelectorAll('#screen-contractors input');
+  var selects = document.querySelectorAll('#screen-contractors select');
+  var name = inputs[0] ? inputs[0].value : '';
+  var trade = selects[0] ? selects[0].value : '';
+  var city = selects[1] ? selects[1].value : 'Bogota';
+  var phone = inputs[1] ? inputs[1].value : '';
+  var msg = 'Registro Tecnico - ServiCasa%0A%0ANombre: ' + encodeURIComponent(name) +
+    '%0AEspecialidad: ' + encodeURIComponent(trade) +
+    '%0ACiudad: ' + encodeURIComponent(city) +
+    '%0AWhatsApp: ' + encodeURIComponent(phone);
   window.open('https://wa.me/16172021549?text=' + msg, '_blank');
   showScreen('screen-success');
 }
 
-// ─── TABS ─────────────────────────────────────────────────────
 function switchTab(el, tabId) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
   el.classList.add('active');
   switchTabById(tabId);
 }
 
 function switchTabById(tabId) {
-  ['tab-about','tab-reviews','tab-portfolio'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = id === tabId ? 'block' : 'none';
-  });
+  var ids = ['tab-about','tab-reviews','tab-portfolio'];
+  for (var i = 0; i < ids.length; i++) {
+    var el = document.getElementById(ids[i]);
+    if (el) el.style.display = ids[i] === tabId ? 'block' : 'none';
+  }
 }
 
-// ─── INIT ─────────────────────────────────────────────────────
 renderContractors(contractors, 'contractors-list');
 </script>
 </body>
