@@ -1856,9 +1856,13 @@ function updateNavForUser() {
     var parts = currentUser.name.split(' ');
     var initials = '';
     for (var i = 0; i < parts.length && i < 2; i++) initials += parts[i][0].toUpperCase();
-    navRight.innerHTML =
-      '<div class="user-avatar-nav" onclick="showScreen('screen-dashboard')">' + initials + '</div>' +
-      '<button class="nav-btn active" onclick="showScreen('screen-post')">Publicar Trabajo</button>';
+    var html = '<div class="user-avatar-nav" onclick="showScreen(';
+    html += String.fromCharCode(39) + 'screen-dashboard' + String.fromCharCode(39);
+    html += ')">' + initials + '</div>';
+    html += '<button class="nav-btn active" onclick="showScreen(';
+    html += String.fromCharCode(39) + 'screen-post' + String.fromCharCode(39);
+    html += ')">Publicar Trabajo</button>';
+    navRight.innerHTML = html;
     var du = document.getElementById('dash-username');
     if (du) du.textContent = parts[0];
     var da = document.getElementById('dash-avatar');
@@ -1872,10 +1876,16 @@ function updateNavForUser() {
     var upr = document.getElementById('user-profile-role');
     if (upr) upr.textContent = currentUser.role === 'contractor' ? 'Tecnico' : 'Cliente';
   } else {
-    navRight.innerHTML =
-      '<button class="nav-btn" onclick="showScreen('screen-contractors')">Soy Tecnico</button>' +
-      '<button class="nav-btn" onclick="showScreen('screen-auth')">Ingresar</button>' +
-      '<button class="nav-btn active" onclick="showScreen('screen-post')">Publicar Trabajo</button>';
+    var html2 = '<button class="nav-btn" onclick="showScreen(';
+    html2 += String.fromCharCode(39) + 'screen-contractors' + String.fromCharCode(39);
+    html2 += ')">Soy Tecnico</button>';
+    html2 += '<button class="nav-btn" onclick="showScreen(';
+    html2 += String.fromCharCode(39) + 'screen-auth' + String.fromCharCode(39);
+    html2 += ')">Ingresar</button>';
+    html2 += '<button class="nav-btn active" onclick="showScreen(';
+    html2 += String.fromCharCode(39) + 'screen-post' + String.fromCharCode(39);
+    html2 += ')">Publicar Trabajo</button>';
+    navRight.innerHTML = html2;
   }
 }
 
