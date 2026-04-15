@@ -1093,6 +1093,135 @@
     margin-bottom: 12px;
     display: none;
   }
+
+  /* ── JOB TRACKING ── */
+  .tracker-hero {
+    background: var(--brand);
+    padding: 28px 20px 36px;
+    text-align: center;
+  }
+  .tracker-hero h2 { color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .tracker-hero p { color: rgba(255,255,255,0.65); font-size: 13px; }
+  .progress-bar-wrap {
+    background: var(--white);
+    border-radius: var(--radius);
+    margin: -18px 20px 0;
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+  }
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    position: relative;
+  }
+  .progress-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 60%;
+    right: -40%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .progress-step.done:not(:last-child)::after { background: var(--brand); }
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    font-family: 'Syne', sans-serif;
+  }
+  .progress-step.done .step-circle { background: var(--brand); }
+  .progress-step.active .step-circle { background: var(--gold); color: var(--brand); }
+  .step-label { font-size: 9px; color: var(--text-muted); text-align: center; font-weight: 500; }
+  .progress-step.done .step-label { color: var(--brand); font-weight: 600; }
+  .progress-step.active .step-label { color: var(--gold); font-weight: 600; }
+  .bid-cards { padding: 20px; }
+  .bid-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .bid-card.selected { border-color: var(--brand); background: var(--brand-accent); }
+  .bid-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .bid-info { flex: 1; min-width: 0; }
+  .bid-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .bid-trade { font-size: 11px; color: var(--brand-light); margin-bottom: 4px; }
+  .bid-message { font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 6px; }
+  .bid-price {
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    color: var(--brand); text-align: right; flex-shrink: 0;
+  }
+  .bid-price span { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: var(--text-muted); }
+  .bid-actions { display: flex; gap: 8px; margin-top: 8px; }
+  .bid-accept { background: var(--brand); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .bid-accept:hover { background: var(--brand-light); }
+  .bid-reject { background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .job-detail-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 16px; margin: 0 20px 16px; border: 1px solid var(--border);
+  }
+  .jdc-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+  .jdc-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .jdc-row:last-child { border-bottom: none; }
+  .jdc-label { font-size: 12px; color: var(--text-muted); }
+  .jdc-value { font-size: 12px; font-weight: 600; }
+  .bid-count-badge {
+    background: var(--gold); color: var(--brand);
+    border-radius: 20px; padding: 2px 10px;
+    font-size: 12px; font-weight: 700;
+    font-family: 'Syne', sans-serif;
+  }
+  .timeline { padding: 0 20px 20px; }
+  .timeline-item { display: flex; gap: 12px; margin-bottom: 16px; }
+  .timeline-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--brand); flex-shrink: 0; margin-top: 4px;
+    position: relative;
+  }
+  .timeline-dot::after {
+    content: ''; position: absolute; top: 12px; left: 5px;
+    width: 2px; height: 28px; background: var(--border);
+  }
+  .timeline-item:last-child .timeline-dot::after { display: none; }
+  .timeline-dot.pending { background: var(--border); }
+  .timeline-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .timeline-time { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+  .notify-banner {
+    background: var(--brand-accent); border: 1px solid #A5D6A7;
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    margin: 0 20px 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .notify-banner p { font-size: 12px; color: var(--brand); line-height: 1.4; }
 </style>
 </head>
 <body>
@@ -1980,6 +2109,103 @@ function editProfile() {
   alert('Edicion de perfil proximamente disponible.');
 }
 
+
+// ─── JOB TRACKER ─────────────────────────────────────────────
+var sampleBids = [
+  {id:1, contractorId:5, name:'Diego Morales', initials:'DM', trade:'Pintura & Acabados', avatar:'green',
+   price:210000, message:'Puedo hacer el trabajo esta semana. Incluye materiales y 2 manos de pintura de alta calidad.', rating:4.6, time:'Hace 30 min'},
+  {id:2, contractorId:1, name:'Mario Restrepo', initials:'MR', trade:'Pintura', avatar:'green',
+   price:255000, message:'Tengo disponibilidad inmediata. Trabajo garantizado por 1 ano, incluye limpieza al finalizar.', rating:4.9, time:'Hace 1 hora'},
+  {id:3, contractorId:null, name:'Carlos Perez', initials:'CP', trade:'Pintura', avatar:'blue',
+   price:185000, message:'Precio mas economico del mercado. Experiencia de 3 anos en apartamentos residenciales.', rating:4.3, time:'Hace 2 horas'},
+  {id:4, contractorId:null, name:'Ana Martinez', initials:'AM', trade:'Pintura & Decoracion', avatar:'coral',
+   price:295000, message:'Especialista en acabados premium. Incluye pintura importada y garantia de 2 anos.', rating:4.8, time:'Hace 3 horas'}
+];
+
+var currentTrackerJob = null;
+var selectedBidId = null;
+
+function openJobTracker(job) {
+  currentTrackerJob = job || {
+    title: 'Pintura sala y comedor',
+    service: 'Pintura',
+    city: 'Bogota',
+    when: 'Esta semana',
+    status: 'Esperando seleccion'
+  };
+  document.getElementById('tracker-job-title').textContent = currentTrackerJob.title;
+  document.getElementById('tracker-job-city').textContent = currentTrackerJob.city + ' - Publicado hace 2 dias';
+  document.getElementById('tracker-service').textContent = currentTrackerJob.service;
+  document.getElementById('tracker-city-detail').textContent = currentTrackerJob.city;
+  document.getElementById('tracker-when').textContent = currentTrackerJob.when;
+  document.getElementById('tracker-bid-count').textContent = sampleBids.length;
+  document.getElementById('tracker-bid-count2').textContent = sampleBids.length;
+  renderBids();
+  showScreen('screen-tracker');
+}
+
+function renderBids() {
+  var container = document.getElementById('bids-list');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < sampleBids.length; i++) {
+    var b = sampleBids[i];
+    var isSelected = selectedBidId === b.id;
+    var price = '$' + (b.price / 1000).toFixed(0) + 'k';
+    html += '<div class="bid-card' + (isSelected ? ' selected' : '') + '" id="bid-' + b.id + '">' +
+      '<div class="bid-avatar ' + b.avatar + '">' + b.initials + '</div>' +
+      '<div class="bid-info">' +
+        '<div class="bid-name">' + b.name + '</div>' +
+        '<div class="bid-trade">' + b.trade + ' · ' + b.rating + ' &#9733; · ' + b.time + '</div>' +
+        '<div class="bid-message">' + b.message + '</div>' +
+        '<div class="bid-actions">' +
+          (isSelected
+            ? '<span style="color:var(--brand);font-size:12px;font-weight:700;">&#10003; Seleccionado</span>'
+            : '<button class="bid-accept" onclick="acceptBid(' + b.id + ')">Aceptar propuesta</button>' +
+              '<button class="bid-reject" onclick="viewBidProfile(' + b.id + ')">Ver perfil</button>'
+          ) +
+        '</div>' +
+      '</div>' +
+      '<div class="bid-price">' + price + '<span>total est.</span></div>' +
+    '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function acceptBid(bidId) {
+  selectedBidId = bidId;
+  var bid = null;
+  for (var i = 0; i < sampleBids.length; i++) {
+    if (sampleBids[i].id === bidId) { bid = sampleBids[i]; break; }
+  }
+  renderBids();
+  // Update status
+  var statusEl = document.getElementById('tracker-status');
+  if (statusEl) statusEl.textContent = 'Tecnico seleccionado: ' + bid.name;
+  if (statusEl) statusEl.style.color = 'var(--brand)';
+  // Update progress bar
+  var steps = document.querySelectorAll('.progress-step');
+  if (steps.length >= 4) {
+    steps[2].className = 'progress-step done';
+    steps[2].querySelector('.step-circle').innerHTML = '&#10003;';
+    steps[2].querySelector('.step-circle').parentElement.querySelector('.step-circle').innerHTML = '&#10003;';
+    steps[3].className = 'progress-step active';
+  }
+  alert('Excelente! Has seleccionado a ' + bid.name + '. Se comunicaran contigo pronto por WhatsApp.');
+}
+
+function viewBidProfile(bidId) {
+  var bid = null;
+  for (var i = 0; i < sampleBids.length; i++) {
+    if (sampleBids[i].id === bidId) { bid = sampleBids[i]; break; }
+  }
+  if (bid && bid.contractorId) {
+    openProfile(bid.contractorId);
+  } else {
+    alert('Perfil completo proximamente disponible.');
+  }
+}
+
 renderContractors(contractors, 'contractors-list');
 updateNavForUser();
 </script>
@@ -2146,13 +2372,13 @@ updateNavForUser();
       <a onclick="showScreen('screen-post')">+ Nuevo</a>
     </div>
     <div id="dash-jobs-list">
-      <div class="job-item">
+      <div class="job-item" onclick="openJobTracker(null)" style="cursor:pointer;">
         <div class="job-icon paint">🎨</div>
         <div style="flex:1;">
           <div class="job-title">Pintura sala y comedor</div>
-          <div class="job-meta">Bogotá · Hace 2 días · 4 cotizaciones</div>
+          <div class="job-meta">Bogotá · Hace 2 días · <strong style="color:var(--gold);">4 cotizaciones</strong></div>
         </div>
-        <div class="job-status status-open">Abierto</div>
+        <div class="job-status status-open">Ver →</div>
       </div>
       <div class="job-item">
         <div class="job-icon clean">🧹</div>
@@ -2227,6 +2453,138 @@ updateNavForUser();
       <div class="pmi-icon" style="background:#FFEBEE;">🚪</div>
       <div class="pmi-label" style="color:#C62828;">Cerrar sesión</div>
       <div class="pmi-arrow" style="color:#C62828;">›</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SCREEN: JOB TRACKER ============ -->
+<div class="screen" id="screen-tracker">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-dashboard')">← Dashboard</button>
+    </div>
+  </nav>
+
+  <div class="tracker-hero">
+    <h2 id="tracker-job-title">Pintura sala y comedor</h2>
+    <p id="tracker-job-city">Bogota · Publicado hace 2 dias</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;">
+      <span style="color:rgba(255,255,255,0.7);font-size:12px;">Cotizaciones recibidas:</span>
+      <span class="bid-count-badge" id="tracker-bid-count">4</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar-wrap">
+    <div class="progress-steps" id="tracker-steps">
+      <div class="progress-step done">
+        <div class="step-circle">&#10003;</div>
+        <div class="step-label">Publicado</div>
+      </div>
+      <div class="progress-step done">
+        <div class="step-circle">&#10003;</div>
+        <div class="step-label">Cotizaciones</div>
+      </div>
+      <div class="progress-step active">
+        <div class="step-circle">3</div>
+        <div class="step-label">Seleccionar</div>
+      </div>
+      <div class="progress-step">
+        <div class="step-circle">4</div>
+        <div class="step-label">En proceso</div>
+      </div>
+      <div class="progress-step">
+        <div class="step-circle">5</div>
+        <div class="step-label">Completado</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--brand);font-weight:600;text-align:center;margin-top:8px;">
+      Selecciona un tecnico para continuar
+    </p>
+  </div>
+
+  <!-- NOTIFICATION -->
+  <div class="notify-banner" style="margin-top:16px;">
+    <span style="font-size:18px;">&#128276;</span>
+    <p><strong>4 tecnicos han cotizado tu trabajo.</strong> Revisa las propuestas y selecciona la mejor opcion.</p>
+  </div>
+
+  <!-- JOB DETAILS -->
+  <div class="job-detail-card">
+    <div class="jdc-title">Detalles del trabajo</div>
+    <div class="jdc-row">
+      <div class="jdc-label">Servicio</div>
+      <div class="jdc-value" id="tracker-service">Pintura</div>
+    </div>
+    <div class="jdc-row">
+      <div class="jdc-label">Ciudad</div>
+      <div class="jdc-value" id="tracker-city-detail">Bogota</div>
+    </div>
+    <div class="jdc-row">
+      <div class="jdc-label">Cuando</div>
+      <div class="jdc-value" id="tracker-when">Esta semana</div>
+    </div>
+    <div class="jdc-row">
+      <div class="jdc-label">Estado</div>
+      <div class="jdc-value" style="color:var(--gold);" id="tracker-status">Esperando seleccion</div>
+    </div>
+  </div>
+
+  <!-- BIDS LIST -->
+  <div class="bid-cards">
+    <div style="font-size:15px;font-weight:700;margin-bottom:14px;">
+      Propuestas recibidas <span class="bid-count-badge" id="tracker-bid-count2">4</span>
+    </div>
+    <div id="bids-list"></div>
+  </div>
+
+  <!-- ACTIVITY TIMELINE -->
+  <div style="padding:0 20px;margin-bottom:8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:14px;">Actividad reciente</div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div>
+        <div class="timeline-text">Diego Morales envio una cotizacion de <strong>$210k</strong></div>
+        <div class="timeline-time">Hace 30 minutos</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div>
+        <div class="timeline-text">Mario Restrepo envio una cotizacion de <strong>$255k</strong></div>
+        <div class="timeline-time">Hace 1 hora</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div>
+        <div class="timeline-text">2 tecnicos vieron tu publicacion</div>
+        <div class="timeline-time">Hace 3 horas</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div>
+        <div class="timeline-text">Tu trabajo fue publicado exitosamente</div>
+        <div class="timeline-time">Hace 2 dias</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot pending"></div>
+      <div>
+        <div class="timeline-text" style="color:var(--text-muted);">Tecnico acepta el trabajo</div>
+        <div class="timeline-time">Pendiente</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot pending"></div>
+      <div>
+        <div class="timeline-text" style="color:var(--text-muted);">Trabajo completado y calificado</div>
+        <div class="timeline-time">Pendiente</div>
+      </div>
     </div>
   </div>
 </div>
