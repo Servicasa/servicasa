@@ -1541,66 +1541,94 @@
 </div>
 
 <script>
-var contractors = [
-  { id:1, phone:'573101111111', name:'Mario Restrepo', initials:'MR', trade:'Pintura', city:'Bogotá', rating:4.9, reviews:47, jobs:127, years:5, rate:'$85k', avatar:'green', badges:['Verificado','Top Rated'], bio:'Pintor profesional con más de 5 años de experiencia en interiores y exteriores.' },
-  { id:2, phone:'573102222222', name:'Sofía Vargas', initials:'SV', trade:'Limpieza Profunda', city:'Medellín', rating:4.8, reviews:62, jobs:203, years:4, rate:'$65k', avatar:'gold', badges:['Verificada','Disponible Hoy'], bio:'Especialista en limpieza de hogares y oficinas. Métodos ecológicos y materiales de alta calidad.' },
-  { id:3, phone:'573103333333', name:'Juan Ospina', initials:'JO', trade:'Carpintería', city:'Bogotá', rating:4.7, reviews:31, jobs:88, years:7, rate:'$95k', avatar:'blue', badges:['Verificado'], bio:'Carpintero con 7 años fabricando e instalando muebles a medida, closets y cocinas.' },
-  { id:4, phone:'573104444444', name:'Camila Ríos', initials:'CR', trade:'Drywall & Reparaciones', city:'Cali', rating:4.9, reviews:28, jobs:54, years:3, rate:'$75k', avatar:'coral', badges:['Verificada','Nuevo'], bio:'Técnica en drywall y reparaciones generales. Trabajo limpio y entrega a tiempo garantizada.' },
-  { id:5, phone:'573105555555', name:'Diego Morales', initials:'DM', trade:'Pintura & Acabados', city:'Bogotá', rating:4.6, reviews:19, jobs:41, years:2, rate:'$70k', avatar:'green', badges:['Verificado'], bio:'Pintor especializado en acabados modernos y técnicas decorativas para el hogar.' },
-];
-
-// ─── PORTFOLIO CARDS (SVG inline - no external images needed) ───
-var portfolioData = {
+var photoLibrary = {
   'Pintura': [
-    { bg:'#E8F5E9', label:'Sala pintada', sub:'Acabado mate premium', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="25" width="100" height="70" rx="4" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/><rect x="10" y="25" width="100" height="12" rx="2" fill="#2E7D32"/><rect x="25" y="47" width="30" height="35" rx="2" fill="#A5D6A7"/><rect x="65" y="47" width="30" height="35" rx="2" fill="#A5D6A7"/><rect x="15" y="80" width="90" height="3" fill="#2E7D32" opacity="0.4"/><circle cx="60" cy="20" r="6" fill="#F4A100"/><rect x="55" y="14" width="10" height="4" rx="1" fill="#E65100"/></svg>' },
-    { bg:'#FFF8E1', label:'Fachada exterior', sub:'Pintura impermeable', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><polygon points="60,15 10,50 110,50" fill="#F4A100"/><rect x="15" y="50" width="90" height="60" fill="#FFF9C4" stroke="#F4A100" stroke-width="2"/><rect x="45" y="70" width="30" height="40" rx="2" fill="#A5D6A7"/><rect x="20" y="58" width="25" height="20" rx="2" fill="#B3E5FC"/><rect x="75" y="58" width="25" height="20" rx="2" fill="#B3E5FC"/><rect x="56" y="70" width="8" height="15" rx="1" fill="#2E7D32"/></svg>' },
-    { bg:'#E3F2FD', label:'Habitación moderna', sub:'Tonos contemporáneos', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="20" width="110" height="85" rx="3" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><rect x="5" y="90" width="110" height="15" rx="2" fill="#90CAF9"/><rect x="15" y="35" width="35" height="45" rx="3" fill="#E3F2FD" stroke="#1565C0" stroke-width="1"/><rect x="70" y="35" width="35" height="45" rx="3" fill="#E3F2FD" stroke="#1565C0" stroke-width="1"/><line x1="60" y1="20" x2="60" y2="90" stroke="#1565C0" stroke-width="1" stroke-dasharray="4,3"/><circle cx="87" cy="30" r="8" fill="#FFF9C4" stroke="#F4A100" stroke-width="1.5"/></svg>' },
-    { bg:'#FCE4EC', label:'Cocina renovada', sub:'Colores vivos y duraderos', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="60" width="110" height="50" rx="3" fill="#F48FB1" stroke="#C2185B" stroke-width="1.5"/><rect x="5" y="50" width="110" height="12" rx="2" fill="#E91E63"/><rect x="15" y="65" width="25" height="30" rx="2" fill="#FCE4EC" stroke="#C2185B" stroke-width="1"/><rect x="50" y="65" width="25" height="30" rx="2" fill="#FCE4EC" stroke="#C2185B" stroke-width="1"/><rect x="85" y="65" width="25" height="30" rx="2" fill="#FCE4EC" stroke="#C2185B" stroke-width="1"/><circle cx="27" cy="30" r="12" fill="none" stroke="#C2185B" stroke-width="2"/><circle cx="27" cy="30" r="5" fill="#E91E63"/><circle cx="55" cy="30" r="12" fill="none" stroke="#C2185B" stroke-width="2"/><circle cx="55" cy="30" r="5" fill="#E91E63"/></svg>' }
+    {url:'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=400&h=400&fit=crop',caption:'Sala pintada'},
+    {url:'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=400&fit=crop',caption:'Fachada exterior'},
+    {url:'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=400&h=400&fit=crop',caption:'Habitacion moderna'},
+    {url:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop',caption:'Cocina renovada'}
   ],
   'Limpieza Profunda': [
-    { bg:'#E0F7FA', label:'Cocina impecable', sub:'Limpieza profunda', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="40" width="100" height="65" rx="3" fill="#B2EBF2" stroke="#00838F" stroke-width="2"/><rect x="10" y="40" width="100" height="15" rx="2" fill="#00838F"/><rect x="20" y="60" width="35" height="30" rx="2" fill="#E0F7FA" stroke="#00838F" stroke-width="1"/><rect x="65" y="60" width="35" height="30" rx="2" fill="#E0F7FA" stroke="#00838F" stroke-width="1"/><path d="M55 25 Q60 10 75 20 Q80 8 90 15" stroke="#00838F" stroke-width="2" fill="none"/><circle cx="55" cy="25" r="3" fill="#00838F"/><circle cx="90" cy="15" r="3" fill="#00838F"/></svg>' },
-    { bg:'#F3E5F5', label:'Baño reluciente', sub:'Desinfección total', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="50" width="70" height="55" rx="5" fill="#CE93D8" stroke="#6A1B9A" stroke-width="2"/><ellipse cx="45" cy="50" rx="35" ry="8" fill="#AB47BC"/><rect x="85" y="30" width="20" height="75" rx="4" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.5"/><rect x="88" y="55" width="14" height="25" rx="2" fill="#CE93D8"/><circle cx="95" cy="48" r="4" fill="#6A1B9A"/><path d="M30 65 Q45 58 60 65" stroke="#6A1B9A" stroke-width="1.5" fill="none"/></svg>' },
-    { bg:'#E8F5E9', label:'Sala ordenada', sub:'Limpieza completa', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="70" width="110" height="40" rx="4" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/><rect x="15" y="55" width="40" height="35" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/><rect x="65" y="55" width="40" height="35" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/><rect x="45" y="75" width="30" height="35" rx="2" fill="#81C784"/><circle cx="60" cy="40" r="15" fill="none" stroke="#2E7D32" stroke-width="2"/><path d="M52 40 L58 46 L70 34" stroke="#2E7D32" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>' },
-    { bg:'#FFF3E0', label:'Alfombras limpias', sub:'Lavado a vapor', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="70" width="100" height="35" rx="4" fill="#FFCC80" stroke="#E65100" stroke-width="2"/><line x1="25" y1="70" x2="25" y2="105" stroke="#E65100" stroke-width="1"/><line x1="40" y1="70" x2="40" y2="105" stroke="#E65100" stroke-width="1"/><line x1="55" y1="70" x2="55" y2="105" stroke="#E65100" stroke-width="1"/><line x1="70" y1="70" x2="70" y2="105" stroke="#E65100" stroke-width="1"/><line x1="85" y1="70" x2="85" y2="105" stroke="#E65100" stroke-width="1"/><line x1="100" y1="70" x2="100" y2="105" stroke="#E65100" stroke-width="1"/><rect x="35" y="20" width="18" height="55" rx="4" fill="#FB8C00" stroke="#E65100" stroke-width="1.5"/><ellipse cx="44" cy="20" rx="12" ry="8" fill="#F4A100"/><path d="M38 25 Q44 15 50 25" stroke="white" stroke-width="1.5" fill="none"/></svg>' }
+    {url:'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&h=400&fit=crop',caption:'Limpieza cocina'},
+    {url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',caption:'Bano impecable'},
+    {url:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=400&fit=crop',caption:'Sala ordenada'},
+    {url:'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=400&fit=crop',caption:'Limpieza profunda'}
   ],
   'Carpinteria': [
-    { bg:'#FFF8E1', label:'Closet a medida', sub:'Madera sólida premium', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="15" width="100" height="95" rx="3" fill="#FFE082" stroke="#F57F17" stroke-width="2"/><line x1="60" y1="15" x2="60" y2="110" stroke="#F57F17" stroke-width="2"/><rect x="15" y="20" width="40" height="40" rx="2" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/><rect x="65" y="20" width="40" height="40" rx="2" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/><rect x="15" y="65" width="40" height="40" rx="2" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/><rect x="65" y="65" width="40" height="40" rx="2" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/><circle cx="57" cy="62" r="3" fill="#F57F17"/><circle cx="63" cy="62" r="3" fill="#F57F17"/></svg>' },
-    { bg:'#EFEBE9', label:'Muebles a medida', sub:'Diseño personalizado', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="55" width="100" height="45" rx="4" fill="#BCAAA4" stroke="#4E342E" stroke-width="2"/><rect x="5" y="50" width="110" height="10" rx="3" fill="#8D6E63"/><rect x="15" y="40" width="20" height="15" rx="2" fill="#A1887F" stroke="#4E342E" stroke-width="1"/><rect x="50" y="40" width="20" height="15" rx="2" fill="#A1887F" stroke="#4E342E" stroke-width="1"/><rect x="85" y="40" width="20" height="15" rx="2" fill="#A1887F" stroke="#4E342E" stroke-width="1"/><rect x="20" y="100" width="12" height="10" rx="2" fill="#6D4C41"/><rect x="88" y="100" width="12" height="10" rx="2" fill="#6D4C41"/><rect x="25" y="62" width="28" height="25" rx="2" fill="#D7CCC8" stroke="#4E342E" stroke-width="1"/><rect x="67" y="62" width="28" height="25" rx="2" fill="#D7CCC8" stroke="#4E342E" stroke-width="1"/></svg>' },
-    { bg:'#E8EAF6', label:'Cocina en madera', sub:'Enchapes finos', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="55" width="110" height="55" rx="3" fill="#9FA8DA" stroke="#283593" stroke-width="2"/><rect x="5" y="45" width="110" height="12" rx="2" fill="#3949AB"/><rect x="12" y="60" width="28" height="35" rx="2" fill="#C5CAE9" stroke="#283593" stroke-width="1"/><rect x="46" y="60" width="28" height="35" rx="2" fill="#C5CAE9" stroke="#283593" stroke-width="1"/><rect x="80" y="60" width="28" height="35" rx="2" fill="#C5CAE9" stroke="#283593" stroke-width="1"/><circle cx="25" cy="30" r="10" fill="none" stroke="#283593" stroke-width="2"/><circle cx="25" cy="30" r="4" fill="#3949AB"/><circle cx="55" cy="30" r="10" fill="none" stroke="#283593" stroke-width="2"/><circle cx="55" cy="30" r="4" fill="#3949AB"/></svg>' },
-    { bg:'#FBE9E7', label:'Mesa artesanal', sub:'Trabajo fino a mano', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="50" width="100" height="15" rx="4" fill="#FF8A65" stroke="#BF360C" stroke-width="2"/><rect x="20" y="65" width="12" height="45" rx="3" fill="#FF7043" stroke="#BF360C" stroke-width="1.5"/><rect x="88" y="65" width="12" height="45" rx="3" fill="#FF7043" stroke="#BF360C" stroke-width="1.5"/><rect x="44" y="65" width="12" height="35" rx="3" fill="#FF7043" stroke="#BF360C" stroke-width="1.5"/><rect x="64" y="65" width="12" height="35" rx="3" fill="#FF7043" stroke="#BF360C" stroke-width="1.5"/><ellipse cx="60" cy="35" rx="45" ry="18" fill="#FFCCBC" stroke="#BF360C" stroke-width="2"/><line x1="25" y1="30" x2="95" y2="30" stroke="#BF360C" stroke-width="1" opacity="0.4"/><line x1="25" y1="40" x2="95" y2="40" stroke="#BF360C" stroke-width="1" opacity="0.4"/></svg>' }
+    {url:'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=400&fit=crop',caption:'Closet a medida'},
+    {url:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop',caption:'Sala amueblada'},
+    {url:'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400&h=400&fit=crop',caption:'Cocina madera'},
+    {url:'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=400&fit=crop',caption:'Mesa artesanal'}
   ],
-  'Drywall & Reparaciones': [
-    { bg:'#E8F5E9', label:'Instalación drywall', sub:'Acabado profesional', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="110" height="100" rx="2" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/><line x1="5" y1="60" x2="115" y2="60" stroke="#2E7D32" stroke-width="2"/><line x1="60" y1="10" x2="60" y2="110" stroke="#2E7D32" stroke-width="2"/><circle cx="60" cy="60" r="5" fill="#2E7D32"/><circle cx="5" cy="10" r="4" fill="#F4A100"/><circle cx="115" cy="10" r="4" fill="#F4A100"/><circle cx="5" cy="110" r="4" fill="#F4A100"/><circle cx="115" cy="110" r="4" fill="#F4A100"/><rect x="25" y="30" width="20" height="15" rx="1" fill="#A5D6A7" stroke="#2E7D32" stroke-width="1"/><rect x="75" y="30" width="20" height="15" rx="1" fill="#A5D6A7" stroke="#2E7D32" stroke-width="1"/></svg>' },
-    { bg:'#F3E5F5', label:'Techo terminado', sub:'Liso y sin grietas', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="110" height="35" rx="3" fill="#CE93D8" stroke="#6A1B9A" stroke-width="2"/><rect x="5" y="40" width="110" height="70" rx="3" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1"/><line x1="5" y1="40" x2="115" y2="40" stroke="#6A1B9A" stroke-width="2.5"/><rect x="20" y="55" width="30" height="40" rx="2" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1"/><rect x="70" y="55" width="30" height="40" rx="2" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1"/><circle cx="60" cy="22" r="10" fill="#FFF9C4" stroke="#F4A100" stroke-width="2"/><line x1="60" y1="10" x2="60" y2="5" stroke="#F4A100" stroke-width="2"/></svg>' },
-    { bg:'#FFF8E1', label:'Reparación de pared', sub:'Sin rastros visibles', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="110" height="110" rx="2" fill="#FFF9C4" stroke="#F57F17" stroke-width="2"/><path d="M30 40 Q45 30 50 50 Q55 30 70 40 Q65 60 60 55 Q55 70 50 55 Q45 65 40 55 Q35 60 30 40Z" fill="#FFE082" stroke="#F57F17" stroke-width="1"/><path d="M30 40 Q50 50 70 40" stroke="#F57F17" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/><rect x="20" y="75" width="80" height="25" rx="2" fill="#FFF9C4"/><path d="M20 75 Q60 68 100 75" stroke="#F57F17" stroke-width="1.5" fill="none"/><circle cx="60" cy="88" r="8" fill="#FFE082" stroke="#F57F17" stroke-width="1.5"/><path d="M56 88 L59 91 L65 85" stroke="#F57F17" stroke-width="2" fill="none" stroke-linecap="round"/></svg>' },
-    { bg:'#E3F2FD', label:'Acabado liso', sub:'Textura uniforme', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="110" height="110" rx="2" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/><line x1="5" y1="20" x2="115" y2="20" stroke="#90CAF9" stroke-width="1"/><line x1="5" y1="35" x2="115" y2="35" stroke="#90CAF9" stroke-width="1"/><line x1="5" y1="50" x2="115" y2="50" stroke="#90CAF9" stroke-width="1"/><line x1="5" y1="65" x2="115" y2="65" stroke="#90CAF9" stroke-width="1"/><line x1="5" y1="80" x2="115" y2="80" stroke="#90CAF9" stroke-width="1"/><line x1="5" y1="95" x2="115" y2="95" stroke="#90CAF9" stroke-width="1"/><rect x="30" y="25" width="60" height="75" rx="3" fill="rgba(255,255,255,0.5)" stroke="#1565C0" stroke-width="1.5"/><path d="M40 55 Q60 45 80 55 Q60 65 40 55Z" fill="#1565C0" opacity="0.3"/><circle cx="60" cy="55" r="3" fill="#1565C0"/></svg>' }
+  'Drywall': [
+    {url:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop',caption:'Instalacion drywall'},
+    {url:'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=400&h=400&fit=crop',caption:'Techo terminado'},
+    {url:'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=400&h=400&fit=crop',caption:'Reparacion pared'},
+    {url:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=400&fit=crop',caption:'Acabado liso'}
   ],
   'default': [
-    { bg:'#E8F5E9', label:'Trabajo completado', sub:'Alta calidad', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="55" r="40" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2.5"/><path d="M42 55 L54 67 L78 43" stroke="#2E7D32" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="15" y="95" width="90" height="15" rx="4" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/><rect x="25" y="99" width="30" height="7" rx="2" fill="#A5D6A7"/><rect x="65" y="99" width="30" height="7" rx="2" fill="#A5D6A7"/></svg>' },
-    { bg:'#FFF8E1', label:'Proyecto entregado', sub:'En tiempo y forma', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="20" width="80" height="90" rx="4" fill="#FFE082" stroke="#F57F17" stroke-width="2"/><rect x="20" y="20" width="80" height="20" rx="4" fill="#F57F17"/><line x1="35" y1="55" x2="85" y2="55" stroke="#F57F17" stroke-width="2"/><line x1="35" y1="68" x2="85" y2="68" stroke="#F57F17" stroke-width="2"/><line x1="35" y1="81" x2="65" y2="81" stroke="#F57F17" stroke-width="2"/><circle cx="75" cy="85" r="15" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/><path d="M67 85 L73 91 L83 79" stroke="#2E7D32" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>' },
-    { bg:'#E3F2FD', label:'Cliente satisfecho', sub:'5 estrellas', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="45" r="25" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/><circle cx="60" cy="38" r="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><path d="M35 70 Q60 58 85 70 L90 100 L30 100 Z" fill="#90CAF9" stroke="#1565C0" stroke-width="1.5"/><polygon points="60,78 63,88 73,88 65,94 68,104 60,98 52,104 55,94 47,88 57,88" fill="#F4A100" stroke="#E65100" stroke-width="1"/></svg>' },
-    { bg:'#FCE4EC', label:'Garantía incluida', sub:'Respaldo total', svg:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><path d="M60 10 L100 30 L100 65 Q100 90 60 110 Q20 90 20 65 L20 30 Z" fill="#F48FB1" stroke="#C2185B" stroke-width="2"/><path d="M60 20 L90 36 L90 65 Q90 84 60 100 Q30 84 30 65 L30 36 Z" fill="#FCE4EC" stroke="#C2185B" stroke-width="1"/><path d="M42 62 L54 74 L78 50" stroke="#C2185B" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
+    {url:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=400&fit=crop',caption:'Trabajo terminado'},
+    {url:'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&h=400&fit=crop',caption:'Proyecto completado'},
+    {url:'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&h=400&fit=crop',caption:'Interior moderno'},
+    {url:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop',caption:'Renovacion completa'}
   ]
 };
 
-function renderPortfolio(trade) {
-  var grid = document.getElementById('portfolio-grid');
-  if (!grid) return;
-  var items = portfolioData[trade] || portfolioData['default'];
-  var html = '';
-  for (var i = 0; i < items.length; i++) {
-    var item = items[i];
-    html += '<div style="background:' + item.bg + ';border-radius:10px;overflow:hidden;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;border:1px solid rgba(0,0,0,0.06);">' +
-      '<div style="width:70%;aspect-ratio:1;margin-bottom:8px;">' + item.svg + '</div>' +
-      '<div style="font-size:11px;font-weight:600;color:#1A1A1A;text-align:center;line-height:1.3;">' + item.label + '</div>' +
-      '<div style="font-size:10px;color:#6B6B6B;text-align:center;margin-top:2px;">' + item.sub + '</div>' +
-    '</div>';
-  }
-  grid.innerHTML = html;
-}
+var reviewsLibrary = {
+  1:[
+    {name:'Ana Garcia',rating:5,text:'Excelente trabajo, muy puntual. Dejo todo limpio.',date:'Hace 2 semanas'},
+    {name:'Carlos Mendoza',rating:5,text:'El mejor pintor. Termino antes del plazo.',date:'Hace 1 mes'},
+    {name:'Lucia Torres',rating:4,text:'Buen trabajo, compenso la demora con calidad.',date:'Hace 2 meses'}
+  ],
+  2:[
+    {name:'Laura Jimenez',rating:5,text:'Limpieza impecable. Volvere a contratar.',date:'Hace 1 semana'},
+    {name:'Roberto Silva',rating:5,text:'Dejo el apartamento como nuevo.',date:'Hace 3 semanas'}
+  ],
+  3:[
+    {name:'Pedro Salcedo',rating:4,text:'Muebles de excelente calidad.',date:'Hace 3 semanas'},
+    {name:'Isabel Mora',rating:5,text:'El closet quedo perfecto.',date:'Hace 1 mes'}
+  ],
+  4:[
+    {name:'Jorge Ramirez',rating:5,text:'Trabajo limpio y rapido.',date:'Hace 2 semanas'},
+    {name:'Sandra Lopez',rating:5,text:'Muy profesional, llego puntual.',date:'Hace 1 mes'}
+  ],
+  5:[
+    {name:'Felipe Herrera',rating:5,text:'Excelente acabado. Recomendado 100%.',date:'Hace 1 semana'},
+    {name:'Patricia Nunez',rating:4,text:'Buen trabajo, precios justos.',date:'Hace 1 mes'}
+  ]
+};
+
+var contractors = [
+  {id:1,name:'Mario Restrepo',initials:'MR',trade:'Pintura',city:'Bogota',rating:4.9,reviews:47,jobs:127,years:5,rate:'$85k',rateNum:85,avatar:'green',badges:['Verificado','Top Rated'],bio:'Pintor profesional con 5 anos de experiencia en interiores y exteriores.',phone:'573101111111'},
+  {id:2,name:'Sofia Vargas',initials:'SV',trade:'Limpieza Profunda',city:'Medellin',rating:4.8,reviews:62,jobs:203,years:4,rate:'$65k',rateNum:65,avatar:'gold',badges:['Verificada','Disponible Hoy'],bio:'Especialista en limpieza de hogares y oficinas. Disponible 7 dias.',phone:'573102222222'},
+  {id:3,name:'Juan Ospina',initials:'JO',trade:'Carpinteria',city:'Bogota',rating:4.7,reviews:31,jobs:88,years:7,rate:'$95k',rateNum:95,avatar:'blue',badges:['Verificado'],bio:'Carpintero con 7 anos fabricando muebles a medida, closets y cocinas.',phone:'573103333333'},
+  {id:4,name:'Camila Rios',initials:'CR',trade:'Drywall',city:'Cali',rating:4.9,reviews:28,jobs:54,years:3,rate:'$75k',rateNum:75,avatar:'coral',badges:['Verificada'],bio:'Tecnica en drywall y reparaciones. Trabajo limpio y a tiempo.',phone:'573104444444'},
+  {id:5,name:'Diego Morales',initials:'DM',trade:'Pintura',city:'Bogota',rating:4.6,reviews:19,jobs:41,years:2,rate:'$70k',rateNum:70,avatar:'green',badges:['Verificado'],bio:'Pintor especializado en acabados modernos y tecnicas decorativas.',phone:'573105555555'}
+];
 
 var currentContractor = null;
 var prevScreen = 'screen-home';
+var currentResults = contractors.slice();
+var currentUser = null;
+var selectedRole = 'client';
+
+// Load saved user
+try {
+  var saved = localStorage.getItem('sc_user');
+  if (saved) { currentUser = JSON.parse(saved); }
+} catch(e) {}
+
+function showScreen(id) {
+  var screens = document.querySelectorAll('.screen');
+  for (var i = 0; i < screens.length; i++) {
+    screens[i].classList.remove('active');
+  }
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+  updateNavForUser();
+}
+
+function goBack() { showScreen(prevScreen); }
 
 function renderContractors(list, targetId) {
   var el = document.getElementById(targetId);
@@ -1614,7 +1642,8 @@ function renderContractors(list, targetId) {
     var c = list[i];
     var badgeHtml = '';
     for (var b = 0; b < c.badges.length; b++) {
-      badgeHtml += '<span class="badge ' + (c.badges[b]==='Top Rated'?'gold':'') + '">' + c.badges[b] + '</span>';
+      var bg = c.badges[b] === 'Top Rated' ? 'badge gold' : 'badge';
+      badgeHtml += '<span class="' + bg + '">' + c.badges[b] + '</span>';
     }
     html += '<div class="contractor-card" onclick="openProfile(' + c.id + ')">' +
       '<div class="avatar ' + c.avatar + '">' + c.initials + '</div>' +
@@ -1630,12 +1659,52 @@ function renderContractors(list, targetId) {
   el.innerHTML = html;
 }
 
+function renderPortfolio(trade) {
+  var grid = document.getElementById('portfolio-grid');
+  if (!grid) return;
+  var key = trade;
+  if (!photoLibrary[key]) key = 'default';
+  var photos = photoLibrary[key];
+  var html = '';
+  for (var i = 0; i < photos.length; i++) {
+    html += '<div style="border-radius:10px;overflow:hidden;aspect-ratio:1;position:relative;">' +
+      '<img src="' + photos[i].url + '" alt="' + photos[i].caption + '" style="width:100%;height:100%;object-fit:cover;" loading="lazy">' +
+      '<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);padding:6px 8px;font-size:10px;color:#fff;">' + photos[i].caption + '</div>' +
+    '</div>';
+  }
+  grid.innerHTML = html;
+}
+
+function renderReviews(contractorId) {
+  var container = document.getElementById('tab-reviews');
+  if (!container) return;
+  var list = reviewsLibrary[contractorId] || [];
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var r = list[i];
+    var stars = '';
+    for (var s = 0; s < 5; s++) {
+      stars += '<span class="star" style="color:' + (s < r.rating ? 'var(--gold)' : 'var(--border)') + '">&#9733;</span>';
+    }
+    html += '<div class="review-card">' +
+      '<div class="review-header"><div class="reviewer-name">' + r.name + '</div><div class="review-date">' + r.date + '</div></div>' +
+      '<div class="stars" style="margin-bottom:6px;">' + stars + '</div>' +
+      '<div class="review-text">' + r.text + '</div>' +
+    '</div>';
+  }
+  html += '<div style="text-align:center;padding:12px 0;"><button class="btn-outline" onclick="leaveReview()" style="font-size:13px;padding:9px 20px;">Dejar una resena &#9997;</button></div>';
+  container.innerHTML = html;
+}
+
 function openProfile(id) {
-  var c = contractors.find(function(x) x.id === id);
+  var c = null;
+  for (var i = 0; i < contractors.length; i++) {
+    if (contractors[i].id === id) { c = contractors[i]; break; }
+  }
+  if (!c) return;
   currentContractor = c;
   document.getElementById('profile-avatar').textContent = c.initials;
   document.getElementById('profile-avatar').className = 'profile-avatar';
-  renderPortfolio(c.trade);
   document.getElementById('profile-name').textContent = c.name;
   document.getElementById('profile-trade').textContent = c.trade;
   document.getElementById('profile-rating').textContent = c.rating;
@@ -1644,54 +1713,96 @@ function openProfile(id) {
   document.getElementById('profile-rate').textContent = c.rate;
   document.getElementById('profile-city').textContent = c.city;
   document.getElementById('profile-bio').textContent = c.bio;
-  document.getElementById('profile-badges').innerHTML = c.badges.map(function(b) "<span class=\"badge\">" + b + "</span>").join('');
+  var badgeEl = document.getElementById('profile-badges');
+  var bHtml = '';
+  for (var b = 0; b < c.badges.length; b++) bHtml += '<span class="badge">' + c.badges[b] + '</span>';
+  badgeEl.innerHTML = bHtml;
+  renderPortfolio(c.trade);
+  renderReviews(c.id);
   prevScreen = document.querySelector('.screen.active').id;
   showScreen('screen-profile');
   switchTabById('tab-about');
 }
 
-function goBack() {
-  showScreen(prevScreen);
+function msgContractor() {
+  if (!currentContractor) return;
+  var msg = encodeURIComponent('Hola ' + currentContractor.name + ', vi tu perfil en ServiCasa y me gustaria contratarte.');
+  window.open('https://wa.me/' + currentContractor.phone + '?text=' + msg, '_blank');
 }
 
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(function(s) s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
+function leaveReview() {
+  if (!currentContractor) return;
+  var msg = encodeURIComponent('Hola, quiero dejar una resena para ' + currentContractor.name + ' en ServiCasa.');
+  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
 }
 
 function doSearch() {
-  var q = document.getElementById('search-input').value || 'servicios';
-  document.getElementById('results-label').textContent = "Resultados para \"" + q + "\"";
-  renderContractors(contractors, 'results-list');
+  var q = document.getElementById('search-input').value.toLowerCase().trim();
+  currentResults = [];
+  for (var i = 0; i < contractors.length; i++) {
+    var c = contractors[i];
+    if (!q || c.trade.toLowerCase().indexOf(q) !== -1 || c.city.toLowerCase().indexOf(q) !== -1 || c.name.toLowerCase().indexOf(q) !== -1) {
+      currentResults.push(c);
+    }
+  }
+  document.getElementById('results-label').textContent = q ? 'Resultados para "' + q + '"' : 'Todos los tecnicos';
+  renderContractors(currentResults, 'results-list');
   showScreen('screen-results');
 }
 
 function filterCategory(cat) {
-  var filtered = contractors.filter(function(c) c.trade.toLowerCase().includes(cat.toLowerCase()));
-  var list = filtered.length ? filtered : contractors;
-  document.getElementById('results-label').textContent = "Tecnicos de " + cat;
-  renderContractors(list, 'results-list');
+  var q = cat.toLowerCase();
+  currentResults = [];
+  for (var i = 0; i < contractors.length; i++) {
+    if (contractors[i].trade.toLowerCase().indexOf(q) !== -1) {
+      currentResults.push(contractors[i]);
+    }
+  }
+  if (!currentResults.length) currentResults = contractors.slice();
+  document.getElementById('results-label').textContent = 'Tecnicos de ' + cat;
+  renderContractors(currentResults, 'results-list');
   showScreen('screen-results');
 }
 
-function setChip(el, filter) {
-  document.querySelectorAll('.chips .chip').forEach(function(c) c.classList.remove('active'));
+function sortResults(el, type) {
+  var chips = document.querySelectorAll('#results-chips .chip');
+  for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
   el.classList.add('active');
-  if (filter === 'all') {
-    renderContractors(contractors, 'contractors-list');
-  } else {
-    var filtered = contractors.filter(function(c) c.city === filter);
-    renderContractors(filtered.length ? filtered : contractors, 'contractors-list');
+  var sorted = currentResults.slice();
+  if (type === 'rating') {
+    sorted.sort(function(a, b) { return b.rating - a.rating; });
+  } else if (type === 'price') {
+    sorted.sort(function(a, b) { return a.rateNum - b.rateNum; });
+  } else if (type === 'jobs') {
+    sorted.sort(function(a, b) { return b.jobs - a.jobs; });
   }
+  renderContractors(sorted, 'results-list');
+}
+
+function setChip(el, filter) {
+  var chips = document.querySelectorAll('#screen-home .chips .chip');
+  for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+  el.classList.add('active');
+  var list = [];
+  if (filter === 'all') {
+    list = contractors;
+  } else {
+    for (var i = 0; i < contractors.length; i++) {
+      if (contractors[i].city === filter) list.push(contractors[i]);
+    }
+  }
+  renderContractors(list.length ? list : contractors, 'contractors-list');
 }
 
 function submitJob() {
-  var category = document.querySelector('#screen-post select').value;
-  var description = document.querySelector('#screen-post textarea').value;
-  var city = document.querySelectorAll('#screen-post select')[1] ? document.querySelectorAll('#screen-post select')[1].value : 'Bogota';
-  var name = document.querySelectorAll('#screen-post input')[1] ? document.querySelectorAll('#screen-post input')[1].value : '';
-  var phone = document.querySelectorAll('#screen-post input')[2] ? document.querySelectorAll('#screen-post input')[2].value : '';
+  var selects = document.querySelectorAll('#screen-post select');
+  var inputs = document.querySelectorAll('#screen-post input');
+  var textarea = document.querySelector('#screen-post textarea');
+  var category = selects[0] ? selects[0].value : '';
+  var city = selects[1] ? selects[1].value : 'Bogota';
+  var description = textarea ? textarea.value : '';
+  var name = inputs[1] ? inputs[1].value : '';
+  var phone = inputs[2] ? inputs[2].value : '';
   if (!category || !description || !phone) {
     alert('Por favor completa: tipo de servicio, descripcion y WhatsApp');
     return;
@@ -1705,26 +1816,13 @@ function submitJob() {
   showScreen('screen-success');
 }
 
-function switchTab(el, tabId) {
-  var tabs = document.querySelectorAll('.tab');
-  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
-  el.classList.add('active');
-  switchTabById(tabId);
-}
-
-function switchTabById(tabId) {
-  var ids = ['tab-about','tab-reviews','tab-portfolio'];
-  for (var i = 0; i < ids.length; i++) {
-    var el = document.getElementById(ids[i]);
-    if (el) el.style.display = ids[i] === tabId ? 'block' : 'none';
-  }
-}
-
 function joinAsContractor() {
-  var name = document.querySelectorAll('#screen-contractors input')[0] ? document.querySelectorAll('#screen-contractors input')[0].value : '';
-  var trade = document.querySelector('#screen-contractors select') ? document.querySelector('#screen-contractors select').value : '';
-  var city = document.querySelectorAll('#screen-contractors select')[1] ? document.querySelectorAll('#screen-contractors select')[1].value : 'Bogota';
-  var phone = document.querySelectorAll('#screen-contractors input')[1] ? document.querySelectorAll('#screen-contractors input')[1].value : '';
+  var inputs = document.querySelectorAll('#screen-contractors input');
+  var selects = document.querySelectorAll('#screen-contractors select');
+  var name = inputs[0] ? inputs[0].value : '';
+  var trade = selects[0] ? selects[0].value : '';
+  var city = selects[1] ? selects[1].value : 'Bogota';
+  var phone = inputs[1] ? inputs[1].value : '';
   var msg = 'Registro Tecnico - ServiCasa%0A%0ANombre: ' + encodeURIComponent(name) +
     '%0AEspecialidad: ' + encodeURIComponent(trade) +
     '%0ACiudad: ' + encodeURIComponent(city) +
@@ -1733,75 +1831,70 @@ function joinAsContractor() {
   showScreen('screen-success');
 }
 
-function msgContractor() {
-  if (!currentContractor) return;
-  var msg = encodeURIComponent('Hola ' + currentContractor.name + ', vi tu perfil en ServiCasa y me gustaria contratarte. Puedes darme mas informacion?');
-  window.open('https://wa.me/' + (currentContractor.phone || '15551234567') + '?text=' + msg, '_blank');
+function switchTab(el, tabId) {
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  el.classList.add('active');
+  switchTabById(tabId);
 }
 
-renderContractors(contractors, 'contractors-list');
-
-// ─── AUTH SYSTEM ─────────────────────────────────────────────────
-var currentUser = null;
-var selectedRole = 'client';
-
-// Load user from localStorage on startup
-(function() {
-  try {
-    var saved = localStorage.getItem('sc_user');
-    if (saved) {
-      currentUser = JSON.parse(saved);
-      updateNavForUser();
-    }
-  } catch(e) {}
-})();
+function switchTabById(tabId) {
+  var ids = ['tab-about', 'tab-reviews', 'tab-portfolio'];
+  for (var i = 0; i < ids.length; i++) {
+    var el = document.getElementById(ids[i]);
+    if (el) el.style.display = ids[i] === tabId ? 'block' : 'none';
+  }
+}
 
 function updateNavForUser() {
   var navRight = document.getElementById('main-nav-right');
   if (!navRight) return;
   if (currentUser) {
-    var initials = currentUser.name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+    var parts = currentUser.name.split(' ');
+    var initials = '';
+    for (var i = 0; i < parts.length && i < 2; i++) initials += parts[i][0].toUpperCase();
     navRight.innerHTML =
       '<div class="user-avatar-nav" onclick="showScreen('screen-dashboard')">' + initials + '</div>' +
       '<button class="nav-btn active" onclick="showScreen('screen-post')">Publicar Trabajo</button>';
-    document.getElementById('dash-username').textContent = currentUser.name.split(' ')[0];
-    document.getElementById('dash-avatar').textContent = initials;
-    document.getElementById('user-profile-avatar').textContent = initials;
-    document.getElementById('user-profile-name').textContent = currentUser.name;
-    document.getElementById('user-profile-email').textContent = currentUser.email;
-    document.getElementById('user-profile-role').textContent = currentUser.role === 'contractor' ? 'Técnico' : 'Cliente';
+    var du = document.getElementById('dash-username');
+    if (du) du.textContent = parts[0];
+    var da = document.getElementById('dash-avatar');
+    if (da) da.textContent = initials;
+    var upa = document.getElementById('user-profile-avatar');
+    if (upa) upa.textContent = initials;
+    var upn = document.getElementById('user-profile-name');
+    if (upn) upn.textContent = currentUser.name;
+    var upe = document.getElementById('user-profile-email');
+    if (upe) upe.textContent = currentUser.email;
+    var upr = document.getElementById('user-profile-role');
+    if (upr) upr.textContent = currentUser.role === 'contractor' ? 'Tecnico' : 'Cliente';
   } else {
     navRight.innerHTML =
-      '<button class="nav-btn" onclick="showScreen('screen-contractors')">Soy Técnico</button>' +
+      '<button class="nav-btn" onclick="showScreen('screen-contractors')">Soy Tecnico</button>' +
       '<button class="nav-btn" onclick="showScreen('screen-auth')">Ingresar</button>' +
       '<button class="nav-btn active" onclick="showScreen('screen-post')">Publicar Trabajo</button>';
   }
 }
 
 function switchAuthTab(tab) {
-  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
-  document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
-  document.getElementById('form-login').classList.toggle('active', tab === 'login');
-  document.getElementById('form-signup').classList.toggle('active', tab === 'signup');
+  document.getElementById('tab-login').classList[tab === 'login' ? 'add' : 'remove']('active');
+  document.getElementById('tab-signup').classList[tab === 'signup' ? 'add' : 'remove']('active');
+  document.getElementById('form-login').classList[tab === 'login' ? 'add' : 'remove']('active');
+  document.getElementById('form-signup').classList[tab === 'signup' ? 'add' : 'remove']('active');
   document.getElementById('login-error').style.display = 'none';
   document.getElementById('signup-error').style.display = 'none';
 }
 
 function selectRole(role) {
   selectedRole = role;
-  document.getElementById('role-client').classList.toggle('selected', role === 'client');
-  document.getElementById('role-contractor').classList.toggle('selected', role === 'contractor');
+  document.getElementById('role-client').classList[role === 'client' ? 'add' : 'remove']('selected');
+  document.getElementById('role-contractor').classList[role === 'contractor' ? 'add' : 'remove']('selected');
 }
 
 function togglePassword(inputId, btn) {
   var input = document.getElementById(inputId);
-  if (input.type === 'password') {
-    input.type = 'text';
-    btn.textContent = '🙈';
-  } else {
-    input.type = 'password';
-    btn.textContent = '👁';
-  }
+  if (input.type === 'password') { input.type = 'text'; btn.textContent = 'hide'; }
+  else { input.type = 'password'; btn.textContent = 'show'; }
 }
 
 function showError(elId, msg) {
@@ -1814,20 +1907,16 @@ function doLogin() {
   var email = document.getElementById('login-email').value.trim();
   var pass = document.getElementById('login-password').value;
   document.getElementById('login-error').style.display = 'none';
-
   if (!email || !pass) { showError('login-error', 'Por favor completa todos los campos.'); return; }
-  if (!email.includes('@')) { showError('login-error', 'Ingresa un correo válido.'); return; }
-
-  // Check saved users
+  if (email.indexOf('@') === -1) { showError('login-error', 'Ingresa un correo valido.'); return; }
   try {
     var users = JSON.parse(localStorage.getItem('sc_users') || '[]');
-    var user = users.find(function(u){ return u.email === email; });
+    var user = null;
+    for (var i = 0; i < users.length; i++) { if (users[i].email === email) { user = users[i]; break; } }
     if (!user) { showError('login-error', 'No encontramos una cuenta con ese correo.'); return; }
-    if (user.password !== pass) { showError('login-error', 'Contraseña incorrecta.'); return; }
+    if (user.password !== pass) { showError('login-error', 'Contrasena incorrecta.'); return; }
     loginSuccess(user);
-  } catch(e) {
-    showError('login-error', 'Error al iniciar sesión. Intenta de nuevo.');
-  }
+  } catch(e) { showError('login-error', 'Error al iniciar sesion.'); }
 }
 
 function doSignup() {
@@ -1836,62 +1925,51 @@ function doSignup() {
   var phone = document.getElementById('signup-phone').value.trim();
   var pass = document.getElementById('signup-password').value;
   document.getElementById('signup-error').style.display = 'none';
-
   if (!name || !email || !pass) { showError('signup-error', 'Por favor completa todos los campos.'); return; }
-  if (!email.includes('@')) { showError('signup-error', 'Ingresa un correo válido.'); return; }
-  if (pass.length < 6) { showError('signup-error', 'La contraseña debe tener al menos 6 caracteres.'); return; }
-
+  if (email.indexOf('@') === -1) { showError('signup-error', 'Ingresa un correo valido.'); return; }
+  if (pass.length < 6) { showError('signup-error', 'La contrasena debe tener al menos 6 caracteres.'); return; }
   try {
     var users = JSON.parse(localStorage.getItem('sc_users') || '[]');
-    if (users.find(function(u){ return u.email === email; })) {
-      showError('signup-error', 'Ya existe una cuenta con ese correo.'); return;
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].email === email) { showError('signup-error', 'Ya existe una cuenta con ese correo.'); return; }
     }
-    var newUser = { name: name, email: email, phone: phone, password: pass, role: selectedRole, createdAt: new Date().toISOString() };
+    var newUser = {name:name, email:email, phone:phone, password:pass, role:selectedRole, createdAt:new Date().toISOString()};
     users.push(newUser);
     localStorage.setItem('sc_users', JSON.stringify(users));
     document.getElementById('signup-success').style.display = 'block';
-    setTimeout(function(){ loginSuccess(newUser); }, 1200);
-  } catch(e) {
-    showError('signup-error', 'Error al crear cuenta. Intenta de nuevo.');
-  }
+    setTimeout(function() { loginSuccess(newUser); }, 1200);
+  } catch(e) { showError('signup-error', 'Error al crear cuenta.'); }
 }
 
 function socialLogin(provider) {
-  // Simulate social login with a demo account
-  var demoUser = {
-    name: 'Usuario Demo',
-    email: 'demo@servicasa.co',
-    phone: '',
-    role: 'client',
-    provider: provider,
-    createdAt: new Date().toISOString()
-  };
-  loginSuccess(demoUser);
+  loginSuccess({name:'Usuario Demo', email:'demo@servicasa.co', phone:'', role:'client', provider:provider});
 }
 
 function loginSuccess(user) {
   currentUser = user;
-  try { localStorage.setItem('sc_user', JSON.stringify(user)); } catch(e){}
+  try { localStorage.setItem('sc_user', JSON.stringify(user)); } catch(e) {}
   updateNavForUser();
   showScreen('screen-dashboard');
 }
 
 function doLogout() {
   currentUser = null;
-  try { localStorage.removeItem('sc_user'); } catch(e){}
+  try { localStorage.removeItem('sc_user'); } catch(e) {}
   updateNavForUser();
   showScreen('screen-home');
 }
 
 function showForgotPassword() {
-  alert('Función de recuperación de contraseña próximamente. Por ahora contacta soporte por WhatsApp.');
+  alert('Funcion de recuperacion de contrasena proximamente.');
 }
 
 function editProfile() {
-  alert('Edición de perfil próximamente disponible.');
+  alert('Edicion de perfil proximamente disponible.');
 }
 
-</script>
+renderContractors(contractors, 'contractors-list');
+updateNavForUser();
+</script></script>
 
 <!-- ============ SCREEN: AUTH (LOGIN / SIGNUP) ============ -->
 <div class="screen" id="screen-auth">
