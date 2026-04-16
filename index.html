@@ -1596,6 +1596,227 @@
     transition: background 0.2s;
   }
   .nav-notif-btn:hover { background: rgba(255,255,255,0.22); }
+
+  /* ── REPEAT BOOKING & FAVORITES ── */
+  .bookings-hero {
+    background: linear-gradient(135deg, #4A1942 0%, #7B2D8B 100%);
+    padding: 28px 20px 36px; text-align: center;
+  }
+  .bookings-hero h2 { color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .bookings-hero p { color: rgba(255,255,255,0.65); font-size: 13px; }
+  .booking-tabs {
+    display: flex; border-bottom: 1.5px solid var(--border);
+    background: var(--white); padding: 0 20px;
+  }
+  .booking-tab {
+    flex: 1; padding: 13px 0 11px; font-size: 13px; font-weight: 500;
+    color: var(--text-muted); cursor: pointer; text-align: center;
+    border-bottom: 2.5px solid transparent; margin-bottom: -1.5px;
+    transition: all 0.15s;
+  }
+  .booking-tab.active { color: #7B2D8B; border-bottom-color: #7B2D8B; font-weight: 600; }
+  .booking-panel { display: none; padding: 16px 20px; }
+  .booking-panel.active { display: block; }
+  .past-booking-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 16px; border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .pbc-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .pbc-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pbc-info { flex: 1; }
+  .pbc-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .pbc-trade { font-size: 11px; color: var(--brand-light); }
+  .pbc-price {
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800;
+    color: var(--brand); text-align: right;
+  }
+  .pbc-details {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    margin-bottom: 12px; padding: 10px; background: var(--bg);
+    border-radius: 8px;
+  }
+  .pbd-item { font-size: 11px; }
+  .pbd-label { color: var(--text-light); margin-bottom: 2px; }
+  .pbd-val { font-weight: 600; color: var(--text); }
+  .pbc-actions { display: flex; gap: 8px; }
+  .btn-book-again {
+    flex: 1; background: #7B2D8B; color: #fff; border: none;
+    padding: 10px; border-radius: 8px; font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: opacity 0.15s;
+  }
+  .btn-book-again:hover { opacity: 0.88; }
+  .btn-view-profile {
+    background: transparent; color: var(--brand); border: 1.5px solid var(--brand);
+    padding: 10px 14px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-view-profile:hover { background: var(--brand); color: #fff; }
+  .rating-given {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; color: var(--text-muted); margin-top: 6px;
+  }
+  .fav-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 14px; border: 1px solid var(--border);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 12px;
+  }
+  .fav-avatar {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .fav-info { flex: 1; min-width: 0; }
+  .fav-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .fav-trade { font-size: 11px; color: var(--brand-light); margin-bottom: 4px; }
+  .fav-stats { font-size: 11px; color: var(--text-muted); }
+  .fav-heart {
+    font-size: 22px; cursor: pointer; flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .fav-heart:hover { transform: scale(1.2); }
+  .book-again-modal {
+    background: var(--white); border-radius: var(--radius);
+    margin: 0 20px 16px; padding: 20px; border: 1px solid var(--border);
+    box-shadow: var(--card-shadow);
+  }
+  .bam-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  }
+  .booking-stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 10px; margin: 0 20px 16px;
+  }
+  .booking-stat {
+    background: var(--white); border-radius: 10px; padding: 14px;
+    text-align: center; border: 1px solid var(--border);
+  }
+  .bs-val {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    color: #7B2D8B;
+  }
+  .bs-label { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+  /* ── REPEAT BOOKING ── */
+  .repeat-hero {
+    background: linear-gradient(135deg, #4A1942 0%, #7B2D8B 100%);
+    padding: 28px 20px 36px; text-align: center;
+  }
+  .repeat-hero h2 { color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .repeat-hero p { color: rgba(255,255,255,0.65); font-size: 13px; }
+  .booking-history-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 16px; border: 1px solid var(--border); margin-bottom: 12px;
+  }
+  .bhc-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .bhc-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .bhc-info { flex: 1; }
+  .bhc-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .bhc-trade { font-size: 11px; color: var(--brand-light); font-weight: 500; }
+  .bhc-rating { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .bhc-price {
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800;
+    color: var(--brand); text-align: right;
+  }
+  .bhc-price span { display: block; font-size: 10px; font-weight: 400; color: var(--text-muted); font-family: 'DM Sans', sans-serif; }
+  .bhc-details {
+    background: var(--bg); border-radius: 8px; padding: 10px 12px;
+    margin-bottom: 12px; display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .bhc-detail-item { font-size: 11px; }
+  .bhc-detail-label { color: var(--text-muted); margin-bottom: 2px; }
+  .bhc-detail-val { font-weight: 600; color: var(--text); }
+  .bhc-actions { display: flex; gap: 8px; }
+  .book-again-btn {
+    flex: 1; background: var(--brand); color: #fff; border: none;
+    padding: 10px; border-radius: 8px; font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: background 0.15s;
+  }
+  .book-again-btn:hover { background: var(--brand-light); }
+  .view-profile-btn {
+    background: transparent; color: var(--brand); border: 1.5px solid var(--brand);
+    padding: 10px 16px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s;
+  }
+  .view-profile-btn:hover { background: var(--brand); color: #fff; }
+  .completed-badge {
+    background: var(--brand-accent); color: var(--brand);
+    font-size: 10px; font-weight: 700; padding: 3px 8px;
+    border-radius: 20px; display: inline-flex; align-items: center; gap: 3px;
+  }
+  .fav-contractors { padding: 0 20px 20px; }
+  .fav-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 14px; border: 1px solid var(--border); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .fav-card:hover { box-shadow: var(--card-shadow); transform: translateY(-1px); }
+  .fav-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+    flex-shrink: 0; position: relative;
+  }
+  .fav-heart {
+    position: absolute; top: -4px; right: -4px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #E53935; color: #fff; font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid #fff;
+  }
+  .fav-info { flex: 1; }
+  .fav-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .fav-trade { font-size: 11px; color: var(--brand-light); }
+  .fav-jobs { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .book-again-quick {
+    background: var(--gold); color: var(--brand); border: none;
+    padding: 8px 14px; border-radius: 8px; font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700; cursor: pointer; flex-shrink: 0;
+  }
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin: 0 20px 16px;
+  }
+  .stat-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 14px; border: 1px solid var(--border); text-align: center;
+  }
+  .stat-val {
+    font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+    color: var(--brand);
+  }
+  .stat-label { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+  .book-again-modal {
+    background: var(--white); border-radius: var(--radius);
+    margin: 0 20px 16px; padding: 20px; border: 1px solid var(--border);
+    box-shadow: var(--card-shadow);
+  }
+  .bam-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  }
 </style>
 </head>
 <body>
@@ -1796,6 +2017,7 @@
       </div>
     </div>
     <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;" id="profile-badges"></div>
+    <button onclick="addToFavorites()" style="background:none;border:none;cursor:pointer;font-size:22px;margin-top:8px;" id="fav-toggle-btn" title="Add to favorites">&#9825;</button>
   </div>
 
   <div id="tab-reviews" style="padding: 16px 20px; display:none;">
@@ -2843,6 +3065,122 @@ function addNotification(type, icon, iconClass, title, desc) {
   showToast('&#128276; ' + title);
 }
 
+
+// ─── REPEAT BOOKING & FAVORITES ──────────────────────────────
+var currentBookAgainContractor = null;
+
+function bookAgain(contractorId) {
+  var c = null;
+  for (var i = 0; i < contractors.length; i++) {
+    if (contractors[i].id === contractorId) { c = contractors[i]; break; }
+  }
+  if (!c) return;
+  currentBookAgainContractor = c;
+  document.getElementById('book-again-initials').textContent = c.initials;
+  document.getElementById('book-again-name').textContent = c.name;
+  document.getElementById('book-again-trade').textContent = c.trade;
+  showScreen('screen-book-again');
+}
+
+function confirmBookAgain() {
+  if (!currentBookAgainContractor) return;
+  var service = document.getElementById('book-again-service').value;
+  var date = document.getElementById('book-again-date').value;
+  var desc = document.getElementById('book-again-desc').value;
+  var phone = document.getElementById('book-again-phone').value;
+  var msg = 'Hola ' + currentBookAgainContractor.name + ', quiero reservar de nuevo tus servicios.' +
+    '%0AServicio: ' + encodeURIComponent(service) +
+    (date ? '%0AFecha: ' + encodeURIComponent(date) : '') +
+    (desc ? '%0ADetalles: ' + encodeURIComponent(desc) : '');
+  window.open('https://wa.me/' + currentBookAgainContractor.phone + '?text=' + msg, '_blank');
+  addNotification('jobs','&#128197;','ni-blue','Reserva enviada','Tu solicitud de reserva fue enviada a ' + currentBookAgainContractor.name + '.');
+  showToast('Booking request sent to ' + currentBookAgainContractor.name);
+  showScreen('screen-bookings');
+}
+
+function removeFavorite(el) {
+  var card = el.closest('.fav-card');
+  if (card) {
+    el.textContent = '&#9825;';
+    card.style.opacity = '0.5';
+    showToast('Removed from favorites');
+  }
+}
+
+function cancelRecurring(el) {
+  if (confirm('Cancel this recurring booking?')) {
+    var card = el.closest('[style]');
+    showToast('Recurring booking cancelled');
+    el.textContent = 'Cancelled';
+    el.style.color = 'var(--text-light)';
+  }
+}
+
+function switchBookingTab(el, panelId) {
+  var tabs = document.querySelectorAll('.booking-tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  el.classList.add('active');
+  var panels = document.querySelectorAll('.booking-panel');
+  for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
+  var panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+
+function addToFavorites() {
+  var btn = document.getElementById('fav-toggle-btn');
+  if (!btn) return;
+  if (btn.textContent === '&#9825;' || btn.innerHTML === '&#9825;') {
+    btn.innerHTML = '&#10084;&#65039;';
+    showToast((currentContractor ? currentContractor.name : 'Contractor') + ' added to favorites!');
+  } else {
+    btn.innerHTML = '&#9825;';
+    showToast('Removed from favorites');
+  }
+}
+
+function openBookings() {
+  showScreen('screen-bookings');
+}
+
+
+// ─── REPEAT BOOKING ──────────────────────────────────────────
+var bookAgainContractor = null;
+
+function bookAgain(contractorId) {
+  var c = null;
+  for (var i = 0; i < contractors.length; i++) {
+    if (contractors[i].id === contractorId) { c = contractors[i]; break; }
+  }
+  if (!c) return;
+  bookAgainContractor = c;
+  document.getElementById('book-again-title').textContent = 'Book ' + c.name.split(' ')[0] + ' again';
+  document.getElementById('book-again-avatar').textContent = c.initials;
+  document.getElementById('book-again-avatar').className = 'bhc-avatar ' + c.avatar;
+  document.getElementById('book-again-name').textContent = c.name;
+  document.getElementById('book-again-trade').textContent = c.trade;
+  showScreen('screen-book-again');
+}
+
+function confirmBookAgain() {
+  if (!bookAgainContractor) return;
+  var service = document.getElementById('book-again-service').value;
+  var when = document.getElementById('book-again-when').value;
+  var notes = document.getElementById('book-again-notes').value;
+  var msg = 'Hola ' + bookAgainContractor.name + ', quiero volver a contratarte en ServiCasa.%0A%0AServicio: ' +
+    encodeURIComponent(service) + '%0ACuando: ' + encodeURIComponent(when) +
+    (notes ? '%0ANotas: ' + encodeURIComponent(notes) : '');
+  addNotification('jobs', '&#128257;', 'ni-green',
+    'Booking sent to ' + bookAgainContractor.name.split(' ')[0],
+    'Your repeat booking request was sent. They will confirm soon.');
+  window.open('https://wa.me/' + bookAgainContractor.phone + '?text=' + msg, '_blank');
+  showToast('&#128257; Booking request sent to ' + bookAgainContractor.name.split(' ')[0] + '!');
+  showScreen('screen-bookings');
+}
+
+function openBookings() {
+  showScreen('screen-bookings');
+}
+
 renderContractors(contractors, 'contractors-list');
 countUnread();
 setTimeout(updateNotifBadge, 100);
@@ -3033,7 +3371,7 @@ updateNavForUser();
           <div class="job-title">Closet a medida</div>
           <div class="job-meta">Bogotá · Hace 2 semanas</div>
         </div>
-        <div class="job-status status-done">Completado</div>
+        <button onclick="bookAgain(3)" style="background:var(--gold);color:var(--brand);border:none;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">&#128257; Book again</button>
       </div>
     </div>
   </div>
@@ -3755,6 +4093,512 @@ updateNavForUser();
     </div>
   </div>
   <div style="height:20px;"></div>
+</div>
+
+<!-- ============ SCREEN: BOOKING HISTORY & FAVORITES ============ -->
+<div class="screen" id="screen-bookings">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-dashboard')">← Dashboard</button>
+    </div>
+  </nav>
+
+  <div class="bookings-hero">
+    <h2>&#128197; Mis Reservas</h2>
+    <p>Vuelve a contratar tus tecnicos favoritos</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="booking-stats" style="margin-top:16px;">
+    <div class="booking-stat">
+      <div class="bs-val">8</div>
+      <div class="bs-label">Trabajos completados</div>
+    </div>
+    <div class="booking-stat">
+      <div class="bs-val">3</div>
+      <div class="bs-label">Tecnicos favoritos</div>
+    </div>
+    <div class="booking-stat">
+      <div class="bs-val">4.8&#9733;</div>
+      <div class="bs-label">Rating promedio</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="booking-tabs">
+    <div class="booking-tab active" onclick="switchBookingTab(this,'panel-history')">Historial</div>
+    <div class="booking-tab" onclick="switchBookingTab(this,'panel-favorites')">Favoritos &#10084;</div>
+    <div class="booking-tab" onclick="switchBookingTab(this,'panel-recurring')">Recurrentes</div>
+  </div>
+
+  <!-- HISTORY PANEL -->
+  <div class="booking-panel active" id="panel-history">
+
+    <div class="past-booking-card">
+      <div class="pbc-header">
+        <div class="pbc-avatar green">MR</div>
+        <div class="pbc-info">
+          <div class="pbc-name">Mario Restrepo</div>
+          <div class="pbc-trade">Pintura · Hace 2 semanas</div>
+        </div>
+        <div class="pbc-price">$255k</div>
+      </div>
+      <div class="pbc-details">
+        <div class="pbd-item"><div class="pbd-label">Servicio</div><div class="pbd-val">Pintura interior</div></div>
+        <div class="pbd-item"><div class="pbd-label">Duracion</div><div class="pbd-val">2 dias</div></div>
+        <div class="pbd-item"><div class="pbd-label">Ciudad</div><div class="pbd-val">Bogota</div></div>
+        <div class="pbd-item"><div class="pbd-label">Estado</div><div class="pbd-val" style="color:var(--brand);">&#10003; Completado</div></div>
+      </div>
+      <div class="rating-given">&#11088;&#11088;&#11088;&#11088;&#11088; Tu calificacion: 5/5</div>
+      <div class="pbc-actions" style="margin-top:10px;">
+        <button class="btn-book-again" onclick="bookAgain(1)">&#128197; Reservar de nuevo</button>
+        <button class="btn-view-profile" onclick="openProfile(1)">Ver perfil</button>
+      </div>
+    </div>
+
+    <div class="past-booking-card">
+      <div class="pbc-header">
+        <div class="pbc-avatar coral">CR</div>
+        <div class="pbc-info">
+          <div class="pbc-name">Camila Rios</div>
+          <div class="pbc-trade">Drywall · Hace 1 mes</div>
+        </div>
+        <div class="pbc-price">$180k</div>
+      </div>
+      <div class="pbc-details">
+        <div class="pbd-item"><div class="pbd-label">Servicio</div><div class="pbd-val">Drywall</div></div>
+        <div class="pbd-item"><div class="pbd-label">Duracion</div><div class="pbd-val">1 dia</div></div>
+        <div class="pbd-item"><div class="pbd-label">Ciudad</div><div class="pbd-val">Cali</div></div>
+        <div class="pbd-item"><div class="pbd-label">Estado</div><div class="pbd-val" style="color:var(--brand);">&#10003; Completado</div></div>
+      </div>
+      <div class="rating-given">&#11088;&#11088;&#11088;&#11088;&#11088; Tu calificacion: 5/5</div>
+      <div class="pbc-actions" style="margin-top:10px;">
+        <button class="btn-book-again" onclick="bookAgain(4)">&#128197; Reservar de nuevo</button>
+        <button class="btn-view-profile" onclick="openProfile(4)">Ver perfil</button>
+      </div>
+    </div>
+
+    <div class="past-booking-card">
+      <div class="pbc-header">
+        <div class="pbc-avatar gold">SV</div>
+        <div class="pbc-info">
+          <div class="pbc-name">Sofia Vargas</div>
+          <div class="pbc-trade">Limpieza · Hace 6 semanas</div>
+        </div>
+        <div class="pbc-price">$120k</div>
+      </div>
+      <div class="pbc-details">
+        <div class="pbd-item"><div class="pbd-label">Servicio</div><div class="pbd-val">Limpieza profunda</div></div>
+        <div class="pbd-item"><div class="pbd-label">Duracion</div><div class="pbd-val">4 horas</div></div>
+        <div class="pbd-item"><div class="pbd-label">Ciudad</div><div class="pbd-val">Medellin</div></div>
+        <div class="pbd-item"><div class="pbd-label">Estado</div><div class="pbd-val" style="color:var(--brand);">&#10003; Completado</div></div>
+      </div>
+      <div class="rating-given">&#11088;&#11088;&#11088;&#11088;&#11088; Tu calificacion: 5/5</div>
+      <div class="pbc-actions" style="margin-top:10px;">
+        <button class="btn-book-again" onclick="bookAgain(2)">&#128197; Reservar de nuevo</button>
+        <button class="btn-view-profile" onclick="openProfile(2)">Ver perfil</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAVORITES PANEL -->
+  <div class="booking-panel" id="panel-favorites">
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Tus tecnicos guardados</p>
+
+    <div class="fav-card">
+      <div class="fav-avatar green">MR</div>
+      <div class="fav-info">
+        <div class="fav-name">Mario Restrepo</div>
+        <div class="fav-trade">Pintura · Bogota</div>
+        <div class="fav-stats">4.9&#9733; · 127 trabajos · $85k/hr</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="fav-heart" onclick="removeFavorite(this)">&#10084;&#65039;</div>
+        <button class="btn-book-again" style="font-size:11px;padding:6px 10px;" onclick="bookAgain(1)">Reservar</button>
+      </div>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-avatar coral">CR</div>
+      <div class="fav-info">
+        <div class="fav-name">Camila Rios</div>
+        <div class="fav-trade">Drywall · Cali</div>
+        <div class="fav-stats">4.9&#9733; · 54 trabajos · $75k/hr</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="fav-heart" onclick="removeFavorite(this)">&#10084;&#65039;</div>
+        <button class="btn-book-again" style="font-size:11px;padding:6px 10px;" onclick="bookAgain(4)">Reservar</button>
+      </div>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-avatar gold">SV</div>
+      <div class="fav-info">
+        <div class="fav-name">Sofia Vargas</div>
+        <div class="fav-trade">Limpieza · Medellin</div>
+        <div class="fav-stats">4.8&#9733; · 203 trabajos · $65k/hr</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="fav-heart" onclick="removeFavorite(this)">&#10084;&#65039;</div>
+        <button class="btn-book-again" style="font-size:11px;padding:6px 10px;" onclick="bookAgain(2)">Reservar</button>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:20px 0;">
+      <button class="btn-outline" onclick="showScreen('screen-home')" style="font-size:13px;padding:10px 24px;">
+        + Encontrar mas tecnicos
+      </button>
+    </div>
+  </div>
+
+  <!-- RECURRING PANEL -->
+  <div class="booking-panel" id="panel-recurring">
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Servicios programados automaticamente</p>
+
+    <div style="background:var(--white);border-radius:var(--radius);padding:16px;border:1px solid var(--border);margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+        <div style="width:40px;height:40px;border-radius:8px;background:#F3E5F5;display:flex;align-items:center;justify-content:center;font-size:20px;">&#129529;</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;">Limpieza mensual</div>
+          <div style="font-size:11px;color:var(--text-muted);">Sofia Vargas · Cada mes</div>
+        </div>
+        <div style="background:var(--brand-accent);color:var(--brand);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;">Activo</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);padding:8px 0;border-top:1px solid var(--border);">
+        <span>Proxima reserva: <strong style="color:var(--text);">15 Mayo 2026</strong></span>
+        <span style="color:#C62828;cursor:pointer;" onclick="cancelRecurring(this)">Cancelar</span>
+      </div>
+    </div>
+
+    <div style="background:var(--bg);border-radius:var(--radius);padding:20px;text-align:center;border:1.5px dashed var(--border);">
+      <div style="font-size:28px;margin-bottom:8px;">&#128197;</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Programar un servicio recurrente</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Reserva automaticamente cada semana, quincena o mes</div>
+      <button class="btn-gold" style="padding:10px 24px;font-size:13px;" onclick="showScreen('screen-post')">
+        Configurar servicio recurrente
+      </button>
+    </div>
+  </div>
+
+  <div style="height:20px;"></div>
+</div>
+
+<!-- BOOK AGAIN CONFIRMATION -->
+<div class="screen" id="screen-book-again">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-bookings')">← Volver</button>
+    </div>
+  </nav>
+
+  <div style="background:linear-gradient(135deg,#4A1942,#7B2D8B);padding:28px 20px 36px;text-align:center;">
+    <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-bottom:8px;">Reservar de nuevo con</div>
+    <div style="width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-size:22px;font-weight:800;color:var(--brand);margin:0 auto 10px;border:3px solid rgba(255,255,255,0.3);" id="book-again-initials">MR</div>
+    <div style="color:#fff;font-size:20px;font-weight:800;" id="book-again-name">Mario Restrepo</div>
+    <div style="color:var(--gold);font-size:12px;margin-top:4px;" id="book-again-trade">Pintura</div>
+  </div>
+
+  <div class="book-again-modal">
+    <div class="bam-header">
+      <div style="font-size:28px;">&#128197;</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;">Detalles de la reserva</div>
+        <div style="font-size:12px;color:var(--text-muted);">Mismo servicio que la ultima vez</div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>Tipo de servicio</label>
+      <select id="book-again-service">
+        <option>Pintura interior</option>
+        <option>Pintura exterior</option>
+        <option>Limpieza profunda</option>
+        <option>Drywall</option>
+        <option>Carpinteria</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Fecha preferida</label>
+      <input type="date" id="book-again-date">
+    </div>
+    <div class="fg">
+      <label>Descripcion del trabajo</label>
+      <textarea id="book-again-desc" placeholder="Mismo trabajo que antes o describe cambios..."></textarea>
+    </div>
+    <div class="fg">
+      <label>Tu WhatsApp</label>
+      <input type="tel" id="book-again-phone" placeholder="+57 300...">
+    </div>
+
+    <button class="btn-book-again" style="width:100%;padding:14px;font-size:14px;border-radius:10px;" onclick="confirmBookAgain()">
+      &#128197; Confirmar reserva
+    </button>
+    <p style="font-size:11px;color:var(--text-light);text-align:center;margin-top:10px;">
+      El tecnico recibira tu solicitud y confirmara disponibilidad
+    </p>
+  </div>
+</div>
+
+<!-- ============ SCREEN: BOOKING HISTORY & REPEAT ============ -->
+<div class="screen" id="screen-bookings">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-dashboard')">← Dashboard</button>
+    </div>
+  </nav>
+
+  <div class="repeat-hero">
+    <h2>&#128203; My Bookings</h2>
+    <p>Your history and favorite technicians</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row" style="margin-top:16px;">
+    <div class="stat-card">
+      <div class="stat-val">8</div>
+      <div class="stat-label">Total jobs</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">3</div>
+      <div class="stat-label">Favorites</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">$1.2M</div>
+      <div class="stat-label">Total spent</div>
+    </div>
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="fav-contractors">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">&#10084; Favorite technicians</div>
+
+    <div class="fav-card">
+      <div class="fav-avatar green">
+        MR
+        <div class="fav-heart">&#10084;</div>
+      </div>
+      <div class="fav-info">
+        <div class="fav-name">Mario Restrepo</div>
+        <div class="fav-trade">Painting · 4.9 &#9733;</div>
+        <div class="fav-jobs">3 jobs completed with him</div>
+      </div>
+      <button class="book-again-quick" onclick="bookAgain(1)">Book again</button>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-avatar gold">
+        SV
+        <div class="fav-heart">&#10084;</div>
+      </div>
+      <div class="fav-info">
+        <div class="fav-name">Sofia Vargas</div>
+        <div class="fav-trade">Deep Cleaning · 4.8 &#9733;</div>
+        <div class="fav-jobs">2 jobs completed with her</div>
+      </div>
+      <button class="book-again-quick" onclick="bookAgain(2)">Book again</button>
+    </div>
+
+    <div class="fav-card">
+      <div class="fav-avatar coral">
+        CR
+        <div class="fav-heart">&#10084;</div>
+      </div>
+      <div class="fav-info">
+        <div class="fav-name">Camila Rios</div>
+        <div class="fav-trade">Drywall · 4.9 &#9733;</div>
+        <div class="fav-jobs">1 job completed with her</div>
+      </div>
+      <button class="book-again-quick" onclick="bookAgain(4)">Book again</button>
+    </div>
+  </div>
+
+  <!-- BOOKING HISTORY -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">Recent history</div>
+  </div>
+
+  <div style="padding:0 20px 20px;" id="booking-history-list">
+
+    <div class="booking-history-card">
+      <div class="bhc-header">
+        <div class="bhc-avatar green">MR</div>
+        <div class="bhc-info">
+          <div class="bhc-name">Mario Restrepo</div>
+          <div class="bhc-trade">Painting</div>
+          <div class="bhc-rating">&#9733; 4.9 · Completed Mar 2026</div>
+        </div>
+        <div>
+          <div class="bhc-price">$255k<span>total paid</span></div>
+          <div style="text-align:right;margin-top:4px;"><span class="completed-badge">&#10003; Completed</span></div>
+        </div>
+      </div>
+      <div class="bhc-details">
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Service</div>
+          <div class="bhc-detail-val">Interior painting</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Location</div>
+          <div class="bhc-detail-val">Bogota</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Duration</div>
+          <div class="bhc-detail-val">2 days</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Rating given</div>
+          <div class="bhc-detail-val">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0</div>
+        </div>
+      </div>
+      <div class="bhc-actions">
+        <button class="book-again-btn" onclick="bookAgain(1)">&#128257; Book Mario again</button>
+        <button class="view-profile-btn" onclick="openProfile(1)">View profile</button>
+      </div>
+    </div>
+
+    <div class="booking-history-card">
+      <div class="bhc-header">
+        <div class="bhc-avatar gold">SV</div>
+        <div class="bhc-info">
+          <div class="bhc-name">Sofia Vargas</div>
+          <div class="bhc-trade">Deep Cleaning</div>
+          <div class="bhc-rating">&#9733; 4.8 · Completed Feb 2026</div>
+        </div>
+        <div>
+          <div class="bhc-price">$150k<span>total paid</span></div>
+          <div style="text-align:right;margin-top:4px;"><span class="completed-badge">&#10003; Completed</span></div>
+        </div>
+      </div>
+      <div class="bhc-details">
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Service</div>
+          <div class="bhc-detail-val">Deep cleaning</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Location</div>
+          <div class="bhc-detail-val">Bogota</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Duration</div>
+          <div class="bhc-detail-val">1 day</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Rating given</div>
+          <div class="bhc-detail-val">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0</div>
+        </div>
+      </div>
+      <div class="bhc-actions">
+        <button class="book-again-btn" onclick="bookAgain(2)">&#128257; Book Sofia again</button>
+        <button class="view-profile-btn" onclick="openProfile(2)">View profile</button>
+      </div>
+    </div>
+
+    <div class="booking-history-card">
+      <div class="bhc-header">
+        <div class="bhc-avatar blue">JO</div>
+        <div class="bhc-info">
+          <div class="bhc-name">Juan Ospina</div>
+          <div class="bhc-trade">Carpentry</div>
+          <div class="bhc-rating">&#9733; 4.7 · Completed Jan 2026</div>
+        </div>
+        <div>
+          <div class="bhc-price">$850k<span>total paid</span></div>
+          <div style="text-align:right;margin-top:4px;"><span class="completed-badge">&#10003; Completed</span></div>
+        </div>
+      </div>
+      <div class="bhc-details">
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Service</div>
+          <div class="bhc-detail-val">Custom closet</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Location</div>
+          <div class="bhc-detail-val">Bogota</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Duration</div>
+          <div class="bhc-detail-val">5 days</div>
+        </div>
+        <div class="bhc-detail-item">
+          <div class="bhc-detail-label">Rating given</div>
+          <div class="bhc-detail-val">&#9733;&#9733;&#9733;&#9733; 4.0</div>
+        </div>
+      </div>
+      <div class="bhc-actions">
+        <button class="book-again-btn" onclick="bookAgain(3)">&#128257; Book Juan again</button>
+        <button class="view-profile-btn" onclick="openProfile(3)">View profile</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ SCREEN: BOOK AGAIN CONFIRM ============ -->
+<div class="screen" id="screen-book-again">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-bookings')">← Back</button>
+    </div>
+  </nav>
+
+  <div style="background:var(--brand);padding:28px 20px 36px;text-align:center;">
+    <div style="font-size:36px;margin-bottom:12px;">&#128257;</div>
+    <h2 style="color:#fff;font-size:22px;font-weight:800;margin-bottom:6px;" id="book-again-title">Book Mario again</h2>
+    <p style="color:rgba(255,255,255,0.65);font-size:13px;">Fill in the details for your new job</p>
+  </div>
+
+  <div class="book-again-modal">
+    <div class="bam-header">
+      <div class="bhc-avatar green" id="book-again-avatar" style="width:46px;height:46px;font-size:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;flex-shrink:0;">MR</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;" id="book-again-name">Mario Restrepo</div>
+        <div style="font-size:12px;color:var(--brand-light);" id="book-again-trade">Painting</div>
+        <div style="font-size:11px;color:var(--text-muted);">Last booked: March 2026 · $255k</div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>What do you need?</label>
+      <select id="book-again-service">
+        <option>Same service as last time</option>
+        <option>Pintura interior</option>
+        <option>Pintura exterior</option>
+        <option>Limpieza profunda</option>
+        <option>Carpinteria</option>
+        <option>Drywall</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>When do you need it?</label>
+      <select id="book-again-when">
+        <option>This week</option>
+        <option>Next week</option>
+        <option>This month</option>
+        <option>Flexible</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Additional notes</label>
+      <textarea id="book-again-notes" placeholder="Any specific details for this new booking..." style="min-height:70px;"></textarea>
+    </div>
+
+    <div style="background:var(--brand-accent);border-radius:8px;padding:12px;margin-bottom:14px;font-size:12px;color:var(--brand);line-height:1.5;">
+      &#9889; Your previous technician will be notified immediately and will confirm availability.
+    </div>
+
+    <button class="btn-gold" style="width:100%;padding:13px;" onclick="confirmBookAgain()">
+      &#128257; Confirm booking
+    </button>
+    <button class="btn-outline" style="width:100%;padding:12px;margin-top:8px;" onclick="showScreen('screen-post')">
+      Post as new job instead
+    </button>
+  </div>
 </div>
 </body>
 </html>
