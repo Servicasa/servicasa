@@ -1486,15 +1486,131 @@
   .contractor-verify-badge.gold-badge {
     background: var(--gold); color: var(--brand);
   }
+
+  /* ── NOTIFICATIONS ── */
+  .notif-badge {
+    position: absolute; top: -4px; right: -4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #E53935; color: #fff;
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--brand);
+  }
+  .notif-bell-wrap { position: relative; display: inline-flex; }
+  .notif-hero {
+    background: linear-gradient(135deg, #1A237E 0%, #3949AB 100%);
+    padding: 28px 20px 36px; text-align: center;
+  }
+  .notif-hero h2 { color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .notif-hero p { color: rgba(255,255,255,0.65); font-size: 13px; }
+  .notif-list { padding: 16px 20px; }
+  .notif-item {
+    background: var(--white); border-radius: var(--radius);
+    padding: 14px 16px; border: 1px solid var(--border);
+    margin-bottom: 10px; display: flex; gap: 12px;
+    align-items: flex-start; cursor: pointer;
+    transition: all 0.15s; position: relative;
+  }
+  .notif-item:hover { box-shadow: var(--card-shadow); transform: translateY(-1px); }
+  .notif-item.unread { border-left: 3px solid var(--brand); background: #F8FFF9; }
+  .notif-item.unread-gold { border-left: 3px solid var(--gold); background: #FFFDF0; }
+  .notif-item.unread-blue { border-left: 3px solid #3949AB; background: #F5F6FF; }
+  .notif-icon-wrap {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .ni-green { background: var(--brand-accent); }
+  .ni-gold { background: var(--gold-light); }
+  .ni-blue { background: #E8EAF6; }
+  .ni-red { background: #FFEBEE; }
+  .ni-gray { background: var(--bg); }
+  .notif-content { flex: 1; min-width: 0; }
+  .notif-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+  .notif-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+  .notif-time { font-size: 10px; color: var(--text-light); margin-top: 4px; }
+  .notif-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--brand); flex-shrink: 0; margin-top: 6px;
+  }
+  .notif-dot.gold { background: var(--gold); }
+  .notif-dot.blue { background: #3949AB; }
+  .notif-dot.hidden { background: transparent; }
+  .notif-filter-bar {
+    display: flex; gap: 8px; padding: 12px 20px 4px;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .notif-filter-bar::-webkit-scrollbar { display: none; }
+  .notif-filter {
+    padding: 5px 14px; border-radius: 20px; font-size: 12px;
+    font-weight: 500; border: 1.5px solid var(--border);
+    background: var(--white); color: var(--text-muted);
+    cursor: pointer; white-space: nowrap; transition: all 0.15s;
+  }
+  .notif-filter.active {
+    background: var(--brand); color: #fff; border-color: var(--brand);
+  }
+  .notif-empty {
+    text-align: center; padding: 48px 20px;
+    color: var(--text-muted); font-size: 14px;
+  }
+  .notif-empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .notif-settings-card {
+    background: var(--white); border-radius: var(--radius);
+    margin: 0 20px 16px; padding: 16px; border: 1px solid var(--border);
+  }
+  .notif-setting-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+  }
+  .notif-setting-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .notif-setting-info h4 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .notif-setting-info p { font-size: 11px; color: var(--text-muted); }
+  .toggle-switch {
+    width: 44px; height: 24px; border-radius: 12px;
+    background: var(--brand); cursor: pointer;
+    position: relative; transition: background 0.2s; flex-shrink: 0;
+  }
+  .toggle-switch.off { background: var(--border); }
+  .toggle-switch::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #fff; transition: left 0.2s;
+  }
+  .toggle-switch.on::after { left: 22px; }
+  /* Toast notification */
+  .toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    background: #1A1A1A; color: #fff; border-radius: 10px;
+    padding: 12px 20px; font-size: 13px; font-weight: 500;
+    z-index: 9999; opacity: 0; transition: opacity 0.3s;
+    white-space: nowrap; max-width: 90vw;
+  }
+  .toast.show { opacity: 1; }
+  /* Notification counter in nav */
+  .nav-notif-btn {
+    background: rgba(255,255,255,0.12); color: #fff; border: none;
+    padding: 6px 12px; border-radius: 20px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px;
+    font-weight: 500; cursor: pointer; position: relative;
+    transition: background 0.2s;
+  }
+  .nav-notif-btn:hover { background: rgba(255,255,255,0.22); }
 </style>
 </head>
 <body>
+
+<div class="toast" id="toast-notification"></div>
 
 <!-- ============ SCREEN 1: HOME ============ -->
 <div class="screen active" id="screen-home">
   <nav>
     <div class="logo">Servi<span>Casa</span></div>
     <div class="nav-right" id="main-nav-right">
+      <div class="notif-bell-wrap" onclick="openNotifications()" style="cursor:pointer;">
+        <span style="color:rgba(255,255,255,0.8);font-size:18px;">&#128276;</span>
+        <div class="notif-badge notif-count-badge" style="display:flex;">4</div>
+      </div>
       <button class="nav-btn" onclick="openPriceEstimator()">&#128200; Precios</button>
       <button class="nav-btn" onclick="showScreen('screen-contractors')">Soy Técnico</button>
       <button class="nav-btn" onclick="showScreen('screen-auth')">Ingresar</button>
@@ -2214,6 +2330,7 @@ function submitJob() {
     '%0ACliente: ' + encodeURIComponent(name) +
     '%0ATelefono: ' + encodeURIComponent(phone);
   window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  addNotification('jobs','&#10003;','ni-green','Trabajo publicado','Tu trabajo de ' + category + ' fue enviado a tecnicos verificados en ' + city + '.');
   showScreen('screen-success');
 }
 
@@ -2229,6 +2346,7 @@ function joinAsContractor() {
     '%0ACiudad: ' + encodeURIComponent(city) +
     '%0AWhatsApp: ' + encodeURIComponent(phone);
   window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  addNotification('jobs','&#10003;','ni-green','Trabajo publicado','Tu trabajo de ' + category + ' fue enviado a tecnicos verificados en ' + city + '.');
   showScreen('screen-success');
 }
 
@@ -2460,6 +2578,7 @@ function acceptBid(bidId) {
     steps[2].querySelector('.step-circle').parentElement.querySelector('.step-circle').innerHTML = '&#10003;';
     steps[3].className = 'progress-step active';
   }
+  addNotification('bids','&#11088;','ni-gold','Tecnico contratado','Has seleccionado a ' + bid.name + '. Se comunicara contigo pronto.');
   alert('Excelente! Has seleccionado a ' + bid.name + '. Se comunicaran contigo pronto por WhatsApp.');
 }
 
@@ -2559,7 +2678,172 @@ function submitVerification() {
   showScreen('screen-contractors');
 }
 
+
+// ─── NOTIFICATION SYSTEM ─────────────────────────────────────
+var notifications = [
+  {id:1, type:'bids', icon:'&#128176;', iconClass:'ni-gold', title:'Nueva cotizacion recibida',
+   desc:'Mario Restrepo cotizo tu trabajo de Pintura por $255k. Revision ahora.',
+   time:'Hace 5 minutos', unread:true, unreadClass:'unread-gold', dotClass:'gold',
+   action:'openJobTracker'},
+  {id:2, type:'bids', icon:'&#128176;', iconClass:'ni-gold', title:'Nueva cotizacion recibida',
+   desc:'Diego Morales cotizo tu trabajo de Pintura por $210k.',
+   time:'Hace 30 minutos', unread:true, unreadClass:'unread-gold', dotClass:'gold',
+   action:'openJobTracker'},
+  {id:3, type:'jobs', icon:'&#10003;', iconClass:'ni-green', title:'Tecnico aceptó tu trabajo',
+   desc:'Camila Rios aceptó el trabajo de Drywall. Se comunicará contigo pronto.',
+   time:'Hace 2 horas', unread:true, unreadClass:'unread', dotClass:'',
+   action:'openJobTracker'},
+  {id:4, type:'system', icon:'&#128737;', iconClass:'ni-blue', title:'Verificacion en proceso',
+   desc:'Tu solicitud de verificacion fue recibida. Tiempo estimado: 24-48 horas.',
+   time:'Hace 3 horas', unread:true, unreadClass:'unread-blue', dotClass:'blue',
+   action:'openVerification'},
+  {id:5, type:'jobs', icon:'&#11088;', iconClass:'ni-gold', title:'Dejanos tu opinion',
+   desc:'Como fue tu experiencia con Juan Ospina? Califica el trabajo.',
+   time:'Hace 1 dia', unread:false, unreadClass:'', dotClass:'hidden',
+   action:'showScreen_home'},
+  {id:6, type:'system', icon:'&#127881;', iconClass:'ni-green', title:'Bienvenido a ServiCasa',
+   desc:'Tu cuenta fue creada exitosamente. Empieza publicando tu primer trabajo.',
+   time:'Hace 2 dias', unread:false, unreadClass:'', dotClass:'hidden',
+   action:'showScreen_post'},
+  {id:7, type:'bids', icon:'&#128226;', iconClass:'ni-gray', title:'2 tecnicos vieron tu trabajo',
+   desc:'Tu publicacion de Limpieza esta activa y recibiendo visitas.',
+   time:'Hace 3 dias', unread:false, unreadClass:'', dotClass:'hidden',
+   action:'openJobTracker'}
+];
+
+var currentNotifFilter = 'all';
+var unreadCount = 0;
+
+function countUnread() {
+  unreadCount = 0;
+  for (var i = 0; i < notifications.length; i++) {
+    if (notifications[i].unread) unreadCount++;
+  }
+  return unreadCount;
+}
+
+function updateNotifBadge() {
+  var count = countUnread();
+  var badges = document.querySelectorAll('.notif-count-badge');
+  for (var i = 0; i < badges.length; i++) {
+    badges[i].textContent = count;
+    badges[i].style.display = count > 0 ? 'flex' : 'none';
+  }
+  var heroCount = document.getElementById('notif-hero-count');
+  if (heroCount) {
+    heroCount.textContent = count > 0
+      ? 'Tienes ' + count + ' notificacion' + (count > 1 ? 'es' : '') + ' sin leer'
+      : 'Estas al dia con todas tus notificaciones';
+  }
+}
+
+function renderNotifications(filter) {
+  var container = document.getElementById('notif-list');
+  if (!container) return;
+  var list = notifications;
+  if (filter && filter !== 'all') {
+    var filtered = [];
+    for (var i = 0; i < notifications.length; i++) {
+      if (notifications[i].type === filter) filtered.push(notifications[i]);
+    }
+    list = filtered;
+  }
+  if (!list.length) {
+    container.innerHTML = '<div class="notif-empty"><div class="notif-empty-icon">&#128276;</div><p>No hay notificaciones en esta categoria</p></div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var n = list[i];
+    html += '<div class="notif-item ' + (n.unread ? n.unreadClass : '') + '" onclick="handleNotifClick(' + n.id + ')">' +
+      '<div class="notif-icon-wrap ' + n.iconClass + '">' + n.icon + '</div>' +
+      '<div class="notif-content">' +
+        '<div class="notif-title">' + n.title + '</div>' +
+        '<div class="notif-desc">' + n.desc + '</div>' +
+        '<div class="notif-time">' + n.time + '</div>' +
+      '</div>' +
+      '<div class="notif-dot ' + n.dotClass + (n.unread ? '' : ' hidden') + '"></div>' +
+    '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function handleNotifClick(id) {
+  for (var i = 0; i < notifications.length; i++) {
+    if (notifications[i].id === id) {
+      notifications[i].unread = false;
+      break;
+    }
+  }
+  updateNotifBadge();
+  renderNotifications(currentNotifFilter);
+  // Navigate based on action
+  var n = null;
+  for (var i = 0; i < notifications.length; i++) {
+    if (notifications[i].id === id) { n = notifications[i]; break; }
+  }
+  if (n && n.action === 'openJobTracker') openJobTracker(null);
+  else if (n && n.action === 'openVerification') openVerification(null);
+  else if (n && n.action === 'showScreen_post') showScreen('screen-post');
+}
+
+function filterNotifs(el, filter) {
+  currentNotifFilter = filter;
+  var filters = document.querySelectorAll('.notif-filter');
+  for (var i = 0; i < filters.length; i++) filters[i].classList.remove('active');
+  el.classList.add('active');
+  renderNotifications(filter);
+}
+
+function markAllRead() {
+  for (var i = 0; i < notifications.length; i++) {
+    notifications[i].unread = false;
+  }
+  updateNotifBadge();
+  renderNotifications(currentNotifFilter);
+  showToast('All notifications marked as read');
+}
+
+function toggleSetting(el) {
+  if (el.classList.contains('on')) {
+    el.classList.remove('on');
+    el.classList.add('off');
+    showToast('Notification turned off');
+  } else {
+    el.classList.remove('off');
+    el.classList.add('on');
+    showToast('Notification turned on');
+  }
+}
+
+function openNotifications() {
+  renderNotifications('all');
+  updateNotifBadge();
+  showScreen('screen-notifications');
+}
+
+function showToast(msg) {
+  var toast = document.getElementById('toast-notification');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 2500);
+}
+
+function addNotification(type, icon, iconClass, title, desc) {
+  notifications.unshift({
+    id: Date.now(), type: type, icon: icon, iconClass: iconClass,
+    title: title, desc: desc, time: 'Ahora mismo',
+    unread: true, unreadClass: 'unread-gold', dotClass: 'gold',
+    action: 'openJobTracker'
+  });
+  updateNotifBadge();
+  showToast('&#128276; ' + title);
+}
+
 renderContractors(contractors, 'contractors-list');
+countUnread();
+setTimeout(updateNotifBadge, 100);
 updateNavForUser();
 </script>
 
@@ -3399,6 +3683,76 @@ updateNavForUser();
       <div><h4>Cobra mas</h4><p>Tecnicos verificados cobran en promedio 25% mas.</p></div>
     </div>
   </div>
+</div>
+
+<!-- ============ SCREEN: NOTIFICATIONS ============ -->
+<div class="screen" id="screen-notifications">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="markAllRead()">Marcar todo</button>
+      <button class="nav-btn" onclick="showScreen('screen-home')">← Inicio</button>
+    </div>
+  </nav>
+
+  <div class="notif-hero">
+    <h2>&#128276; Notificaciones</h2>
+    <p id="notif-hero-count">Tienes 4 notificaciones sin leer</p>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="notif-filter-bar">
+    <div class="notif-filter active" onclick="filterNotifs(this,'all')">Todas</div>
+    <div class="notif-filter" onclick="filterNotifs(this,'bids')">Cotizaciones</div>
+    <div class="notif-filter" onclick="filterNotifs(this,'jobs')">Trabajos</div>
+    <div class="notif-filter" onclick="filterNotifs(this,'system')">Sistema</div>
+  </div>
+
+  <!-- NOTIFICATIONS LIST -->
+  <div class="notif-list" id="notif-list"></div>
+
+  <!-- SETTINGS -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">Preferencias</div>
+  </div>
+  <div class="notif-settings-card">
+    <div class="notif-setting-row">
+      <div class="notif-setting-info">
+        <h4>Nuevas cotizaciones</h4>
+        <p>Cuando un tecnico cotiza tu trabajo</p>
+      </div>
+      <div class="toggle-switch on" id="toggle-bids" onclick="toggleSetting(this)"></div>
+    </div>
+    <div class="notif-setting-row">
+      <div class="notif-setting-info">
+        <h4>Estado del trabajo</h4>
+        <p>Actualizaciones de progreso</p>
+      </div>
+      <div class="toggle-switch on" id="toggle-jobs" onclick="toggleSetting(this)"></div>
+    </div>
+    <div class="notif-setting-row">
+      <div class="notif-setting-info">
+        <h4>Mensajes de tecnicos</h4>
+        <p>Cuando un tecnico te contacta</p>
+      </div>
+      <div class="toggle-switch on" id="toggle-msgs" onclick="toggleSetting(this)"></div>
+    </div>
+    <div class="notif-setting-row">
+      <div class="notif-setting-info">
+        <h4>Ofertas y promociones</h4>
+        <p>Descuentos y novedades de ServiCasa</p>
+      </div>
+      <div class="toggle-switch off" id="toggle-promo" onclick="toggleSetting(this)"></div>
+    </div>
+    <div class="notif-setting-row">
+      <div class="notif-setting-info">
+        <h4>Notificaciones WhatsApp</h4>
+        <p>Recibir alertas por WhatsApp</p>
+      </div>
+      <div class="toggle-switch on" id="toggle-wa" onclick="toggleSetting(this)"></div>
+    </div>
+  </div>
+  <div style="height:20px;"></div>
 </div>
 </body>
 </html>
