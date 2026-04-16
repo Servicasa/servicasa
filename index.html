@@ -1607,10 +1607,6 @@
   <nav>
     <div class="logo">Servi<span>Casa</span></div>
     <div class="nav-right" id="main-nav-right">
-      <div class="notif-bell-wrap" onclick="openNotifications()" style="cursor:pointer;">
-        <span style="color:rgba(255,255,255,0.8);font-size:18px;">&#128276;</span>
-        <div class="notif-badge notif-count-badge" style="display:flex;">4</div>
-      </div>
       <button class="nav-btn" onclick="openPriceEstimator()">&#128200; Precios</button>
       <button class="nav-btn" onclick="showScreen('screen-contractors')">Soy Técnico</button>
       <button class="nav-btn" onclick="showScreen('screen-auth')">Ingresar</button>
@@ -2368,11 +2364,16 @@ function switchTabById(tabId) {
 function updateNavForUser() {
   var navRight = document.getElementById('main-nav-right');
   if (!navRight) return;
+  var bellHtml = '<div class="notif-bell-wrap" onclick="openNotifications()" style="cursor:pointer;margin-right:4px;">' +
+    '<span style="color:rgba(255,255,255,0.8);font-size:18px;">&#128276;</span>' +
+    '<div class="notif-badge notif-count-badge" style="display:flex;">' + countUnread() + '</div>' +
+    '</div>';
   if (currentUser) {
     var parts = currentUser.name.split(' ');
     var initials = '';
     for (var i = 0; i < parts.length && i < 2; i++) initials += parts[i][0].toUpperCase();
-    var html = '<div class="user-avatar-nav" onclick="showScreen(';
+    var html = bellHtml;
+    html += '<div class="user-avatar-nav" onclick="showScreen(';
     html += String.fromCharCode(39) + 'screen-dashboard' + String.fromCharCode(39);
     html += ')">' + initials + '</div>';
     html += '<button class="nav-btn active" onclick="showScreen(';
@@ -2392,7 +2393,8 @@ function updateNavForUser() {
     var upr = document.getElementById('user-profile-role');
     if (upr) upr.textContent = currentUser.role === 'contractor' ? 'Tecnico' : 'Cliente';
   } else {
-    var html2 = '<button class="nav-btn" onclick="showScreen(';
+    var html2 = bellHtml;
+    html2 += '<button class="nav-btn" onclick="showScreen(';
     html2 += String.fromCharCode(39) + 'screen-contractors' + String.fromCharCode(39);
     html2 += ')">Soy Tecnico</button>';
     html2 += '<button class="nav-btn" onclick="showScreen(';
