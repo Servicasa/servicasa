@@ -1358,6 +1358,134 @@
     border-radius: 20px; padding: 4px 12px;
     font-size: 12px; font-weight: 600; margin-bottom: 8px;
   }
+
+  /* ── VERIFICATION SYSTEM ── */
+  .verify-hero {
+    background: linear-gradient(135deg, #1A3A5C 0%, #2C5F8A 100%);
+    padding: 32px 20px 40px; text-align: center;
+  }
+  .verify-hero h2 { color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .verify-hero p { color: rgba(255,255,255,0.65); font-size: 13px; }
+  .verify-shield {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; margin: 0 auto 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  .verify-steps-card {
+    background: var(--white); border-radius: var(--radius);
+    margin: -20px 20px 16px; padding: 20px;
+    box-shadow: var(--card-shadow); border: 1px solid var(--border);
+  }
+  .verify-step-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .verify-step-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .verify-step-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .verify-step-icon.done { background: var(--brand-accent); }
+  .verify-step-icon.pending { background: var(--gold-light); }
+  .verify-step-icon.locked { background: #F5F5F5; }
+  .verify-step-info { flex: 1; }
+  .verify-step-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .verify-step-desc { font-size: 11px; color: var(--text-muted); }
+  .verify-badge-status {
+    font-size: 11px; font-weight: 700; padding: 4px 10px;
+    border-radius: 20px; flex-shrink: 0;
+  }
+  .vbs-done { background: var(--brand-accent); color: var(--brand); }
+  .vbs-pending { background: var(--gold-light); color: #A06B00; }
+  .vbs-locked { background: #F5F5F5; color: var(--text-light); }
+  .trust-score-card {
+    background: linear-gradient(135deg, var(--brand) 0%, #2D6A4F 100%);
+    border-radius: var(--radius); margin: 0 20px 16px;
+    padding: 20px; text-align: center;
+  }
+  .trust-score-num {
+    font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800;
+    color: #fff; line-height: 1;
+  }
+  .trust-score-label { color: rgba(255,255,255,0.7); font-size: 12px; margin-top: 4px; }
+  .trust-score-bar {
+    background: rgba(255,255,255,0.2); border-radius: 4px;
+    height: 8px; margin: 12px 0 8px; overflow: hidden;
+  }
+  .trust-score-fill {
+    background: var(--gold); height: 100%; border-radius: 4px;
+    width: 78%;
+  }
+  .trust-score-breakdown {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 8px; margin-top: 12px;
+  }
+  .tsb-item { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 8px; }
+  .tsb-val { color: #fff; font-size: 14px; font-weight: 700; font-family: 'Syne', sans-serif; }
+  .tsb-label { color: rgba(255,255,255,0.6); font-size: 10px; margin-top: 2px; }
+  .verified-profile-card {
+    background: var(--white); border-radius: var(--radius);
+    margin: 0 20px 16px; padding: 16px; border: 1px solid var(--border);
+  }
+  .vpc-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .vpc-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--brand-accent); display: flex;
+    align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    color: var(--brand); flex-shrink: 0; position: relative;
+  }
+  .vpc-verify-dot {
+    position: absolute; bottom: 0; right: 0;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--brand); border: 2px solid #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; color: #fff;
+  }
+  .vpc-checks { display: flex; flex-direction: column; gap: 8px; }
+  .vpc-check-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; border-radius: 8px; background: var(--bg);
+  }
+  .vpc-check-icon { font-size: 16px; flex-shrink: 0; }
+  .vpc-check-label { font-size: 12px; font-weight: 600; flex: 1; }
+  .vpc-check-val { font-size: 11px; color: var(--text-muted); }
+  .vpc-check-status { font-size: 11px; font-weight: 700; }
+  .vcs-ok { color: var(--brand); }
+  .vcs-pending { color: var(--gold); }
+  .badge-showcase {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; padding: 0 20px 20px;
+  }
+  .badge-card {
+    border-radius: var(--radius); padding: 16px;
+    text-align: center; border: 1px solid var(--border);
+  }
+  .badge-card.earned { background: var(--brand-accent); border-color: #A5D6A7; }
+  .badge-card.locked { background: var(--bg); opacity: 0.6; }
+  .badge-icon { font-size: 28px; margin-bottom: 8px; }
+  .badge-name { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+  .badge-name.earned-text { color: var(--brand); }
+  .badge-desc { font-size: 10px; color: var(--text-muted); }
+  .verify-cta {
+    background: var(--brand); border-radius: var(--radius);
+    margin: 0 20px 20px; padding: 20px; text-align: center;
+  }
+  .verify-cta h3 { color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .verify-cta p { color: rgba(255,255,255,0.7); font-size: 12px; margin-bottom: 14px; }
+  .contractor-verify-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--brand); color: #fff;
+    border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600;
+  }
+  .contractor-verify-badge.gold-badge {
+    background: var(--gold); color: var(--brand);
+  }
 </style>
 </head>
 <body>
@@ -1425,7 +1553,7 @@
 
   <div class="trust-banner">
     <span style="font-size:20px;">✅</span>
-    <p><strong>Técnicos verificados.</strong> Todos nuestros profesionales pasan por verificación de antecedentes y están asegurados.</p>
+    <p><strong>Técnicos verificados.</strong> Todos nuestros profesionales pasan por verificación de antecedentes y están asegurados. <span onclick="showScreen('screen-verify')" style="text-decoration:underline;cursor:pointer;color:#7A5800;">Ver proceso →</span></p>
   </div>
 
   <div class="section" style="padding-top: 0;">
@@ -2397,6 +2525,37 @@ function openPriceEstimator(service) {
   showScreen('screen-prices');
 }
 
+
+// ─── VERIFICATION SYSTEM ─────────────────────────────────────
+function openVerification(contractorId) {
+  if (contractorId) {
+    var c = null;
+    for (var i = 0; i < contractors.length; i++) {
+      if (contractors[i].id === contractorId) { c = contractors[i]; break; }
+    }
+    if (c) {
+      var score = Math.round(c.rating * 15 + Math.min(c.jobs, 100) * 0.3);
+      document.getElementById('verify-score').textContent = score;
+      document.getElementById('verify-score-bar').style.width = score + '%';
+    }
+  }
+  showScreen('screen-verify');
+}
+
+function submitVerification() {
+  var cedula = document.getElementById('verify-cedula').value;
+  var name = document.getElementById('verify-fullname').value;
+  if (!cedula || !name) {
+    alert('Por favor completa cedula y nombre completo.');
+    return;
+  }
+  var msg = 'Solicitud Verificacion - ServiCasa%0A%0ANombre: ' + encodeURIComponent(name) +
+    '%0ACedula: ' + encodeURIComponent(cedula);
+  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  alert('Solicitud enviada. Te contactaremos en 24-48 horas para completar el proceso.');
+  showScreen('screen-contractors');
+}
+
 renderContractors(contractors, 'contractors-list');
 updateNavForUser();
 </script>
@@ -2972,6 +3131,271 @@ updateNavForUser();
   </div>
 
   <div style="height:20px;"></div>
+</div>
+
+<!-- ============ SCREEN: VERIFICATION ============ -->
+<div class="screen" id="screen-verify">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">← Inicio</button>
+    </div>
+  </nav>
+
+  <div class="verify-hero">
+    <div class="verify-shield">&#128737;</div>
+    <h2>Sistema de Verificacion</h2>
+    <p>Todos los tecnicos pasan por nuestro proceso de validacion</p>
+  </div>
+
+  <!-- TRUST SCORE -->
+  <div class="trust-score-card">
+    <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-bottom:6px;">Puntaje de confianza</div>
+    <div class="trust-score-num" id="verify-score">78</div>
+    <div class="trust-score-label">de 100 · Nivel: Confiable</div>
+    <div class="trust-score-bar">
+      <div class="trust-score-fill" id="verify-score-bar"></div>
+    </div>
+    <div class="trust-score-breakdown">
+      <div class="tsb-item">
+        <div class="tsb-val">4.9&#9733;</div>
+        <div class="tsb-label">Rating</div>
+      </div>
+      <div class="tsb-item">
+        <div class="tsb-val">127</div>
+        <div class="tsb-label">Trabajos</div>
+      </div>
+      <div class="tsb-item">
+        <div class="tsb-val">98%</div>
+        <div class="tsb-label">Respuesta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERIFICATION STEPS -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">Proceso de verificacion</div>
+  </div>
+  <div class="verify-steps-card">
+    <div class="verify-step-row">
+      <div class="verify-step-icon done">&#128100;</div>
+      <div class="verify-step-info">
+        <div class="verify-step-title">Verificacion de identidad</div>
+        <div class="verify-step-desc">Cedula de ciudadania validada con Registraduria</div>
+      </div>
+      <span class="verify-badge-status vbs-done">&#10003; Verificado</span>
+    </div>
+    <div class="verify-step-row">
+      <div class="verify-step-icon done">&#128203;</div>
+      <div class="verify-step-info">
+        <div class="verify-step-title">Antecedentes judiciales</div>
+        <div class="verify-step-desc">Consulta SIJIN · Sin antecedentes</div>
+      </div>
+      <span class="verify-badge-status vbs-done">&#10003; Limpio</span>
+    </div>
+    <div class="verify-step-icon done" style="display:none;"></div>
+    <div class="verify-step-row">
+      <div class="verify-step-icon done">&#128241;</div>
+      <div class="verify-step-info">
+        <div class="verify-step-title">Numero de contacto</div>
+        <div class="verify-step-desc">WhatsApp verificado con codigo SMS</div>
+      </div>
+      <span class="verify-badge-status vbs-done">&#10003; Verificado</span>
+    </div>
+    <div class="verify-step-row">
+      <div class="verify-step-icon pending">&#127970;</div>
+      <div class="verify-step-info">
+        <div class="verify-step-title">Seguro de responsabilidad</div>
+        <div class="verify-step-desc">Poliza de seguro para trabajos en el hogar</div>
+      </div>
+      <span class="verify-badge-status vbs-pending">&#9201; Pendiente</span>
+    </div>
+    <div class="verify-step-row">
+      <div class="verify-step-icon locked">&#127891;</div>
+      <div class="verify-step-info">
+        <div class="verify-step-title">Certificacion tecnica</div>
+        <div class="verify-step-desc">Diploma o certificado del oficio</div>
+      </div>
+      <span class="verify-badge-status vbs-locked">&#128274; Bloqueado</span>
+    </div>
+  </div>
+
+  <!-- VERIFIED CONTRACTOR PROFILE -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">Ejemplo: Mario Restrepo</div>
+  </div>
+  <div class="verified-profile-card">
+    <div class="vpc-header">
+      <div class="vpc-avatar">
+        MR
+        <div class="vpc-verify-dot">&#10003;</div>
+      </div>
+      <div>
+        <div style="font-size:15px;font-weight:700;">Mario Restrepo</div>
+        <div style="font-size:12px;color:var(--brand-light);">Pintor Profesional</div>
+        <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
+          <span class="contractor-verify-badge">&#10003; Verificado</span>
+          <span class="contractor-verify-badge gold-badge">&#11088; Top Rated</span>
+        </div>
+      </div>
+    </div>
+    <div class="vpc-checks">
+      <div class="vpc-check-row">
+        <div class="vpc-check-icon">&#128100;</div>
+        <div class="vpc-check-label">Identidad</div>
+        <div class="vpc-check-val">CC 102***456</div>
+        <div class="vpc-check-status vcs-ok">&#10003; OK</div>
+      </div>
+      <div class="vpc-check-row">
+        <div class="vpc-check-icon">&#128203;</div>
+        <div class="vpc-check-label">Antecedentes</div>
+        <div class="vpc-check-val">SIJIN 2024</div>
+        <div class="vpc-check-status vcs-ok">&#10003; Limpio</div>
+      </div>
+      <div class="vpc-check-row">
+        <div class="vpc-check-icon">&#128241;</div>
+        <div class="vpc-check-label">WhatsApp</div>
+        <div class="vpc-check-val">+57 310 ***</div>
+        <div class="vpc-check-status vcs-ok">&#10003; Activo</div>
+      </div>
+      <div class="vpc-check-row">
+        <div class="vpc-check-icon">&#11088;</div>
+        <div class="vpc-check-label">Calificacion</div>
+        <div class="vpc-check-val">47 resenas</div>
+        <div class="vpc-check-status vcs-ok">4.9 &#9733;</div>
+      </div>
+      <div class="vpc-check-row">
+        <div class="vpc-check-icon">&#128737;</div>
+        <div class="vpc-check-label">Seguro</div>
+        <div class="vpc-check-val">En proceso</div>
+        <div class="vpc-check-status vcs-pending">&#9201; Pendiente</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BADGE SHOWCASE -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">Insignias disponibles</div>
+  </div>
+  <div class="badge-showcase">
+    <div class="badge-card earned">
+      <div class="badge-icon">&#10003;</div>
+      <div class="badge-name earned-text">Verificado</div>
+      <div class="badge-desc">Identidad confirmada</div>
+    </div>
+    <div class="badge-card earned">
+      <div class="badge-icon">&#11088;</div>
+      <div class="badge-name earned-text">Top Rated</div>
+      <div class="badge-desc">+4.8 estrellas promedio</div>
+    </div>
+    <div class="badge-card earned">
+      <div class="badge-icon">&#128293;</div>
+      <div class="badge-name earned-text">Superactivo</div>
+      <div class="badge-desc">+100 trabajos completados</div>
+    </div>
+    <div class="badge-card locked">
+      <div class="badge-icon">&#128737;</div>
+      <div class="badge-name">Asegurado</div>
+      <div class="badge-desc">Requiere poliza activa</div>
+    </div>
+    <div class="badge-card locked">
+      <div class="badge-icon">&#127891;</div>
+      <div class="badge-name">Certificado</div>
+      <div class="badge-desc">Diploma tecnico requerido</div>
+    </div>
+    <div class="badge-card locked">
+      <div class="badge-icon">&#128081;</div>
+      <div class="badge-name">Pro Elite</div>
+      <div class="badge-desc">Todos los requisitos</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="verify-cta">
+    <h3>&#128737; Confia en tecnicos verificados</h3>
+    <p>Todos nuestros profesionales pasan por verificacion de identidad y antecedentes antes de aparecer en la plataforma.</p>
+    <button class="btn-gold" style="width:100%;padding:12px;" onclick="showScreen('screen-home')">
+      Encontrar tecnicos verificados
+    </button>
+  </div>
+</div>
+
+<!-- ============ SCREEN: CONTRACTOR VERIFICATION APPLY ============ -->
+<div class="screen" id="screen-verify-apply">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-contractors')">← Volver</button>
+    </div>
+  </nav>
+
+  <div class="verify-hero">
+    <div class="verify-shield">&#128203;</div>
+    <h2>Solicitar verificacion</h2>
+    <p>Aumenta tu credibilidad y consigue mas clientes</p>
+  </div>
+
+  <div style="background:var(--white);border-radius:var(--radius);margin:-20px 20px 16px;padding:20px;box-shadow:var(--card-shadow);border:1px solid var(--border);">
+    <div style="font-size:14px;font-weight:700;margin-bottom:14px;">Documentos requeridos</div>
+
+    <div class="fg">
+      <label>Numero de cedula</label>
+      <input type="text" id="verify-cedula" placeholder="Tu numero de CC">
+    </div>
+    <div class="fg">
+      <label>Nombre completo (como en cedula)</label>
+      <input type="text" id="verify-fullname" placeholder="Nombre completo oficial">
+    </div>
+    <div class="fg">
+      <label>Fecha de expedicion cedula</label>
+      <input type="date" id="verify-date">
+    </div>
+    <div class="fg">
+      <label>Especialidad principal</label>
+      <select id="verify-trade">
+        <option>Pintura</option>
+        <option>Plomeria</option>
+        <option>Carpinteria</option>
+        <option>Limpieza</option>
+        <option>Drywall</option>
+        <option>Electricidad</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Anos de experiencia</label>
+      <select id="verify-exp">
+        <option>1-2 anos</option>
+        <option>3-5 anos</option>
+        <option>6-10 anos</option>
+        <option>Mas de 10 anos</option>
+      </select>
+    </div>
+
+    <div style="background:var(--brand-accent);border-radius:8px;padding:12px;margin-bottom:14px;font-size:12px;color:var(--brand);line-height:1.5;">
+      &#128737; Tu informacion es confidencial y solo se usa para verificacion. No compartimos datos personales con terceros.
+    </div>
+
+    <button class="btn-gold" style="width:100%;padding:13px;" onclick="submitVerification()">
+      Enviar solicitud de verificacion &#128203;
+    </button>
+  </div>
+
+  <!-- BENEFITS -->
+  <div style="padding:0 20px 20px;">
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px;">Beneficios de verificarte</div>
+    <div class="perk">
+      <div class="perk-icon">&#128200;</div>
+      <div><h4>3x mas clientes</h4><p>Los tecnicos verificados reciben 3 veces mas contactos.</p></div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">&#11088;</div>
+      <div><h4>Insignia destacada</h4><p>Tu perfil aparece primero en resultados de busqueda.</p></div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">&#128176;</div>
+      <div><h4>Cobra mas</h4><p>Tecnicos verificados cobran en promedio 25% mas.</p></div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
