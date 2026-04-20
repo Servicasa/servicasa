@@ -1817,6 +1817,100 @@
     display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
     padding-bottom: 14px; border-bottom: 1px solid var(--border);
   }
+
+  /* ── SERVICE PACKAGES ── */
+  .packages-hero {
+    background: linear-gradient(135deg, #B7410E 0%, #E85D04 100%);
+    padding: 28px 20px 40px; text-align: center;
+  }
+  .packages-hero h2 { color:#fff; font-size:22px; font-weight:800; margin-bottom:6px; }
+  .packages-hero p { color:rgba(255,255,255,0.65); font-size:13px; }
+  .pkg-category-bar {
+    display:flex; gap:8px; padding:14px 20px 6px;
+    overflow-x:auto; scrollbar-width:none;
+  }
+  .pkg-category-bar::-webkit-scrollbar { display:none; }
+  .pkg-cat-btn {
+    padding:6px 16px; border-radius:20px; font-size:12px; font-weight:600;
+    border:1.5px solid var(--border); background:var(--white);
+    color:var(--text-muted); cursor:pointer; white-space:nowrap;
+    transition:all 0.15s; font-family:'DM Sans',sans-serif;
+  }
+  .pkg-cat-btn.active {
+    background:var(--brand); color:#fff; border-color:var(--brand);
+  }
+  .pkg-list { padding:8px 20px 20px; }
+  .pkg-card {
+    background:var(--white); border-radius:var(--radius);
+    border:1px solid var(--border); margin-bottom:14px;
+    overflow:hidden; transition:box-shadow 0.15s;
+  }
+  .pkg-card:hover { box-shadow:var(--card-shadow); }
+  .pkg-card.featured { border-color:var(--gold); }
+  .pkg-featured-banner {
+    background:var(--gold); color:var(--brand);
+    font-size:11px; font-weight:700; padding:5px 16px;
+    text-align:center; font-family:'Syne',sans-serif;
+  }
+  .pkg-body { padding:16px; }
+  .pkg-header {
+    display:flex; align-items:flex-start;
+    justify-content:space-between; margin-bottom:12px;
+  }
+  .pkg-icon {
+    width:46px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; flex-shrink:0; margin-right:12px;
+  }
+  .pkg-title-wrap { flex:1; }
+  .pkg-title { font-size:15px; font-weight:800; margin-bottom:3px; }
+  .pkg-subtitle { font-size:11px; color:var(--text-muted); }
+  .pkg-price-wrap { text-align:right; flex-shrink:0; }
+  .pkg-price {
+    font-family:'Syne',sans-serif; font-size:20px; font-weight:800;
+    color:var(--brand);
+  }
+  .pkg-price-label { font-size:10px; color:var(--text-muted); margin-top:1px; }
+  .pkg-includes {
+    margin-bottom:12px;
+  }
+  .pkg-includes-title { font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px; }
+  .pkg-include-item {
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; color:var(--text); margin-bottom:5px;
+  }
+  .pkg-include-icon { color:var(--brand); font-size:12px; flex-shrink:0; }
+  .pkg-meta {
+    display:flex; gap:12px; margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .pkg-meta-item {
+    display:flex; align-items:center; gap:4px;
+    font-size:11px; color:var(--text-muted);
+  }
+  .pkg-actions { display:flex; gap:8px; }
+  .pkg-book-btn {
+    flex:1; background:var(--brand); color:#fff; border:none;
+    padding:11px; border-radius:8px; font-family:'Syne',sans-serif;
+    font-size:13px; font-weight:700; cursor:pointer; transition:background 0.15s;
+  }
+  .pkg-book-btn:hover { background:var(--brand-light); }
+  .pkg-book-btn.gold-btn { background:var(--gold); color:var(--brand); }
+  .pkg-info-btn {
+    background:transparent; color:var(--brand); border:1.5px solid var(--brand);
+    padding:11px 16px; border-radius:8px; font-family:'DM Sans',sans-serif;
+    font-size:12px; cursor:pointer; transition:all 0.15s;
+  }
+  .pkg-savings-badge {
+    background:#FFEBEE; color:#C62828; font-size:10px; font-weight:700;
+    padding:3px 8px; border-radius:20px; display:inline-block; margin-left:6px;
+  }
+  .pkg-guarantee {
+    background:var(--brand-accent); border-radius:8px;
+    padding:10px 12px; margin-bottom:12px;
+    display:flex; align-items:center; gap:8px;
+    font-size:11px; color:var(--brand); line-height:1.4;
+  }
 </style>
 </head>
 <body>
@@ -1843,7 +1937,7 @@
       <input type="text" placeholder="¿Qué necesitas? Ej: pintura, plomería..." id="search-input">
       <button class="btn-primary" onclick="doSearch()">Buscar</button>
     </div>
-    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;" onclick="openPriceEstimator()" style="cursor:pointer;">&#128200; Ver estimados de precios por servicio →</p>
+    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;" onclick="openPriceEstimator()" style="cursor:pointer;">&#128230; Ver paquetes con precio fijo &nbsp;|&nbsp; &#128200; Ver estimados de precios</p>
   </div>
 
   <div class="section">
@@ -3181,7 +3275,211 @@ function openBookings() {
   showScreen('screen-bookings');
 }
 
+
+// ─── SERVICE PACKAGES ────────────────────────────────────────
+var servicePackages = [
+  {
+    id:1, category:'painting', featured:true,
+    icon:'&#127912;', iconBg:'#FFF3E0',
+    title:'Complete Interior Paint',
+    subtitle:'Living room + dining room + 1 bedroom',
+    price:'$380k', savings:'Save $80k',
+    duration:'2 days', guarantee:true, technicians:1,
+    includes:[
+      '2 coats premium paint included',
+      'Surface preparation and repair',
+      'Professional finish guarantee',
+      'Cleanup after work',
+      '6 month warranty'
+    ],
+    tip:'Most popular package. Includes all materials.'
+  },
+  {
+    id:2, category:'painting', featured:false,
+    icon:'&#127912;', iconBg:'#FFF3E0',
+    title:'Studio / Small Apartment Paint',
+    subtitle:'Up to 2 rooms',
+    price:'$180k', savings:'Save $40k',
+    duration:'1 day', guarantee:true, technicians:1,
+    includes:[
+      '2 coats standard paint included',
+      'Surface preparation',
+      'Professional finish',
+      'Same day completion'
+    ],
+    tip:'Perfect for small spaces.'
+  },
+  {
+    id:3, category:'cleaning', featured:true,
+    icon:'&#129529;', iconBg:'#E8F5E9',
+    title:'Full Deep Clean',
+    subtitle:'Complete apartment up to 80m2',
+    price:'$160k', savings:'Save $40k',
+    duration:'4-5 hours', guarantee:true, technicians:2,
+    includes:[
+      'Kitchen deep clean including oven',
+      'Bathrooms disinfection',
+      'Floors and surfaces',
+      'Windows interior cleaning',
+      'All cleaning products included'
+    ],
+    tip:'2 technicians for faster completion.'
+  },
+  {
+    id:4, category:'cleaning', featured:false,
+    icon:'&#129529;', iconBg:'#E8F5E9',
+    title:'Weekly Maintenance Clean',
+    subtitle:'Regular upkeep for apartments',
+    price:'$80k', savings:'',
+    duration:'2 hours', guarantee:false, technicians:1,
+    includes:[
+      'Surfaces and dust removal',
+      'Floors mopping',
+      'Kitchen and bathroom basics',
+      'Trash removal'
+    ],
+    tip:'Great for weekly bookings — get a discount on monthly plans.'
+  },
+  {
+    id:5, category:'drywall', featured:false,
+    icon:'&#127968;', iconBg:'#E3F2FD',
+    title:'Wall Repair Package',
+    subtitle:'Cracks, holes and finishing',
+    price:'$220k', savings:'Save $50k',
+    duration:'1 day', guarantee:true, technicians:1,
+    includes:[
+      'Up to 10 crack repairs',
+      'Hole patching included',
+      'Sanding and smooth finish',
+      'Ready to paint surface',
+      'Materials included'
+    ],
+    tip:'Includes all materials and leaves wall paint-ready.'
+  },
+  {
+    id:6, category:'carpentry', featured:false,
+    icon:'&#129683;', iconBg:'#FFF8E1',
+    title:'Custom Closet Build',
+    subtitle:'Standard bedroom closet',
+    price:'$650k', savings:'Save $150k',
+    duration:'3 days', guarantee:true, technicians:1,
+    includes:[
+      'Design consultation included',
+      'MDP board construction',
+      'Sliding or hinged doors',
+      'Internal shelving and rails',
+      '1 year structural warranty'
+    ],
+    tip:'Price includes materials. Wood upgrades available.'
+  },
+  {
+    id:7, category:'plumbing', featured:false,
+    icon:'&#128295;', iconBg:'#E8EAF6',
+    title:'Bathroom Fixture Install',
+    subtitle:'Toilet, sink or shower installation',
+    price:'$180k', savings:'',
+    duration:'3-4 hours', guarantee:true, technicians:1,
+    includes:[
+      'Single fixture installation',
+      'Old fixture removal',
+      'Connection and testing',
+      'Leak check guarantee',
+      'Labor only — fixtures extra'
+    ],
+    tip:'Labor only. Bring your own fixtures or ask us to source them.'
+  }
+];
+
+var currentPkgFilter = 'all';
+
+function filterPackages(btn, category) {
+  currentPkgFilter = category;
+  var btns = document.querySelectorAll('.pkg-cat-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  renderPackages(category);
+}
+
+function renderPackages(category) {
+  var container = document.getElementById('packages-list');
+  if (!container) return;
+  var list = [];
+  for (var i = 0; i < servicePackages.length; i++) {
+    if (category === 'all' || servicePackages[i].category === category) {
+      list.push(servicePackages[i]);
+    }
+  }
+  if (!list.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">No packages in this category yet.</div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var p = list[i];
+    var includesHtml = '';
+    for (var j = 0; j < p.includes.length; j++) {
+      includesHtml += '<div class="pkg-include-item"><span class="pkg-include-icon">&#10003;</span>' + p.includes[j] + '</div>';
+    }
+    html += '<div class="pkg-card' + (p.featured ? ' featured' : '') + '">' +
+      (p.featured ? '<div class="pkg-featured-banner">&#11088; MOST POPULAR</div>' : '') +
+      '<div class="pkg-body">' +
+        '<div class="pkg-header">' +
+          '<div style="display:flex;align-items:flex-start;flex:1;">' +
+            '<div class="pkg-icon" style="background:' + p.iconBg + ';">' + p.icon + '</div>' +
+            '<div class="pkg-title-wrap">' +
+              '<div class="pkg-title">' + p.title + (p.savings ? '<span class="pkg-savings-badge">' + p.savings + '</span>' : '') + '</div>' +
+              '<div class="pkg-subtitle">' + p.subtitle + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pkg-price-wrap">' +
+            '<div class="pkg-price">' + p.price + '</div>' +
+            '<div class="pkg-price-label">fixed price</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pkg-meta">' +
+          '<div class="pkg-meta-item">&#9201; ' + p.duration + '</div>' +
+          '<div class="pkg-meta-item">&#128100; ' + p.technicians + ' technician' + (p.technicians > 1 ? 's' : '') + '</div>' +
+          (p.guarantee ? '<div class="pkg-meta-item" style="color:var(--brand);">&#128737; Guaranteed</div>' : '') +
+        '</div>' +
+        (p.guarantee ? '<div class="pkg-guarantee"><span style="font-size:16px;">&#128737;</span>Satisfaction guaranteed or we send another technician free of charge.</div>' : '') +
+        '<div class="pkg-includes">' +
+          '<div class="pkg-includes-title">What's included</div>' +
+          includesHtml +
+        '</div>' +
+        '<div class="pkg-actions">' +
+          '<button class="pkg-book-btn' + (p.featured ? ' gold-btn' : '') + '" onclick="bookPackage(' + p.id + ')">Book this package</button>' +
+          '<button class="pkg-info-btn" onclick="showToast('WhatsApp will open to confirm details')">Details</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function bookPackage(pkgId) {
+  var pkg = null;
+  for (var i = 0; i < servicePackages.length; i++) {
+    if (servicePackages[i].id === pkgId) { pkg = servicePackages[i]; break; }
+  }
+  if (!pkg) return;
+  var msg = 'Hola! Quiero reservar el paquete ServiCasa:%0A%0A' +
+    encodeURIComponent(pkg.title) + '%0APrecio fijo: ' + encodeURIComponent(pkg.price) +
+    '%0ADuracion: ' + encodeURIComponent(pkg.duration) +
+    '%0A%0APor favor confirmen disponibilidad.';
+  addNotification('jobs', '&#128230;', 'ni-green',
+    'Package booked: ' + pkg.title,
+    'Your booking request was sent. A technician will confirm soon.');
+  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  showToast('&#128230; Booking request sent!');
+}
+
+function openPackages(category) {
+  renderPackages(category || 'all');
+  showScreen('screen-packages');
+}
+
 renderContractors(contractors, 'contractors-list');
+renderPackages('all');
 countUnread();
 setTimeout(updateNotifBadge, 100);
 updateNavForUser();
@@ -3401,9 +3699,14 @@ updateNavForUser();
     </div>
   </div>
   <div style="padding:20px;">
+    <div class="profile-menu-item" onclick="openBookings()">
+      <div class="pmi-icon">&#128257;</div>
+      <div class="pmi-label">My bookings &amp; favorites</div>
+      <div class="pmi-arrow">›</div>
+    </div>
     <div class="profile-menu-item" onclick="showScreen('screen-post')">
-      <div class="pmi-icon">📋</div>
-      <div class="pmi-label">Mis trabajos publicados</div>
+      <div class="pmi-icon">&#128203;</div>
+      <div class="pmi-label">Post a new job</div>
       <div class="pmi-arrow">›</div>
     </div>
     <div class="profile-menu-item" onclick="editProfile()">
@@ -4599,6 +4902,35 @@ updateNavForUser();
       Post as new job instead
     </button>
   </div>
+</div>
+
+<!-- ============ SCREEN: SERVICE PACKAGES ============ -->
+<div class="screen" id="screen-packages">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">← Home</button>
+    </div>
+  </nav>
+
+  <div class="packages-hero">
+    <div style="font-size:36px;margin-bottom:10px;">&#128230;</div>
+    <h2>Service Packages</h2>
+    <p>Fixed price bundles — no surprises, no negotiation</p>
+  </div>
+
+  <!-- CATEGORY FILTER -->
+  <div class="pkg-category-bar">
+    <button class="pkg-cat-btn active" onclick="filterPackages(this,'all')">All</button>
+    <button class="pkg-cat-btn" onclick="filterPackages(this,'painting')">Painting</button>
+    <button class="pkg-cat-btn" onclick="filterPackages(this,'cleaning')">Cleaning</button>
+    <button class="pkg-cat-btn" onclick="filterPackages(this,'drywall')">Drywall</button>
+    <button class="pkg-cat-btn" onclick="filterPackages(this,'carpentry')">Carpentry</button>
+    <button class="pkg-cat-btn" onclick="filterPackages(this,'plumbing')">Plumbing</button>
+  </div>
+
+  <!-- PACKAGES LIST -->
+  <div class="pkg-list" id="packages-list"></div>
 </div>
 </body>
 </html>
