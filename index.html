@@ -3413,6 +3413,7 @@ function renderPackages(category) {
     container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">No packages in this category yet.</div>';
     return;
   }
+  var q = String.fromCharCode(39);
   var html = '';
   for (var i = 0; i < list.length; i++) {
     var p = list[i];
@@ -3420,14 +3421,18 @@ function renderPackages(category) {
     for (var j = 0; j < p.includes.length; j++) {
       includesHtml += '<div class="pkg-include-item"><span class="pkg-include-icon">&#10003;</span>' + p.includes[j] + '</div>';
     }
+    var savingsHtml = p.savings ? '<span class="pkg-savings-badge">' + p.savings + '</span>' : '';
+    var guaranteeHtml = p.guarantee ? '<div class="pkg-guarantee"><span style="font-size:16px;">&#128737;</span>Satisfaction guaranteed.</div>' : '';
+    var featuredBanner = p.featured ? '<div class="pkg-featured-banner">&#11088; MOST POPULAR</div>' : '';
+    var btnClass = p.featured ? 'pkg-book-btn gold-btn' : 'pkg-book-btn';
     html += '<div class="pkg-card' + (p.featured ? ' featured' : '') + '">' +
-      (p.featured ? '<div class="pkg-featured-banner">&#11088; MOST POPULAR</div>' : '') +
+      featuredBanner +
       '<div class="pkg-body">' +
         '<div class="pkg-header">' +
           '<div style="display:flex;align-items:flex-start;flex:1;">' +
             '<div class="pkg-icon" style="background:' + p.iconBg + ';">' + p.icon + '</div>' +
             '<div class="pkg-title-wrap">' +
-              '<div class="pkg-title">' + p.title + (p.savings ? '<span class="pkg-savings-badge">' + p.savings + '</span>' : '') + '</div>' +
+              '<div class="pkg-title">' + p.title + savingsHtml + '</div>' +
               '<div class="pkg-subtitle">' + p.subtitle + '</div>' +
             '</div>' +
           '</div>' +
@@ -3441,14 +3446,14 @@ function renderPackages(category) {
           '<div class="pkg-meta-item">&#128100; ' + p.technicians + ' technician' + (p.technicians > 1 ? 's' : '') + '</div>' +
           (p.guarantee ? '<div class="pkg-meta-item" style="color:var(--brand);">&#128737; Guaranteed</div>' : '') +
         '</div>' +
-        (p.guarantee ? '<div class="pkg-guarantee"><span style="font-size:16px;">&#128737;</span>Satisfaction guaranteed — we send another technician free.</div>' : '') +
+        guaranteeHtml +
         '<div class="pkg-includes">' +
           '<div class="pkg-includes-title">Whats included</div>' +
           includesHtml +
         '</div>' +
         '<div class="pkg-actions">' +
-          '<button class="pkg-book-btn' + (p.featured ? ' gold-btn' : '') + '" onclick="bookPackage(' + p.id + ')">Book this package</button>' +
-          '<button class="pkg-info-btn" onclick="showToast('WhatsApp will open to confirm details')">Details</button>' +
+          '<button class="' + btnClass + '" onclick="bookPackage(' + p.id + ')">Book this package</button>' +
+          '<button class="pkg-info-btn" onclick="showToast(' + q + 'WhatsApp will open' + q + ')">Details</button>' +
         '</div>' +
       '</div>' +
     '</div>';
