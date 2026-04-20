@@ -2042,9 +2042,9 @@
   <div style="padding: 16px 20px 8px;">
     <div style="font-size:13px; color: var(--text-muted); margin-bottom: 12px;" id="results-label">Resultados para "pintura"</div>
     <div class="chips" id="results-chips">
-      <div class="chip active">Mejor valorados</div>
-      <div class="chip">Menor precio</div>
-      <div class="chip">Disponible hoy</div>
+      <div class="chip active" onclick="sortResults(this,'rating')">Top Rated</div>
+      <div class="chip" onclick="sortResults(this,'price')">Lower price</div>
+      <div class="chip" onclick="sortResults(this,'available')">Available today</div>
     </div>
   </div>
 
@@ -2428,11 +2428,16 @@ var reviewsLibrary = {
 };
 
 var contractors = [
-  {id:1,name:'Mario Restrepo',initials:'MR',trade:'Pintura',city:'Bogota',rating:4.9,reviews:47,jobs:127,years:5,rate:'$85k',rateNum:85,avatar:'green',badges:['Verificado','Top Rated'],bio:'Pintor profesional con 5 anos de experiencia en interiores y exteriores.',phone:'573101111111'},
-  {id:2,name:'Sofia Vargas',initials:'SV',trade:'Limpieza Profunda',city:'Medellin',rating:4.8,reviews:62,jobs:203,years:4,rate:'$65k',rateNum:65,avatar:'gold',badges:['Verificada','Disponible Hoy'],bio:'Especialista en limpieza de hogares y oficinas. Disponible 7 dias.',phone:'573102222222'},
-  {id:3,name:'Juan Ospina',initials:'JO',trade:'Carpinteria',city:'Bogota',rating:4.7,reviews:31,jobs:88,years:7,rate:'$95k',rateNum:95,avatar:'blue',badges:['Verificado'],bio:'Carpintero con 7 anos fabricando muebles a medida, closets y cocinas.',phone:'573103333333'},
-  {id:4,name:'Camila Rios',initials:'CR',trade:'Drywall',city:'Cali',rating:4.9,reviews:28,jobs:54,years:3,rate:'$75k',rateNum:75,avatar:'coral',badges:['Verificada'],bio:'Tecnica en drywall y reparaciones. Trabajo limpio y a tiempo.',phone:'573104444444'},
-  {id:5,name:'Diego Morales',initials:'DM',trade:'Pintura',city:'Bogota',rating:4.6,reviews:19,jobs:41,years:2,rate:'$70k',rateNum:70,avatar:'green',badges:['Verificado'],bio:'Pintor especializado en acabados modernos y tecnicas decorativas.',phone:'573105555555'}
+  {id:1,name:'Mario Restrepo',initials:'MR',trade:'Pintura',city:'Bogota',rating:4.9,reviews:47,jobs:127,years:5,rate:'$85k',rateNum:85,avatar:'green',badges:['Verificado','Top Rated'],bio:'Pintor profesional con 5 anos de experiencia en interiores y exteriores.',phone:'573101111111',available:false},
+  {id:2,name:'Sofia Vargas',initials:'SV',trade:'Limpieza Profunda',city:'Medellin',rating:4.8,reviews:62,jobs:203,years:4,rate:'$65k',rateNum:65,avatar:'gold',badges:['Verificada','Disponible Hoy'],bio:'Especialista en limpieza de hogares y oficinas. Disponible 7 dias.',phone:'573102222222',available:true},
+  {id:3,name:'Juan Ospina',initials:'JO',trade:'Carpinteria',city:'Bogota',rating:4.7,reviews:31,jobs:88,years:7,rate:'$95k',rateNum:95,avatar:'blue',badges:['Verificado'],bio:'Carpintero con 7 anos fabricando muebles a medida, closets y cocinas.',phone:'573103333333',available:false},
+  {id:4,name:'Camila Rios',initials:'CR',trade:'Drywall',city:'Cali',rating:4.9,reviews:28,jobs:54,years:3,rate:'$75k',rateNum:75,avatar:'coral',badges:['Verificada'],bio:'Tecnica en drywall y reparaciones. Trabajo limpio y a tiempo.',phone:'573104444444',available:false},
+  {id:5,name:'Diego Morales',initials:'DM',trade:'Pintura',city:'Bogota',rating:4.6,reviews:19,jobs:41,years:2,rate:'$70k',rateNum:70,avatar:'green',badges:['Verificado'],bio:'Pintor especializado en acabados modernos y tecnicas decorativas.',phone:'573105555555',available:false},
+  {id:6,name:'Carlos Herrera',initials:'CH',trade:'Plomeria',city:'Bogota',rating:4.8,reviews:38,jobs:94,years:6,rate:'$80k',rateNum:80,avatar:'blue',badges:['Verificado','Disponible Hoy'],bio:'Plomero certificado. Reparaciones, instalaciones y emergencias 24/7.',phone:'573106666666',available:true},
+  {id:7,name:'Luis Garzon',initials:'LG',trade:'Plomeria',city:'Medellin',rating:4.6,reviews:24,jobs:67,years:4,rate:'$70k',rateNum:70,avatar:'coral',badges:['Verificado'],bio:'Especialista en instalaciones sanitarias y reparacion de fugas.',phone:'573107777777',available:false},
+  {id:8,name:'Andres Castro',initials:'AC',trade:'Electricidad',city:'Bogota',rating:4.9,reviews:52,jobs:143,years:8,rate:'$90k',rateNum:90,avatar:'gold',badges:['Verificado','Top Rated'],bio:'Electricista certificado RETIE. Instalaciones residenciales y comerciales.',phone:'573108888888',available:true},
+  {id:9,name:'Pedro Salinas',initials:'PS',trade:'Electricidad',city:'Cali',rating:4.7,reviews:29,jobs:71,years:5,rate:'$75k',rateNum:75,avatar:'green',badges:['Verificado'],bio:'Tecnico electricista con experiencia en redes electricas y mantenimiento.',phone:'573109999999',available:false},
+  {id:10,name:'Monica Torres',initials:'MT',trade:'Pisos',city:'Bogota',rating:4.8,reviews:41,jobs:89,years:6,rate:'$85k',rateNum:85,avatar:'coral',badges:['Verificada','Disponible Hoy'],bio:'Instaladora de pisos laminados, ceramica y madera. Resultados impecables.',phone:'573110000000',available:true}
 ];
 
 var currentContractor = null;
@@ -2568,33 +2573,57 @@ function leaveReview() {
 function doSearch() {
   var q = document.getElementById('search-input').value.toLowerCase().trim();
   currentResults = [];
+  var tradeMap = {
+    'plumbing':'plomeria', 'plumber':'plomeria', 'painting':'pintura',
+    'paint':'pintura', 'cleaning':'limpieza', 'clean':'limpieza',
+    'carpentry':'carpinteria', 'carpenter':'carpinteria',
+    'electricity':'electricidad', 'electric':'electricidad',
+    'floors':'pisos', 'floor':'pisos', 'drywall':'drywall',
+    'garden':'jardin', 'jardin':'jardin'
+  };
+  var searchQ = tradeMap[q] || q;
   for (var i = 0; i < contractors.length; i++) {
     var c = contractors[i];
-    if (!q || c.trade.toLowerCase().indexOf(q) !== -1 || c.city.toLowerCase().indexOf(q) !== -1 || c.name.toLowerCase().indexOf(q) !== -1) {
+    var tradeEn = c.trade.toLowerCase();
+    if (!q ||
+      tradeEn.indexOf(searchQ) !== -1 ||
+      tradeEn.indexOf(q) !== -1 ||
+      c.city.toLowerCase().indexOf(q) !== -1 ||
+      c.name.toLowerCase().indexOf(q) !== -1 ||
+      c.bio.toLowerCase().indexOf(q) !== -1) {
       currentResults.push(c);
     }
   }
-  document.getElementById('results-label').textContent = q ? 'Resultados para "' + q + '"' : 'Todos los tecnicos';
+  if (!currentResults.length) currentResults = contractors.slice();
+  var label = q ? 'Results for "' + q + '"' : 'All technicians';
+  document.getElementById('results-label').textContent = label;
   renderContractors(currentResults, 'results-list');
   showScreen('screen-results');
 }
 
 function filterCategory(cat) {
   var q = cat.toLowerCase();
+  var catMap = {
+    'pintura':'pintura', 'plomeria':'plomeria', 'carpinteria':'carpinteria',
+    'limpieza':'limpieza', 'electricidad':'electricidad', 'pisos':'pisos',
+    'drywall':'drywall', 'jardin':'jardin'
+  };
   currentResults = [];
   for (var i = 0; i < contractors.length; i++) {
-    if (contractors[i].trade.toLowerCase().indexOf(q) !== -1) {
+    var trade = contractors[i].trade.toLowerCase();
+    if (trade.indexOf(q) !== -1) {
       currentResults.push(contractors[i]);
     }
   }
   if (!currentResults.length) currentResults = contractors.slice();
-  document.getElementById('results-label').textContent = 'Tecnicos de ' + cat;
+  var label = cat + ' Technicians';
+  document.getElementById('results-label').textContent = label;
   renderContractors(currentResults, 'results-list');
   showScreen('screen-results');
 }
 
 function sortResults(el, type) {
-  var chips = document.querySelectorAll('#results-chips .chip');
+  var chips = document.querySelectorAll('.chip');
   for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
   el.classList.add('active');
   var sorted = currentResults.slice();
@@ -2602,6 +2631,17 @@ function sortResults(el, type) {
     sorted.sort(function(a, b) { return b.rating - a.rating; });
   } else if (type === 'price') {
     sorted.sort(function(a, b) { return a.rateNum - b.rateNum; });
+  } else if (type === 'available') {
+    var avail = [];
+    var rest = [];
+    for (var i = 0; i < sorted.length; i++) {
+      if (sorted[i].available) avail.push(sorted[i]);
+      else rest.push(sorted[i]);
+    }
+    sorted = avail.concat(rest);
+    if (!avail.length) {
+      showToast('No available technicians right now — showing all');
+    }
   } else if (type === 'jobs') {
     sorted.sort(function(a, b) { return b.jobs - a.jobs; });
   }
