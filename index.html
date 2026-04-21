@@ -1911,6 +1911,101 @@
     display:flex; align-items:center; gap:8px;
     font-size:11px; color:var(--brand); line-height:1.4;
   }
+
+  /* ── BEFORE/AFTER PHOTOS ── */
+  .photo-screen-hero {
+    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+    padding: 28px 20px 40px; text-align: center;
+  }
+  .photo-screen-hero h2 { color:#fff; font-size:22px; font-weight:800; margin-bottom:6px; }
+  .photo-screen-hero p { color:rgba(255,255,255,0.65); font-size:13px; }
+  .ba-card {
+    background: var(--white); border-radius: var(--radius);
+    border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden;
+  }
+  .ba-header {
+    padding: 14px 16px 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ba-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ba-info { flex: 1; }
+  .ba-name { font-size: 13px; font-weight: 700; }
+  .ba-meta { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .ba-photos {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    position: relative;
+  }
+  .ba-photo-wrap { position: relative; overflow: hidden; aspect-ratio: 1; }
+  .ba-photo-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform 0.3s;
+  }
+  .ba-photo-wrap img:hover { transform: scale(1.04); }
+  .ba-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 6px 10px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .ba-label.before {
+    background: rgba(180, 0, 0, 0.72); color: #fff;
+  }
+  .ba-label.after {
+    background: rgba(27, 67, 50, 0.82); color: #fff;
+  }
+  .ba-divider {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 3px; background: #fff; z-index: 2;
+    transform: translateX(-50%);
+  }
+  .ba-divider-icon {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #fff; display: flex; align-items: center;
+    justify-content: center; font-size: 12px; z-index: 3;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .ba-footer {
+    padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .ba-service-tag {
+    background: var(--brand-accent); color: var(--brand);
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .ba-rating { font-size: 12px; color: var(--text-muted); }
+  .ba-cta-btn {
+    background: var(--brand); color: #fff; border: none;
+    padding: 8px 14px; border-radius: 8px; font-size: 12px;
+    font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .ba-filter-bar {
+    display: flex; gap: 8px; padding: 12px 20px 4px;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .ba-filter-bar::-webkit-scrollbar { display: none; }
+  .ba-filter {
+    padding: 5px 14px; border-radius: 20px; font-size: 12px;
+    font-weight: 500; border: 1.5px solid var(--border);
+    background: var(--white); color: var(--text-muted);
+    cursor: pointer; white-space: nowrap; transition: all 0.15s;
+  }
+  .ba-filter.active {
+    background: var(--brand); color: #fff; border-color: var(--brand);
+  }
+  .upload-cta {
+    background: var(--brand-accent); border: 2px dashed #A5D6A7;
+    border-radius: var(--radius); margin: 0 20px 16px;
+    padding: 24px; text-align: center; cursor: pointer;
+  }
+  .upload-cta h4 { font-size: 14px; font-weight: 700; color: var(--brand); margin-bottom: 4px; }
+  .upload-cta p { font-size: 12px; color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -1937,7 +2032,7 @@
       <input type="text" placeholder="¿Qué necesitas? Ej: pintura, plomería..." id="search-input">
       <button class="btn-primary" onclick="doSearch()">Buscar</button>
     </div>
-    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;" onclick="openPriceEstimator()" style="cursor:pointer;">&#128230; Ver paquetes con precio fijo &nbsp;|&nbsp; &#128200; Ver estimados de precios</p>
+    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;" onclick="openPriceEstimator()" style="cursor:pointer;">&#128247; Before &amp; After &nbsp;|&nbsp; &#128230; Packages &nbsp;|&nbsp; &#128200; Prices</p>
   </div>
 
   <div class="section">
@@ -3523,7 +3618,181 @@ function openPackages(category) {
   showScreen('screen-packages');
 }
 
+
+// ─── BEFORE/AFTER PHOTOS ─────────────────────────────────────
+var photoProjects = [
+  {
+    id: 1,
+    category: 'painting',
+    contractorId: 1,
+    contractorName: 'Mario Restrepo',
+    contractorInitials: 'MR',
+    contractorAvatar: 'green',
+    service: 'Interior Painting',
+    city: 'Bogota',
+    rating: 5,
+    duration: '2 days',
+    price: '$255k',
+    beforeUrl: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=400&h=400&fit=crop',
+    afterUrl: 'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=400&h=400&fit=crop',
+    review: 'Amazing transformation. Mario was professional and clean.'
+  },
+  {
+    id: 2,
+    category: 'painting',
+    contractorId: 5,
+    contractorName: 'Diego Morales',
+    contractorInitials: 'DM',
+    contractorAvatar: 'green',
+    service: 'Bedroom Painting',
+    city: 'Bogota',
+    rating: 5,
+    duration: '1 day',
+    price: '$180k',
+    beforeUrl: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&h=400&fit=crop',
+    afterUrl: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop',
+    review: 'Perfect finish. Very happy with the result.'
+  },
+  {
+    id: 3,
+    category: 'cleaning',
+    contractorId: 2,
+    contractorName: 'Sofia Vargas',
+    contractorInitials: 'SV',
+    contractorAvatar: 'gold',
+    service: 'Deep Kitchen Clean',
+    city: 'Medellin',
+    rating: 5,
+    duration: '4 hours',
+    price: '$120k',
+    beforeUrl: 'https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=400&h=400&fit=crop',
+    afterUrl: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&h=400&fit=crop',
+    review: 'Kitchen looks brand new. Sofia is incredible.'
+  },
+  {
+    id: 4,
+    category: 'drywall',
+    contractorId: 4,
+    contractorName: 'Camila Rios',
+    contractorInitials: 'CR',
+    contractorAvatar: 'coral',
+    service: 'Wall Repair',
+    city: 'Cali',
+    rating: 5,
+    duration: '1 day',
+    price: '$220k',
+    beforeUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop',
+    afterUrl: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=400&fit=crop',
+    review: 'Wall looks perfect. Completely smooth finish.'
+  },
+  {
+    id: 5,
+    category: 'carpentry',
+    contractorId: 3,
+    contractorName: 'Juan Ospina',
+    contractorInitials: 'JO',
+    contractorAvatar: 'blue',
+    service: 'Custom Closet Build',
+    city: 'Bogota',
+    rating: 4,
+    duration: '4 days',
+    price: '$850k',
+    beforeUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',
+    afterUrl: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=400&fit=crop',
+    review: 'Exactly what I wanted. Great quality wood.'
+  },
+  {
+    id: 6,
+    category: 'floors',
+    contractorId: 10,
+    contractorName: 'Monica Torres',
+    contractorInitials: 'MT',
+    contractorAvatar: 'coral',
+    service: 'Laminate Floor Install',
+    city: 'Bogota',
+    rating: 5,
+    duration: '2 days',
+    price: '$480k',
+    beforeUrl: 'https://images.unsplash.com/photo-1584822327697-6d9d47c6f28b?w=400&h=400&fit=crop',
+    afterUrl: 'https://images.unsplash.com/photo-1553531087-b25b01ab3765?w=400&h=400&fit=crop',
+    review: 'Stunning transformation. Monica was fast and precise.'
+  }
+];
+
+var currentPhotoFilter = 'all';
+
+function renderPhotos(filter) {
+  var container = document.getElementById('photos-list');
+  if (!container) return;
+  var list = [];
+  for (var i = 0; i < photoProjects.length; i++) {
+    if (filter === 'all' || photoProjects[i].category === filter) {
+      list.push(photoProjects[i]);
+    }
+  }
+  if (!list.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">No photos in this category yet.</div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var p = list[i];
+    var stars = '';
+    for (var s = 0; s < 5; s++) {
+      stars += s < p.rating ? '&#9733;' : '&#9734;';
+    }
+    html += '<div class="ba-card">' +
+      '<div class="ba-header">' +
+        '<div class="ba-avatar ' + p.contractorAvatar + '">' + p.contractorInitials + '</div>' +
+        '<div class="ba-info">' +
+          '<div class="ba-name">' + p.contractorName + '</div>' +
+          '<div class="ba-meta">' + p.service + ' &middot; ' + p.city + ' &middot; ' + p.duration + '</div>' +
+        '</div>' +
+        '<div style="text-align:right;">' +
+          '<div style="font-size:13px;font-weight:700;color:var(--brand);font-family:'Syne',sans-serif;">' + p.price + '</div>' +
+          '<div style="font-size:10px;color:var(--text-muted);">total</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ba-photos">' +
+        '<div class="ba-photo-wrap">' +
+          '<img src="' + p.beforeUrl + '" alt="Before" loading="lazy">' +
+          '<div class="ba-label before">BEFORE</div>' +
+        '</div>' +
+        '<div class="ba-divider"><div class="ba-divider-icon">&#8596;</div></div>' +
+        '<div class="ba-photo-wrap">' +
+          '<img src="' + p.afterUrl + '" alt="After" loading="lazy">' +
+          '<div class="ba-label after">AFTER</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ba-footer">' +
+        '<div>' +
+          '<div class="ba-service-tag">' + p.service + '</div>' +
+          '<div class="ba-rating" style="margin-top:4px;">' + stars + ' &nbsp;' + p.rating + '.0</div>' +
+          '<div style="font-size:11px;color:var(--text-muted);margin-top:3px;font-style:italic;">"' + p.review + '"</div>' +
+        '</div>' +
+        '<button class="ba-cta-btn" onclick="openProfile(' + p.contractorId + ')">Hire</button>' +
+      '</div>' +
+    '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function filterPhotos(btn, filter) {
+  currentPhotoFilter = filter;
+  var btns = document.querySelectorAll('.ba-filter');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  renderPhotos(filter);
+}
+
+function openPhotos(category) {
+  renderPhotos(category || 'all');
+  showScreen('screen-photos');
+}
+
 renderContractors(contractors, 'contractors-list');
+renderPhotos('all');
+renderPackages('all');
 renderPackages('all');
 countUnread();
 setTimeout(updateNotifBadge, 100);
@@ -4976,6 +5245,41 @@ updateNavForUser();
 
   <!-- PACKAGES LIST -->
   <div class="pkg-list" id="packages-list"></div>
+</div>
+
+<!-- ============ SCREEN: BEFORE/AFTER PHOTOS ============ -->
+<div class="screen" id="screen-photos">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">Home</button>
+    </div>
+  </nav>
+
+  <div class="photo-screen-hero">
+    <div style="font-size:36px;margin-bottom:10px;">&#128247;</div>
+    <h2>Before &amp; After</h2>
+    <p>Real work from verified technicians</p>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="ba-filter-bar">
+    <button class="ba-filter active" onclick="filterPhotos(this,'all')">All</button>
+    <button class="ba-filter" onclick="filterPhotos(this,'painting')">Painting</button>
+    <button class="ba-filter" onclick="filterPhotos(this,'cleaning')">Cleaning</button>
+    <button class="ba-filter" onclick="filterPhotos(this,'drywall')">Drywall</button>
+    <button class="ba-filter" onclick="filterPhotos(this,'carpentry')">Carpentry</button>
+    <button class="ba-filter" onclick="filterPhotos(this,'floors')">Floors</button>
+  </div>
+
+  <!-- UPLOAD CTA -->
+  <div class="upload-cta" onclick="showToast('Photo upload coming soon!')">
+    <h4>&#128247; Are you a technician?</h4>
+    <p>Add your own before/after photos to attract more clients</p>
+  </div>
+
+  <!-- PHOTOS LIST -->
+  <div style="padding:0 20px 20px;" id="photos-list"></div>
 </div>
 </body>
 </html>
