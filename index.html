@@ -2006,6 +2006,100 @@
   }
   .upload-cta h4 { font-size: 14px; font-weight: 700; color: var(--brand); margin-bottom: 4px; }
   .upload-cta p { font-size: 12px; color: var(--text-muted); }
+
+  /* ── DISPUTE RESOLUTION ── */
+  .dispute-hero {
+    background: linear-gradient(135deg, #7B1FA2 0%, #9C27B0 100%);
+    padding: 28px 20px 40px; text-align: center;
+  }
+  .dispute-hero h2 { color:#fff; font-size:22px; font-weight:800; margin-bottom:6px; }
+  .dispute-hero p { color:rgba(255,255,255,0.65); font-size:13px; }
+  .dispute-steps-card {
+    background:var(--white); border-radius:var(--radius);
+    margin:-20px 20px 16px; padding:20px;
+    box-shadow:var(--card-shadow); border:1px solid var(--border);
+  }
+  .dispute-step-row {
+    display:flex; align-items:flex-start; gap:14px;
+    padding:14px 0; border-bottom:1px solid var(--border);
+  }
+  .dispute-step-row:last-child { border-bottom:none; padding-bottom:0; }
+  .dispute-step-num {
+    width:32px; height:32px; border-radius:50%;
+    background:var(--brand); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:Syne,sans-serif; font-size:14px; font-weight:700;
+    flex-shrink:0;
+  }
+  .dispute-step-num.purple { background:#9C27B0; }
+  .dispute-step-info h4 { font-size:13px; font-weight:700; margin-bottom:3px; }
+  .dispute-step-info p { font-size:12px; color:var(--text-muted); line-height:1.4; }
+  .dispute-form-card {
+    background:var(--white); border-radius:var(--radius);
+    margin:0 20px 16px; padding:20px; border:1px solid var(--border);
+  }
+  .dispute-type-grid {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:8px; margin-bottom:14px;
+  }
+  .dispute-type-btn {
+    border:1.5px solid var(--border); border-radius:10px;
+    padding:12px 8px; text-align:center; cursor:pointer;
+    transition:all 0.15s; background:var(--white);
+  }
+  .dispute-type-btn.selected {
+    border-color:#9C27B0; background:#F3E5F5;
+  }
+  .dispute-type-icon { font-size:22px; margin-bottom:6px; }
+  .dispute-type-label { font-size:11px; font-weight:600; color:var(--text); }
+  .dispute-status-card {
+    background:var(--white); border-radius:var(--radius);
+    margin:0 20px 16px; padding:16px; border:1px solid var(--border);
+  }
+  .dispute-status-row {
+    display:flex; align-items:center; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--border);
+  }
+  .dispute-status-row:last-child { border-bottom:none; }
+  .dispute-status-icon {
+    width:40px; height:40px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; flex-shrink:0;
+  }
+  .dsi-open { background:#FFF3E0; }
+  .dsi-resolved { background:var(--brand-accent); }
+  .dsi-review { background:#E8EAF6; }
+  .dispute-status-info { flex:1; }
+  .dispute-status-title { font-size:13px; font-weight:700; margin-bottom:2px; }
+  .dispute-status-desc { font-size:11px; color:var(--text-muted); }
+  .dispute-status-badge {
+    font-size:10px; font-weight:700; padding:3px 10px;
+    border-radius:20px; flex-shrink:0;
+  }
+  .dsb-open { background:#FFF3E0; color:#E65100; }
+  .dsb-resolved { background:var(--brand-accent); color:var(--brand); }
+  .dsb-review { background:#E8EAF6; color:#3949AB; }
+  .dispute-guarantee-card {
+    background:linear-gradient(135deg,#7B1FA2,#9C27B0);
+    border-radius:var(--radius); margin:0 20px 16px; padding:20px;
+    text-align:center;
+  }
+  .dispute-guarantee-card h3 { color:#fff; font-size:16px; font-weight:800; margin-bottom:6px; }
+  .dispute-guarantee-card p { color:rgba(255,255,255,0.75); font-size:12px; margin-bottom:14px; line-height:1.5; }
+  .dispute-faq-item {
+    background:var(--white); border-radius:var(--radius);
+    margin:0 20px 10px; border:1px solid var(--border); overflow:hidden;
+  }
+  .dispute-faq-q {
+    padding:14px 16px; font-size:13px; font-weight:700;
+    cursor:pointer; display:flex; justify-content:space-between;
+    align-items:center;
+  }
+  .dispute-faq-a {
+    padding:0 16px 14px; font-size:12px; color:var(--text-muted);
+    line-height:1.5; display:none;
+  }
+  .dispute-faq-a.open { display:block; }
 </style>
 </head>
 <body>
@@ -3790,6 +3884,68 @@ function openPhotos(category) {
   showScreen('screen-photos');
 }
 
+
+// ─── DISPUTE RESOLUTION ──────────────────────────────────────
+var selectedDisputeType = '';
+
+function selectDisputeType(btn, type) {
+  selectedDisputeType = type;
+  var btns = document.querySelectorAll('.dispute-type-btn');
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.remove('selected');
+  }
+  btn.classList.add('selected');
+}
+
+function submitDispute() {
+  var contractor = document.getElementById('dispute-contractor').value.trim();
+  var desc = document.getElementById('dispute-desc').value.trim();
+  if (!selectedDisputeType) {
+    showToast('Please select an issue type first');
+    return;
+  }
+  if (!contractor || !desc) {
+    showToast('Please fill in technician name and description');
+    return;
+  }
+  var typeLabel = {
+    quality: 'Poor quality',
+    noshow: 'No-show',
+    payment: 'Payment issue',
+    other: 'Other issue'
+  };
+  var amount = document.getElementById('dispute-amount').value || 'Not specified';
+  var date = document.getElementById('dispute-date').value || 'Not specified';
+  var label = typeLabel[selectedDisputeType] || selectedDisputeType;
+  var msg = 'Dispute - ServiCasa%0A%0AType: ' + encodeURIComponent(label) +
+    '%0ATechnician: ' + encodeURIComponent(contractor) +
+    '%0ADate: ' + encodeURIComponent(date) +
+    '%0AAmount: ' + encodeURIComponent(amount) +
+    '%0ADescription: ' + encodeURIComponent(desc);
+  addNotification('system', '&#9878;', 'ni-blue',
+    'Dispute submitted',
+    'Your dispute has been received. A mediator will contact you within 24 hours.');
+  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  showToast('Dispute submitted — mediator will contact you within 24h');
+  showScreen('screen-home');
+}
+
+function toggleFaq(el) {
+  var answer = el.nextElementSibling;
+  var span = el.querySelector('span');
+  if (answer.classList.contains('open')) {
+    answer.classList.remove('open');
+    span.innerHTML = '&#43;';
+  } else {
+    answer.classList.add('open');
+    span.innerHTML = '&#8722;';
+  }
+}
+
+function openDispute() {
+  showScreen('screen-dispute');
+}
+
 renderContractors(contractors, 'contractors-list');
 renderPhotos('all');
 renderPackages('all');
@@ -5280,6 +5436,186 @@ updateNavForUser();
 
   <!-- PHOTOS LIST -->
   <div style="padding:0 20px 20px;" id="photos-list"></div>
+</div>
+
+<!-- ============ SCREEN: DISPUTE RESOLUTION ============ -->
+<div class="screen" id="screen-dispute">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">Home</button>
+    </div>
+  </nav>
+
+  <div class="dispute-hero">
+    <div style="font-size:36px;margin-bottom:10px;">&#9878;</div>
+    <h2>Dispute Resolution</h2>
+    <p>We protect both clients and technicians fairly</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div style="padding:0 20px 8px;margin-top:16px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">How it works</div>
+  </div>
+  <div class="dispute-steps-card">
+    <div class="dispute-step-row">
+      <div class="dispute-step-num purple">1</div>
+      <div class="dispute-step-info">
+        <h4>Report the issue</h4>
+        <p>Describe what went wrong — poor quality, no-show, payment issue or other problem.</p>
+      </div>
+    </div>
+    <div class="dispute-step-row">
+      <div class="dispute-step-num purple">2</div>
+      <div class="dispute-step-info">
+        <h4>We contact both parties</h4>
+        <p>ServiCasa mediator contacts both client and technician within 24 hours.</p>
+      </div>
+    </div>
+    <div class="dispute-step-row">
+      <div class="dispute-step-num purple">3</div>
+      <div class="dispute-step-info">
+        <h4>Evidence review</h4>
+        <p>Both parties share photos, messages and documentation. We review everything fairly.</p>
+      </div>
+    </div>
+    <div class="dispute-step-row">
+      <div class="dispute-step-num purple">4</div>
+      <div class="dispute-step-info">
+        <h4>Resolution within 72 hours</h4>
+        <p>We issue a final decision — refund, redo the work, or partial compensation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPEN A DISPUTE -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">Open a dispute</div>
+  </div>
+  <div class="dispute-form-card">
+    <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text-muted);">What is the issue?</div>
+    <div class="dispute-type-grid" id="dispute-type-grid">
+      <div class="dispute-type-btn" onclick="selectDisputeType(this,'quality')">
+        <div class="dispute-type-icon">&#128313;</div>
+        <div class="dispute-type-label">Poor quality</div>
+      </div>
+      <div class="dispute-type-btn" onclick="selectDisputeType(this,'noshow')">
+        <div class="dispute-type-icon">&#128683;</div>
+        <div class="dispute-type-label">No-show</div>
+      </div>
+      <div class="dispute-type-btn" onclick="selectDisputeType(this,'payment')">
+        <div class="dispute-type-icon">&#128176;</div>
+        <div class="dispute-type-label">Payment issue</div>
+      </div>
+      <div class="dispute-type-btn" onclick="selectDisputeType(this,'other')">
+        <div class="dispute-type-icon">&#8230;</div>
+        <div class="dispute-type-label">Other</div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>Technician name</label>
+      <input type="text" id="dispute-contractor" placeholder="Who did the work?">
+    </div>
+    <div class="fg">
+      <label>Date of service</label>
+      <input type="date" id="dispute-date">
+    </div>
+    <div class="fg">
+      <label>Describe the problem</label>
+      <textarea id="dispute-desc" placeholder="Please describe what happened in detail..." style="min-height:80px;"></textarea>
+    </div>
+    <div class="fg">
+      <label>Amount paid (COP)</label>
+      <input type="text" id="dispute-amount" placeholder="e.g. $250,000">
+    </div>
+
+    <div style="background:#F3E5F5;border-radius:8px;padding:12px;margin-bottom:14px;font-size:12px;color:#6A1B9A;line-height:1.5;">
+      &#128737; Your dispute will be reviewed by a ServiCasa mediator within 24 hours. Both parties will be contacted via WhatsApp.
+    </div>
+
+    <button class="btn-gold" style="width:100%;padding:13px;" onclick="submitDispute()">
+      &#9878; Submit dispute
+    </button>
+  </div>
+
+  <!-- ACTIVE DISPUTES -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">My disputes</div>
+  </div>
+  <div class="dispute-status-card">
+    <div class="dispute-status-row">
+      <div class="dispute-status-icon dsi-open">&#128313;</div>
+      <div class="dispute-status-info">
+        <div class="dispute-status-title">Poor quality — Painting job</div>
+        <div class="dispute-status-desc">Opened 2 days ago · Mediator assigned</div>
+      </div>
+      <span class="dispute-status-badge dsb-open">Open</span>
+    </div>
+    <div class="dispute-status-row">
+      <div class="dispute-status-icon dsi-resolved">&#10003;</div>
+      <div class="dispute-status-info">
+        <div class="dispute-status-title">Payment issue — Cleaning job</div>
+        <div class="dispute-status-desc">Resolved Jan 2026 · Refund issued</div>
+      </div>
+      <span class="dispute-status-badge dsb-resolved">Resolved</span>
+    </div>
+    <div class="dispute-status-row">
+      <div class="dispute-status-icon dsi-review">&#128269;</div>
+      <div class="dispute-status-info">
+        <div class="dispute-status-title">No-show — Drywall job</div>
+        <div class="dispute-status-desc">Under review · Evidence submitted</div>
+      </div>
+      <span class="dispute-status-badge dsb-review">In review</span>
+    </div>
+  </div>
+
+  <!-- GUARANTEE -->
+  <div class="dispute-guarantee-card">
+    <h3>&#128737; ServiCasa Guarantee</h3>
+    <p>We protect every job on our platform. If a verified technician does not complete the work as agreed, we will arrange a free redo or issue a refund.</p>
+    <button class="btn-gold" style="width:100%;padding:12px;" onclick="showScreen('screen-home')">
+      Find verified technicians
+    </button>
+  </div>
+
+  <!-- FAQ -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">Common questions</div>
+  </div>
+  <div class="dispute-faq-item">
+    <div class="dispute-faq-q" onclick="toggleFaq(this)">
+      How long does a dispute take? <span>&#43;</span>
+    </div>
+    <div class="dispute-faq-a">
+      Most disputes are resolved within 72 hours. Complex cases may take up to 7 days.
+    </div>
+  </div>
+  <div class="dispute-faq-item">
+    <div class="dispute-faq-q" onclick="toggleFaq(this)">
+      Can I get a full refund? <span>&#43;</span>
+    </div>
+    <div class="dispute-faq-a">
+      Yes, if the technician failed to show up or the work was significantly below the agreed standard, a full refund is possible.
+    </div>
+  </div>
+  <div class="dispute-faq-item">
+    <div class="dispute-faq-q" onclick="toggleFaq(this)">
+      What evidence should I provide? <span>&#43;</span>
+    </div>
+    <div class="dispute-faq-a">
+      Photos of the work, WhatsApp messages with the technician, receipts or payment proof, and a written description of the issue.
+    </div>
+  </div>
+  <div class="dispute-faq-item">
+    <div class="dispute-faq-q" onclick="toggleFaq(this)">
+      Does this affect the technician rating? <span>&#43;</span>
+    </div>
+    <div class="dispute-faq-a">
+      If a dispute is decided against the technician, their trust score is reduced and they may be temporarily suspended.
+    </div>
+  </div>
+  <div style="height:20px;"></div>
 </div>
 </body>
 </html>
