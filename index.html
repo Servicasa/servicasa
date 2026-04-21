@@ -2100,6 +2100,127 @@
     line-height:1.5; display:none;
   }
   .dispute-faq-a.open { display:block; }
+
+  /* ── PROMOTIONS & FEATURED ── */
+  .promo-hero {
+    background: linear-gradient(135deg, #B7410E 0%, #FF6D00 100%);
+    padding: 28px 20px 40px; text-align: center;
+  }
+  .promo-hero h2 { color:#fff; font-size:22px; font-weight:800; margin-bottom:6px; }
+  .promo-hero p { color:rgba(255,255,255,0.7); font-size:13px; }
+  .featured-banner {
+    background: linear-gradient(90deg, #FF6D00, #FFD600);
+    border-radius: var(--radius); margin: 0 20px 16px;
+    padding: 16px; display: flex; align-items: center; gap: 14px;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .featured-banner:hover { opacity: 0.92; }
+  .featured-banner-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+  }
+  .featured-banner-info { flex: 1; }
+  .featured-banner-title { color:#fff; font-size:15px; font-weight:800; margin-bottom:3px; }
+  .featured-banner-desc { color:rgba(255,255,255,0.85); font-size:12px; }
+  .featured-badge {
+    background: #FFD600; color: #B7410E;
+    font-size: 10px; font-weight: 800; padding: 3px 8px;
+    border-radius: 20px; font-family: Syne,sans-serif;
+    display: inline-block; margin-bottom: 4px;
+  }
+  .promo-card {
+    background: var(--white); border-radius: var(--radius);
+    border: 1px solid var(--border); margin-bottom: 12px;
+    overflow: hidden; transition: box-shadow 0.15s;
+  }
+  .promo-card:hover { box-shadow: var(--card-shadow); }
+  .promo-card.hot { border-color: #FF6D00; }
+  .promo-card.hot .promo-card-header { background: linear-gradient(135deg,#FF6D00,#FFD600); }
+  .promo-card.new-user { border-color: var(--brand); }
+  .promo-card.new-user .promo-card-header { background: linear-gradient(135deg,var(--brand),#2D6A4F); }
+  .promo-card.loyalty { border-color: #9C27B0; }
+  .promo-card.loyalty .promo-card-header { background: linear-gradient(135deg,#7B1FA2,#9C27B0); }
+  .promo-card-header {
+    padding: 14px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .promo-card-title { color:#fff; font-size:14px; font-weight:800; }
+  .promo-card-tag { color:rgba(255,255,255,0.85); font-size:11px; margin-top:2px; }
+  .promo-discount {
+    background: rgba(255,255,255,0.25); color:#fff;
+    font-family: Syne,sans-serif; font-size:22px; font-weight:800;
+    padding: 6px 14px; border-radius: 8px;
+  }
+  .promo-card-body { padding: 14px 16px; }
+  .promo-code-box {
+    background: var(--bg); border: 1.5px dashed var(--border);
+    border-radius: 8px; padding: 10px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .promo-code {
+    font-family: Syne,sans-serif; font-size:16px; font-weight:800;
+    color: var(--brand); letter-spacing: 2px;
+  }
+  .promo-copy-btn {
+    background: var(--brand); color:#fff; border:none;
+    padding: 6px 14px; border-radius: 6px; font-size:12px;
+    font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif;
+  }
+  .promo-expires {
+    font-size: 11px; color: var(--text-muted); margin-bottom: 10px;
+  }
+  .promo-expires span { color: #E53935; font-weight:600; }
+  .promo-services { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+  .promo-service-tag {
+    background: var(--brand-accent); color: var(--brand);
+    font-size: 11px; font-weight:600; padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .countdown-timer {
+    display: flex; gap: 8px; justify-content: center;
+    margin: 12px 0;
+  }
+  .countdown-unit {
+    background: var(--brand); color:#fff; border-radius:8px;
+    padding: 8px 12px; text-align:center; min-width:50px;
+  }
+  .countdown-num {
+    font-family: Syne,sans-serif; font-size:20px; font-weight:800;
+    display:block; line-height:1;
+  }
+  .countdown-label { font-size:9px; opacity:0.75; margin-top:3px; display:block; }
+  .featured-contractor-card {
+    background: var(--white); border-radius: var(--radius);
+    border: 2px solid #FFD600; margin-bottom: 12px;
+    padding: 16px; position: relative; overflow:hidden;
+  }
+  .featured-contractor-card::before {
+    content: ""; position:absolute; top:0; left:0; right:0;
+    height:3px; background: linear-gradient(90deg,#FF6D00,#FFD600);
+  }
+  .fc-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .fc-avatar {
+    width:50px; height:50px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:Syne,sans-serif; font-size:16px; font-weight:700;
+    flex-shrink:0; border:2px solid #FFD600;
+  }
+  .fc-info { flex:1; }
+  .fc-name { font-size:15px; font-weight:700; margin-bottom:2px; }
+  .fc-trade { font-size:12px; color:var(--brand-light); }
+  .fc-price {
+    font-family:Syne,sans-serif; font-size:18px; font-weight:800;
+    color:var(--brand); text-align:right;
+  }
+  .fc-promo-badge {
+    background: linear-gradient(90deg,#FF6D00,#FFD600);
+    color:#fff; font-size:11px; font-weight:700;
+    padding:3px 10px; border-radius:20px; display:inline-block;
+    margin-bottom:8px;
+  }
 </style>
 </head>
 <body>
@@ -2126,7 +2247,7 @@
       <input type="text" placeholder="¿Qué necesitas? Ej: pintura, plomería..." id="search-input">
       <button class="btn-primary" onclick="doSearch()">Buscar</button>
     </div>
-    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;cursor:pointer;"><span onclick="openPhotos()">&#128247; Before &amp; After</span> &nbsp;|&nbsp; <span onclick="openPackages()">&#128230; Packages</span> &nbsp;|&nbsp; <span onclick="openPriceEstimator()">&#128200; Prices</span></p>
+    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;cursor:pointer;"><span onclick="openPhotos()">&#128247; Before &amp; After</span> &nbsp;|&nbsp; <span onclick="openPackages()">&#128230; Packages</span> &nbsp;|&nbsp; <span onclick="openPromos()">&#127881; Offers</span> &nbsp;|&nbsp; <span onclick="openPriceEstimator()">&#128200; Prices</span></p>
   </div>
 
   <div class="section">
@@ -3946,6 +4067,91 @@ function openDispute() {
   showScreen('screen-dispute');
 }
 
+
+// ─── PROMOTIONS & FEATURED ───────────────────────────────────
+var countdownEnd = null;
+var countdownInterval = null;
+
+function startCountdown() {
+  if (countdownEnd) return;
+  countdownEnd = new Date();
+  countdownEnd.setHours(countdownEnd.getHours() + 4);
+  countdownEnd.setMinutes(countdownEnd.getMinutes() + 32);
+  countdownEnd.setSeconds(countdownEnd.getSeconds() + 15);
+  if (countdownInterval) clearInterval(countdownInterval);
+  countdownInterval = setInterval(function() {
+    var now = new Date();
+    var diff = countdownEnd - now;
+    if (diff <= 0) {
+      clearInterval(countdownInterval);
+      return;
+    }
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    var hEl = document.getElementById('cd-hours');
+    var mEl = document.getElementById('cd-mins');
+    var sEl = document.getElementById('cd-secs');
+    if (hEl) hEl.textContent = h < 10 ? '0' + h : h;
+    if (mEl) mEl.textContent = m < 10 ? '0' + m : m;
+    if (sEl) sEl.textContent = s < 10 ? '0' + s : s;
+  }, 1000);
+}
+
+function copyCode(code) {
+  try {
+    navigator.clipboard.writeText(code);
+    showToast('Code ' + code + ' copied to clipboard!');
+  } catch(e) {
+    showToast('Code: ' + code + ' — copy it manually');
+  }
+}
+
+function applyPromo(code) {
+  addNotification('system', '&#127881;', 'ni-gold',
+    'Promo code applied: ' + code,
+    'Your discount has been saved. It will be applied at checkout.');
+  showToast('Promo ' + code + ' applied! Discount saved.');
+  showScreen('screen-post');
+}
+
+var featuredContractors = [
+  {id:1, initials:'MR', avatar:'green', name:'Mario Restrepo', trade:'Painting', rating:4.9, rate:'$85k', discount:'20% OFF', city:'Bogota'},
+  {id:2, initials:'SV', avatar:'gold', name:'Sofia Vargas', trade:'Deep Cleaning', rating:4.8, rate:'$65k', discount:'30% OFF', city:'Medellin'},
+  {id:8, initials:'AC', avatar:'gold', name:'Andres Castro', trade:'Electricity', rating:4.9, rate:'$90k', discount:'15% OFF', city:'Bogota'}
+];
+
+function renderFeaturedContractors() {
+  var container = document.getElementById('featured-contractors-list');
+  if (!container) return;
+  var html = '';
+  for (var i = 0; i < featuredContractors.length; i++) {
+    var c = featuredContractors[i];
+    html += '<div class="featured-contractor-card">' +
+      '<div class="fc-header">' +
+        '<div class="fc-avatar ' + c.avatar + '">' + c.initials + '</div>' +
+        '<div class="fc-info">' +
+          '<div class="fc-promo-badge">&#11088; Featured &nbsp;&#183;&nbsp; ' + c.discount + '</div>' +
+          '<div class="fc-name">' + c.name + '</div>' +
+          '<div class="fc-trade">' + c.trade + ' &nbsp;&#183;&nbsp; ' + c.rating + ' &#9733; &nbsp;&#183;&nbsp; &#128205; ' + c.city + '</div>' +
+        '</div>' +
+        '<div class="fc-price">' + c.rate + '<span style="font-size:10px;font-weight:400;color:var(--text-muted);font-family:DM Sans,sans-serif;display:block;">per hour</span></div>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;">' +
+        '<button class="pkg-book-btn" onclick="openProfile(' + c.id + ')">View profile</button>' +
+        '<button class="pkg-book-btn gold-btn" onclick="bookAgain(' + c.id + ')">Book now</button>' +
+      '</div>' +
+    '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function openPromos() {
+  renderFeaturedContractors();
+  startCountdown();
+  showScreen('screen-promos');
+}
+
 renderContractors(contractors, 'contractors-list');
 renderPhotos('all');
 renderPackages('all');
@@ -5621,6 +5827,118 @@ updateNavForUser();
     </div>
   </div>
   <div style="height:20px;"></div>
+</div>
+
+<!-- ============ SCREEN: PROMOTIONS ============ -->
+<div class="screen" id="screen-promos">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">Home</button>
+    </div>
+  </nav>
+
+  <div class="promo-hero">
+    <div style="font-size:36px;margin-bottom:10px;">&#127881;</div>
+    <h2>Offers &amp; Promotions</h2>
+    <p>Exclusive discounts for ServiCasa users</p>
+  </div>
+
+  <!-- FLASH DEAL BANNER -->
+  <div style="margin-top:16px;padding:0 20px 0;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">&#9889; Flash deal</div>
+  </div>
+  <div style="margin:0 20px 16px;background:linear-gradient(135deg,#B7410E,#FF6D00);border-radius:var(--radius);padding:20px;text-align:center;">
+    <div style="color:rgba(255,255,255,0.8);font-size:12px;margin-bottom:6px;">Offer ends in</div>
+    <div class="countdown-timer" id="countdown-timer">
+      <div class="countdown-unit"><span class="countdown-num" id="cd-hours">04</span><span class="countdown-label">HRS</span></div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-mins">32</span><span class="countdown-label">MIN</span></div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-secs">15</span><span class="countdown-label">SEC</span></div>
+    </div>
+    <div style="color:#fff;font-size:22px;font-weight:800;margin:10px 0;">30% OFF Deep Cleaning</div>
+    <div style="color:rgba(255,255,255,0.8);font-size:13px;margin-bottom:14px;">Book today and save up to $48k COP</div>
+    <button class="btn-gold" style="width:100%;padding:12px;" onclick="applyPromo('LIMPIEZA30')">Claim deal &#127881;</button>
+  </div>
+
+  <!-- PROMO CODES -->
+  <div style="padding:0 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">&#127881; Discount codes</div>
+  </div>
+  <div style="padding:0 20px;">
+
+    <div class="promo-card hot">
+      <div class="promo-card-header">
+        <div>
+          <div class="promo-card-title">&#128293; Hot deal — Painting</div>
+          <div class="promo-card-tag">Valid for interior painting packages</div>
+        </div>
+        <div class="promo-discount">20%</div>
+      </div>
+      <div class="promo-card-body">
+        <div class="promo-code-box">
+          <span class="promo-code">PAINT20</span>
+          <button class="promo-copy-btn" onclick="copyCode('PAINT20')">Copy</button>
+        </div>
+        <div class="promo-expires">Expires: <span>Apr 30, 2026</span> &nbsp;&#183;&nbsp; 47 uses left</div>
+        <div class="promo-services">
+          <span class="promo-service-tag">Interior painting</span>
+          <span class="promo-service-tag">Exterior painting</span>
+        </div>
+        <button class="btn-gold" style="width:100%;padding:11px;" onclick="applyPromo('PAINT20')">Apply discount</button>
+      </div>
+    </div>
+
+    <div class="promo-card new-user">
+      <div class="promo-card-header">
+        <div>
+          <div class="promo-card-title">&#127381; New user — First job free</div>
+          <div class="promo-card-tag">15% off your first booking</div>
+        </div>
+        <div class="promo-discount">15%</div>
+      </div>
+      <div class="promo-card-body">
+        <div class="promo-code-box">
+          <span class="promo-code">NUEVO15</span>
+          <button class="promo-copy-btn" onclick="copyCode('NUEVO15')">Copy</button>
+        </div>
+        <div class="promo-expires">Expires: <span>May 31, 2026</span> &nbsp;&#183;&nbsp; First booking only</div>
+        <div class="promo-services">
+          <span class="promo-service-tag">All services</span>
+        </div>
+        <button class="btn-gold" style="width:100%;padding:11px;" onclick="applyPromo('NUEVO15')">Apply discount</button>
+      </div>
+    </div>
+
+    <div class="promo-card loyalty">
+      <div class="promo-card-header">
+        <div>
+          <div class="promo-card-title">&#128081; Loyalty — 3+ bookings</div>
+          <div class="promo-card-tag">Reward for returning customers</div>
+        </div>
+        <div class="promo-discount">25%</div>
+      </div>
+      <div class="promo-card-body">
+        <div class="promo-code-box">
+          <span class="promo-code">FIEL25</span>
+          <button class="promo-copy-btn" onclick="copyCode('FIEL25')">Copy</button>
+        </div>
+        <div class="promo-expires">Expires: <span>Jun 30, 2026</span> &nbsp;&#183;&nbsp; 3+ previous bookings required</div>
+        <div class="promo-services">
+          <span class="promo-service-tag">Cleaning</span>
+          <span class="promo-service-tag">Painting</span>
+          <span class="promo-service-tag">Drywall</span>
+        </div>
+        <button class="btn-gold" style="width:100%;padding:11px;" onclick="applyPromo('FIEL25')">Apply discount</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FEATURED CONTRACTORS -->
+  <div style="padding:16px 20px 8px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">&#11088; Featured technicians</div>
+  </div>
+  <div style="padding:0 20px 20px;" id="featured-contractors-list"></div>
 </div>
 </body>
 </html>
