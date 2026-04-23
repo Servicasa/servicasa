@@ -2434,11 +2434,11 @@
     background:var(--brand); color:#fff; border-color:var(--brand);
   }
   .map-popup-card {
-    position:absolute; bottom:20px; left:50%;
-    transform:translateX(-50%); z-index:1000;
+    position:fixed; bottom:90px; left:50%;
+    transform:translateX(-50%); z-index:9999;
     background:var(--white); border-radius:var(--radius);
     padding:14px 16px; box-shadow:0 4px 20px rgba(0,0,0,0.2);
-    min-width:260px; border:1px solid var(--border);
+    min-width:280px; max-width:90vw; border:1px solid var(--border);
     display:none;
   }
   .map-popup-card.show { display:block; }
