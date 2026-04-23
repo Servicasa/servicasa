@@ -7,6 +7,7 @@
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ServiCasa — Servicios para tu hogar v2</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -2360,6 +2361,87 @@
     font-family:'DM Sans',sans-serif; transition:all 0.15s;
   }
   .chat-quick-btn:hover { background:var(--brand); color:#fff; }
+
+  /* ── MAP / LOCATION VIEW ── */
+  .map-hero {
+    background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+    padding: 20px 20px 28px; text-align: center;
+  }
+  .map-hero h2 { color:#fff; font-size:20px; font-weight:800; margin-bottom:4px; }
+  .map-hero p { color:rgba(255,255,255,0.65); font-size:12px; }
+  .map-city-bar {
+    display:flex; gap:8px; padding:12px 20px 4px;
+    overflow-x:auto; scrollbar-width:none; background:var(--white);
+    border-bottom:1px solid var(--border);
+  }
+  .map-city-bar::-webkit-scrollbar { display:none; }
+  .map-city-btn {
+    padding:6px 16px; border-radius:20px; font-size:12px; font-weight:600;
+    border:1.5px solid var(--border); background:var(--white);
+    color:var(--text-muted); cursor:pointer; white-space:nowrap;
+    transition:all 0.15s; font-family:'DM Sans',sans-serif;
+  }
+  .map-city-btn.active {
+    background:var(--brand); color:#fff; border-color:var(--brand);
+  }
+  #map-container {
+    height:320px; width:100%; background:#E8F4FD;
+    position:relative; z-index:1;
+  }
+  .map-results-header {
+    padding:12px 20px; background:var(--white);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .map-results-title { font-size:14px; font-weight:700; }
+  .map-results-count { font-size:12px; color:var(--text-muted); }
+  .map-contractor-card {
+    background:var(--white); padding:14px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:12px;
+    cursor:pointer; transition:background 0.1s;
+  }
+  .map-contractor-card:hover { background:var(--bg); }
+  .map-contractor-card.highlighted { background:var(--brand-accent); border-left:3px solid var(--brand); }
+  .map-c-avatar {
+    width:44px; height:44px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:Syne,sans-serif; font-size:14px; font-weight:700;
+    flex-shrink:0;
+  }
+  .map-c-info { flex:1; }
+  .map-c-name { font-size:14px; font-weight:700; margin-bottom:2px; }
+  .map-c-trade { font-size:11px; color:var(--brand-light); margin-bottom:3px; }
+  .map-c-distance { font-size:11px; color:var(--text-muted); }
+  .map-c-price {
+    font-family:Syne,sans-serif; font-size:16px; font-weight:800;
+    color:var(--brand); text-align:right; flex-shrink:0;
+  }
+  .map-c-price span { display:block; font-size:10px; font-weight:400; color:var(--text-muted); font-family:'DM Sans',sans-serif; }
+  .map-filter-bar {
+    display:flex; gap:8px; padding:10px 20px;
+    overflow-x:auto; scrollbar-width:none;
+    background:var(--bg); border-bottom:1px solid var(--border);
+  }
+  .map-filter-bar::-webkit-scrollbar { display:none; }
+  .map-filter-chip {
+    padding:5px 14px; border-radius:20px; font-size:12px; font-weight:500;
+    border:1.5px solid var(--border); background:var(--white);
+    color:var(--text-muted); cursor:pointer; white-space:nowrap;
+    font-family:'DM Sans',sans-serif; transition:all 0.15s;
+  }
+  .map-filter-chip.active {
+    background:var(--brand); color:#fff; border-color:var(--brand);
+  }
+  .map-popup-card {
+    position:absolute; bottom:20px; left:50%;
+    transform:translateX(-50%); z-index:1000;
+    background:var(--white); border-radius:var(--radius);
+    padding:14px 16px; box-shadow:0 4px 20px rgba(0,0,0,0.2);
+    min-width:260px; border:1px solid var(--border);
+    display:none;
+  }
+  .map-popup-card.show { display:block; }
 </style>
 </head>
 <body>
@@ -2386,7 +2468,7 @@
       <input type="text" placeholder="¿Qué necesitas? Ej: pintura, plomería..." id="search-input">
       <button class="btn-primary" onclick="doSearch()">Buscar</button>
     </div>
-    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;cursor:pointer;"><span onclick="openPhotos()">&#128247; Before &amp; After</span> &nbsp;|&nbsp; <span onclick="openPackages()">&#128230; Packages</span> &nbsp;|&nbsp; <span onclick="openPromos()">&#127881; Offers</span> &nbsp;|&nbsp; <span onclick="openPriceEstimator()">&#128200; Prices</span></p>
+    <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;cursor:pointer;"><span onclick="openMap()">&#128205; Map</span> &nbsp;|&nbsp; <span onclick="openPhotos()">&#128247; Before &amp; After</span> &nbsp;|&nbsp; <span onclick="openPackages()">&#128230; Packages</span> &nbsp;|&nbsp; <span onclick="openPromos()">&#127881; Offers</span> &nbsp;|&nbsp; <span onclick="openPriceEstimator()">&#128200; Prices</span></p>
   </div>
 
   <div class="section">
@@ -4498,6 +4580,210 @@ function openChatWith(contractorId) {
   openChatList();
 }
 
+
+// ─── MAP / LOCATION VIEW ─────────────────────────────────────
+var mapInstance = null;
+var mapMarkers = [];
+var activeMapCity = 'Bogota';
+var activeMapService = 'all';
+var activeMapContractorId = null;
+
+var cityCoords = {
+  Bogota:       {lat:4.7110,  lng:-74.0721},
+  Medellin:     {lat:6.2442,  lng:-75.5812},
+  Cali:         {lat:3.4516,  lng:-76.5320},
+  Barranquilla: {lat:10.9685, lng:-74.7813}
+};
+
+var contractorLocations = [
+  {contractorId:1,  city:'Bogota',       lat:4.7210,  lng:-74.0621, distance:'1.2 km'},
+  {contractorId:3,  city:'Bogota',       lat:4.7050,  lng:-74.0750, distance:'2.5 km'},
+  {contractorId:5,  city:'Bogota',       lat:4.7180,  lng:-74.0680, distance:'0.8 km'},
+  {contractorId:6,  city:'Bogota',       lat:4.7090,  lng:-74.0810, distance:'3.1 km'},
+  {contractorId:8,  city:'Bogota',       lat:4.7140,  lng:-74.0590, distance:'1.8 km'},
+  {contractorId:10, city:'Bogota',       lat:4.7230,  lng:-74.0700, distance:'2.0 km'},
+  {contractorId:2,  city:'Medellin',     lat:6.2500,  lng:-75.5700, distance:'1.5 km'},
+  {contractorId:7,  city:'Medellin',     lat:6.2380,  lng:-75.5850, distance:'2.8 km'},
+  {contractorId:4,  city:'Cali',         lat:3.4600,  lng:-76.5250, distance:'1.0 km'},
+  {contractorId:9,  city:'Cali',         lat:3.4450,  lng:-76.5400, distance:'3.5 km'}
+];
+
+function getContractorById(id) {
+  for (var i = 0; i < contractors.length; i++) {
+    if (contractors[i].id === id) return contractors[i];
+  }
+  return null;
+}
+
+function initMap(city) {
+  var coords = cityCoords[city] || cityCoords.Bogota;
+  if (mapInstance) {
+    mapInstance.remove();
+    mapInstance = null;
+  }
+  var container = document.getElementById('map-container');
+  if (!container) return;
+  if (typeof L === 'undefined') {
+    container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:8px;color:var(--text-muted);padding:20px;text-align:center;"><span style="font-size:48px;">&#128205;</span><p>Map loading... please wait a moment and try again.</p></div>';
+    return;
+  }
+  try {
+    mapInstance = L.map('map-container', {zoomControl:true, scrollWheelZoom:false}).setView([coords.lat, coords.lng], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'OpenStreetMap contributors',
+      maxZoom: 18
+    }).addTo(mapInstance);
+    addMapMarkers(city, activeMapService);
+  } catch(e) {
+    container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);padding:20px;text-align:center;"><p>&#128205; Map unavailable. Check your connection.</p></div>';
+  }
+}
+
+function addMapMarkers(city, serviceFilter) {
+  if (!mapInstance) return;
+  for (var i = 0; i < mapMarkers.length; i++) {
+    mapInstance.removeLayer(mapMarkers[i]);
+  }
+  mapMarkers = [];
+  var locations = [];
+  for (var i = 0; i < contractorLocations.length; i++) {
+    if (contractorLocations[i].city === city) locations.push(contractorLocations[i]);
+  }
+  for (var i = 0; i < locations.length; i++) {
+    var loc = locations[i];
+    var c = getContractorById(loc.contractorId);
+    if (!c) continue;
+    if (serviceFilter !== 'all' && c.trade !== serviceFilter) continue;
+    var color = c.avatar === 'gold' ? '#F4A100' : c.avatar === 'coral' ? '#E57373' : c.avatar === 'blue' ? '#1976D2' : '#1B4332';
+    var iconHtml = '<div style="background:' + color + ';color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-size:11px;font-weight:700;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);">' + c.initials + '</div>';
+    var icon = L.divIcon({html:iconHtml, className:'', iconSize:[34,34], iconAnchor:[17,17]});
+    var marker = L.marker([loc.lat, loc.lng], {icon:icon});
+    (function(contractor, location) {
+      marker.on('click', function() { showMapPopup(contractor, location); });
+    })(c, loc);
+    marker.addTo(mapInstance);
+    mapMarkers.push(marker);
+  }
+}
+
+function showMapPopup(c, loc) {
+  activeMapContractorId = c.id;
+  var popup = document.getElementById('map-popup-card');
+  var avatarEl = document.getElementById('popup-avatar');
+  var nameEl = document.getElementById('popup-name');
+  var tradeEl = document.getElementById('popup-trade');
+  var ratingEl = document.getElementById('popup-rating');
+  var priceEl = document.getElementById('popup-price');
+  if (avatarEl) { avatarEl.textContent = c.initials; avatarEl.className = 'map-c-avatar ' + c.avatar; }
+  if (nameEl) nameEl.textContent = c.name;
+  if (tradeEl) tradeEl.textContent = c.trade;
+  if (ratingEl) ratingEl.innerHTML = '&#9733; ' + c.rating + ' &nbsp;&#183;&nbsp; ' + c.jobs + ' jobs &nbsp;&#183;&nbsp; &#128205; ' + loc.distance;
+  if (priceEl) priceEl.textContent = c.rate;
+  if (popup) popup.classList.add('show');
+  highlightMapCard(c.id);
+}
+
+function closeMapPopup() {
+  var popup = document.getElementById('map-popup-card');
+  if (popup) popup.classList.remove('show');
+  activeMapContractorId = null;
+  var cards = document.querySelectorAll('.map-contractor-card');
+  for (var i = 0; i < cards.length; i++) cards[i].classList.remove('highlighted');
+}
+
+function highlightMapCard(contractorId) {
+  var cards = document.querySelectorAll('.map-contractor-card');
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].classList.remove('highlighted');
+    if (cards[i].getAttribute('data-id') === String(contractorId)) {
+      cards[i].classList.add('highlighted');
+      cards[i].scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+  }
+}
+
+function openProfileFromMap() {
+  if (activeMapContractorId) {
+    closeMapPopup();
+    openProfile(activeMapContractorId);
+  }
+}
+
+function renderMapContractors(city, serviceFilter) {
+  var container = document.getElementById('map-contractors-list');
+  var titleEl = document.getElementById('map-results-title');
+  var countEl = document.getElementById('map-results-count');
+  if (!container) return;
+  var locations = [];
+  for (var i = 0; i < contractorLocations.length; i++) {
+    if (contractorLocations[i].city === city) locations.push(contractorLocations[i]);
+  }
+  var html = '';
+  var count = 0;
+  for (var i = 0; i < locations.length; i++) {
+    var loc = locations[i];
+    var c = getContractorById(loc.contractorId);
+    if (!c) continue;
+    if (serviceFilter !== 'all' && c.trade !== serviceFilter) continue;
+    count++;
+    html += '<div class="map-contractor-card" data-id="' + c.id + '" onclick="showMapPopupById(' + c.id + ',' + i + ')">' +
+      '<div class="map-c-avatar ' + c.avatar + '">' + c.initials + '</div>' +
+      '<div class="map-c-info">' +
+        '<div class="map-c-name">' + c.name + '</div>' +
+        '<div class="map-c-trade">' + c.trade + '</div>' +
+        '<div class="map-c-distance">&#128205; ' + loc.distance + ' away &nbsp;&#183;&nbsp; &#9733; ' + c.rating + '</div>' +
+      '</div>' +
+      '<div class="map-c-price">' + c.rate + '<span>per hour</span></div>' +
+    '</div>';
+  }
+  if (!count) {
+    html = '<div style="text-align:center;padding:40px;color:var(--text-muted);">No technicians found in this area for that service.</div>';
+  }
+  container.innerHTML = html;
+  if (titleEl) titleEl.textContent = 'Technicians in ' + city;
+  if (countEl) countEl.textContent = count + ' found';
+}
+
+function showMapPopupById(contractorId, locIndex) {
+  var c = getContractorById(contractorId);
+  var loc = null;
+  var count = 0;
+  for (var i = 0; i < contractorLocations.length; i++) {
+    if (contractorLocations[i].contractorId === contractorId) { loc = contractorLocations[i]; break; }
+  }
+  if (c && loc) showMapPopup(c, loc);
+}
+
+function selectMapCity(btn, city) {
+  activeMapCity = city;
+  var btns = document.querySelectorAll('.map-city-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  closeMapPopup();
+  renderMapContractors(city, activeMapService);
+  if (mapInstance) {
+    var coords = cityCoords[city] || cityCoords.Bogota;
+    mapInstance.setView([coords.lat, coords.lng], 13);
+    addMapMarkers(city, activeMapService);
+  }
+}
+
+function filterMapService(btn, service) {
+  activeMapService = service;
+  var chips = document.querySelectorAll('.map-filter-chip');
+  for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+  btn.classList.add('active');
+  closeMapPopup();
+  renderMapContractors(activeMapCity, service);
+  addMapMarkers(activeMapCity, service);
+}
+
+function openMap() {
+  showScreen('screen-map');
+  renderMapContractors('Bogota', 'all');
+  setTimeout(function() { initMap('Bogota'); }, 200);
+}
+
 renderContractors(contractors, 'contractors-list');
 renderPhotos('all');
 renderPackages('all');
@@ -6336,5 +6622,70 @@ updateNavForUser();
     </div>
   </div>
 </div>
+
+<!-- ============ SCREEN: MAP / LOCATION VIEW ============ -->
+<div class="screen" id="screen-map">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">Home</button>
+    </div>
+  </nav>
+
+  <div class="map-hero">
+    <h2>&#128205; Technicians near you</h2>
+    <p>Find verified professionals in your area</p>
+  </div>
+
+  <!-- CITY SELECTOR -->
+  <div class="map-city-bar">
+    <button class="map-city-btn active" onclick="selectMapCity(this,'Bogota')">&#128205; Bogota</button>
+    <button class="map-city-btn" onclick="selectMapCity(this,'Medellin')">&#128205; Medellin</button>
+    <button class="map-city-btn" onclick="selectMapCity(this,'Cali')">&#128205; Cali</button>
+    <button class="map-city-btn" onclick="selectMapCity(this,'Barranquilla')">&#128205; Barranquilla</button>
+  </div>
+
+  <!-- SERVICE FILTER -->
+  <div class="map-filter-bar">
+    <div class="map-filter-chip active" onclick="filterMapService(this,'all')">All</div>
+    <div class="map-filter-chip" onclick="filterMapService(this,'Pintura')">Painting</div>
+    <div class="map-filter-chip" onclick="filterMapService(this,'Plomeria')">Plumbing</div>
+    <div class="map-filter-chip" onclick="filterMapService(this,'Limpieza Profunda')">Cleaning</div>
+    <div class="map-filter-chip" onclick="filterMapService(this,'Electricidad')">Electric</div>
+    <div class="map-filter-chip" onclick="filterMapService(this,'Drywall')">Drywall</div>
+    <div class="map-filter-chip" onclick="filterMapService(this,'Carpinteria')">Carpentry</div>
+  </div>
+
+  <!-- MAP -->
+  <div id="map-container"></div>
+
+  <!-- POPUP CARD (shown when pin tapped) -->
+  <div style="position:relative;">
+    <div class="map-popup-card" id="map-popup-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div class="map-c-avatar green" id="popup-avatar">MR</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;" id="popup-name">Mario Restrepo</div>
+          <div style="font-size:11px;color:var(--brand-light);" id="popup-trade">Painting</div>
+          <div style="font-size:11px;color:var(--text-muted);" id="popup-rating">&#9733; 4.9 &nbsp;&#183;&nbsp; 127 jobs</div>
+        </div>
+        <div style="margin-left:auto;font-family:Syne,sans-serif;font-size:16px;font-weight:800;color:var(--brand);" id="popup-price">$85k</div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-gold" style="flex:1;padding:9px;" id="popup-hire-btn" onclick="openProfileFromMap()">View profile</button>
+        <button class="btn-outline" style="padding:9px 14px;" onclick="closeMapPopup()">&#10005;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS LIST -->
+  <div class="map-results-header">
+    <div class="map-results-title" id="map-results-title">Technicians in Bogota</div>
+    <div class="map-results-count" id="map-results-count">5 found</div>
+  </div>
+  <div id="map-contractors-list"></div>
+  <div style="height:20px;"></div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>
