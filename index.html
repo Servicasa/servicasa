@@ -4730,7 +4730,7 @@ function renderMapContractors(city, serviceFilter) {
     if (!c) continue;
     if (serviceFilter !== 'all' && c.trade !== serviceFilter) continue;
     count++;
-    html += '<div class="map-contractor-card" data-id="' + c.id + '" onclick="showMapPopupById(' + c.id + ',' + i + ')">' +
+    html += '<div class="map-contractor-card" data-id="' + c.id + '" onclick="openProfile(' + c.id + ')">' +
       '<div class="map-c-avatar ' + c.avatar + '">' + c.initials + '</div>' +
       '<div class="map-c-info">' +
         '<div class="map-c-name">' + c.name + '</div>' +
