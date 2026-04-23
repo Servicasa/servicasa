@@ -2442,10 +2442,348 @@
     display:none;
   }
   .map-popup-card.show { display:block; }
+
+  /* ===== STEP 13: PAYMENT ===== */
+  .pay-hero {
+    background: var(--brand);
+    padding: 28px 24px 32px;
+    color: #fff;
+  }
+  .pay-hero h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .pay-hero p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  .pay-section {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pay-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .pay-contractor-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pay-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Syne,sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .pay-contractor-name {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .pay-contractor-trade {
+    font-size: 12px;
+    color: var(--brand-light);
+    margin-bottom: 3px;
+  }
+  .pay-contractor-rating {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .pay-rate-badge {
+    margin-left: auto;
+    text-align: right;
+  }
+  .pay-rate-num {
+    font-family: Syne,sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--brand);
+  }
+  .pay-rate-label {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .hours-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .hours-btn {
+    flex: 1;
+    padding: 12px 0;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    font-family: Syne,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .hours-btn.selected {
+    border-color: var(--brand);
+    background: var(--brand);
+    color: #fff;
+  }
+  .hours-label {
+    font-size: 10px;
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+    font-family: DM Sans,sans-serif;
+  }
+  .pay-date-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: DM Sans,sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    box-sizing: border-box;
+  }
+  .pay-date-input:focus {
+    border-color: var(--brand);
+  }
+  .pay-method-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pay-method-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pay-method-item.selected {
+    border-color: var(--brand);
+    background: var(--brand-accent);
+  }
+  .pay-method-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .pay-method-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .pay-method-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .pay-method-radio {
+    margin-left: auto;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pay-method-item.selected .pay-method-radio {
+    border-color: var(--brand);
+    background: var(--brand);
+  }
+  .pay-method-item.selected .pay-method-radio::after {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .pay-breakdown {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .pay-breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .pay-breakdown-row:last-child {
+    border-bottom: none;
+  }
+  .pay-breakdown-row.total {
+    background: var(--brand);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .pay-breakdown-row .label { color: inherit; }
+  .pay-breakdown-row .value { font-weight: 700; }
+  .pay-breakdown-row.total .value {
+    font-family: Syne,sans-serif;
+    font-size: 18px;
+  }
+  .pay-btn-wrap {
+    padding: 20px;
+    position: sticky;
+    bottom: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+  .pay-confirm-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: var(--brand);
+    border: none;
+    border-radius: var(--radius);
+    font-family: Syne,sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+  .pay-confirm-btn:hover { opacity: 0.88; }
+  .pay-confirm-btn:active { transform: scale(0.98); }
+  .pay-confirm-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .mp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #009EE3;
+    color: #fff;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .pay-security-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+  .pay-success-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+    flex: 1;
+  }
+  .pay-success-icon {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: var(--brand-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+  .pay-success-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--brand);
+    margin-bottom: 10px;
+  }
+  .pay-success-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .pay-confirm-box {
+    background: var(--brand-accent);
+    border: 1px solid var(--brand);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    margin-bottom: 28px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .pay-confirm-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .pay-confirm-num {
+    font-family: Syne,sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brand);
+    letter-spacing: 2px;
+  }
+  .pay-loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .pay-loading-overlay.show {
+    display: flex;
+  }
+  .pay-spinner {
+    width: 52px; height: 52px;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .pay-loading-text {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
 
+<div class="pay-loading-overlay" id="pay-loading-overlay">
+  <div class="pay-spinner"></div>
+  <div class="pay-loading-text" id="pay-loading-text">Processing payment...</div>
+</div>
 <div class="toast" id="toast-notification"></div>
 
 <!-- ============ SCREEN 1: HOME ============ -->
@@ -2680,7 +3018,7 @@
   <div style="height: 80px;"></div>
   <div class="bottom-cta">
     <button class="btn-outline" onclick="openChatWith(currentContractor ? currentContractor.id : 1)">&#128172; Chat</button>
-    <button class="btn-gold" onclick="showScreen('screen-post')">Contratar Ahora</button>
+    <button class="btn-gold" onclick="openPayment()">Contratar Ahora</button>
   </div>
 </div>
 
@@ -4795,6 +5133,134 @@ renderPackages('all');
 countUnread();
 setTimeout(updateNotifBadge, 100);
 updateNavForUser();
+
+// ===== STEP 13: PAYMENT FUNCTIONS =====
+var payHours = 6;
+var payMethod = "mp";
+var payRateNum = 85;
+
+function openPayment() {
+  if (!currentContractor) { showToast("Select a technician first"); return; }
+  var c = currentContractor;
+  payRateNum = c.rateNum || 85;
+  payHours = 6;
+  payMethod = "mp";
+
+  var avatarEl = document.getElementById("pay-avatar");
+  var nameEl = document.getElementById("pay-name");
+  var tradeEl = document.getElementById("pay-trade");
+  var ratingEl = document.getElementById("pay-rating");
+  var rateEl = document.getElementById("pay-rate");
+
+  if (avatarEl) { avatarEl.textContent = c.initials; avatarEl.className = "pay-avatar " + c.avatar; }
+  if (nameEl) nameEl.textContent = c.name;
+  if (tradeEl) tradeEl.textContent = c.trade;
+  if (ratingEl) ratingEl.innerHTML = "&#9733; " + c.rating + " &nbsp;&#183;&nbsp; " + c.jobs + " jobs";
+  if (rateEl) rateEl.textContent = c.rate;
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var yyyy = tomorrow.getFullYear();
+  var mm = String(tomorrow.getMonth() + 1);
+  var dd = String(tomorrow.getDate());
+  if (mm.length < 2) mm = "0" + mm;
+  if (dd.length < 2) dd = "0" + dd;
+  var dateStr = yyyy + "-" + mm + "-" + dd;
+  var dateInput = document.getElementById("pay-date");
+  if (dateInput) { dateInput.min = dateStr; dateInput.value = dateStr; }
+
+  var btns = document.querySelectorAll(".hours-btn");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.remove("selected");
+    if (btns[i].textContent.indexOf("6") === 0) btns[i].classList.add("selected");
+  }
+  var methods = document.querySelectorAll(".pay-method-item");
+  for (var j = 0; j < methods.length; j++) methods[j].classList.remove("selected");
+  if (methods[0]) methods[0].classList.add("selected");
+
+  updatePayTotal();
+  showScreen("screen-payment");
+}
+
+function selectPayHours(btn, hrs) {
+  payHours = hrs;
+  var btns = document.querySelectorAll(".hours-btn");
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove("selected");
+  btn.classList.add("selected");
+  updatePayTotal();
+}
+
+function selectPayMethod(el, method) {
+  payMethod = method;
+  var items = document.querySelectorAll(".pay-method-item");
+  for (var i = 0; i < items.length; i++) items[i].classList.remove("selected");
+  el.classList.add("selected");
+}
+
+function updatePayTotal() {
+  var subtotal = payHours * payRateNum;
+  var fee = Math.round(subtotal * 0.1);
+  var total = subtotal + fee;
+  var hoursLabel = document.getElementById("pay-hours-label");
+  var subtotalEl = document.getElementById("pay-subtotal");
+  var feeEl = document.getElementById("pay-fee");
+  var totalEl = document.getElementById("pay-total");
+  if (hoursLabel) hoursLabel.textContent = payHours + " hrs x $" + payRateNum + "k/hr";
+  if (subtotalEl) subtotalEl.textContent = "$" + subtotal + "k";
+  if (feeEl) feeEl.textContent = "$" + fee + "k";
+  if (totalEl) totalEl.textContent = "$" + total + "k";
+}
+
+function processPayment() {
+  var dateInput = document.getElementById("pay-date");
+  if (!dateInput || !dateInput.value) { showToast("Please select a service date"); return; }
+  var btn = document.getElementById("pay-confirm-btn");
+  if (btn) btn.disabled = true;
+  var overlay = document.getElementById("pay-loading-overlay");
+  var loadText = document.getElementById("pay-loading-text");
+  if (overlay) overlay.classList.add("show");
+  var msgs = ["Connecting to Mercado Pago...", "Verifying payment...", "Confirming booking..."];
+  var idx = 0;
+  var tick = setInterval(function() {
+    idx++;
+    if (idx < msgs.length && loadText) loadText.textContent = msgs[idx];
+  }, 900);
+  setTimeout(function() {
+    clearInterval(tick);
+    if (overlay) overlay.classList.remove("show");
+    if (btn) btn.disabled = false;
+    showPaymentSuccess();
+  }, 2800);
+}
+
+function showPaymentSuccess() {
+  var c = currentContractor || {};
+  var dateInput = document.getElementById("pay-date");
+  var dateVal = dateInput ? dateInput.value : "-";
+  var totalEl = document.getElementById("pay-total");
+  var totalVal = totalEl ? totalEl.textContent : "$0k";
+  var confirmNum = "SC-" + String(Math.floor(Math.random() * 90000) + 10000);
+  var cnEl = document.getElementById("pay-confirm-num");
+  var snEl = document.getElementById("success-name");
+  var stEl = document.getElementById("success-trade");
+  var sdEl = document.getElementById("success-date");
+  var svEl = document.getElementById("success-total");
+  if (cnEl) cnEl.textContent = confirmNum;
+  if (snEl) snEl.textContent = c.name || "-";
+  if (stEl) stEl.textContent = c.trade || "-";
+  if (sdEl) sdEl.textContent = dateVal;
+  if (svEl) svEl.textContent = totalVal;
+  showScreen("screen-payment-success");
+}
+
+function contactAfterPayment() {
+  var c = currentContractor || {};
+  if (c.id) {
+    openChatWith(c.id);
+  } else {
+    showScreen("screen-chat-list");
+  }
+}
 </script>
 
 <!-- ============ SCREEN: AUTH (LOGIN / SIGNUP) ============ -->
@@ -6691,5 +7157,183 @@ updateNavForUser();
   <div style="height:20px;"></div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- ============ SCREEN: PAYMENT ============ -->
+<div class="screen" id="screen-payment">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-profile')">&#8592; Back</button>
+    </div>
+  </nav>
+
+  <div class="pay-hero">
+    <h2>&#128179; Confirm &amp; Pay</h2>
+    <p>Review your booking and choose a payment method</p>
+  </div>
+
+  <!-- CONTRACTOR CARD -->
+  <div class="pay-section">
+    <div class="pay-section-title">Technician</div>
+    <div class="pay-contractor-card">
+      <div class="pay-avatar green" id="pay-avatar">MR</div>
+      <div>
+        <div class="pay-contractor-name" id="pay-name">Mario Restrepo</div>
+        <div class="pay-contractor-trade" id="pay-trade">Painting</div>
+        <div class="pay-contractor-rating" id="pay-rating">&#9733; 4.9 &nbsp;&#183;&nbsp; 127 jobs</div>
+      </div>
+      <div class="pay-rate-badge">
+        <div class="pay-rate-num" id="pay-rate">$85k</div>
+        <div class="pay-rate-label">per hour</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOURS SELECTOR -->
+  <div class="pay-section">
+    <div class="pay-section-title">Hours needed</div>
+    <div class="hours-row">
+      <button class="hours-btn" onclick="selectPayHours(this,2)">2<span class="hours-label">hours</span></button>
+      <button class="hours-btn" onclick="selectPayHours(this,4)">4<span class="hours-label">hours</span></button>
+      <button class="hours-btn selected" onclick="selectPayHours(this,6)">6<span class="hours-label">hours</span></button>
+      <button class="hours-btn" onclick="selectPayHours(this,8)">8<span class="hours-label">hours</span></button>
+    </div>
+  </div>
+
+  <!-- DATE PICKER -->
+  <div class="pay-section">
+    <div class="pay-section-title">Service date</div>
+    <input type="date" class="pay-date-input" id="pay-date" onchange="updatePayTotal()">
+  </div>
+
+  <!-- PAYMENT METHOD -->
+  <div class="pay-section">
+    <div class="pay-section-title">Payment method <span class="mp-badge">&#128274; Secured</span></div>
+    <div class="pay-method-list">
+
+      <div class="pay-method-item selected" onclick="selectPayMethod(this,'mp')">
+        <div class="pay-method-icon" style="background:#E8F6FE;">&#128179;</div>
+        <div>
+          <div class="pay-method-name">Mercado Pago</div>
+          <div class="pay-method-desc">Credit/debit card, wallet balance</div>
+        </div>
+        <div class="pay-method-radio"></div>
+      </div>
+
+      <div class="pay-method-item" onclick="selectPayMethod(this,'pse')">
+        <div class="pay-method-icon" style="background:#EDF7EE;">&#127981;</div>
+        <div>
+          <div class="pay-method-name">PSE</div>
+          <div class="pay-method-desc">Direct bank transfer</div>
+        </div>
+        <div class="pay-method-radio"></div>
+      </div>
+
+      <div class="pay-method-item" onclick="selectPayMethod(this,'nequi')">
+        <div class="pay-method-icon" style="background:#F3EAF9;">&#128242;</div>
+        <div>
+          <div class="pay-method-name">Nequi</div>
+          <div class="pay-method-desc">Pay instantly from your Nequi app</div>
+        </div>
+        <div class="pay-method-radio"></div>
+      </div>
+
+      <div class="pay-method-item" onclick="selectPayMethod(this,'daviplata')">
+        <div class="pay-method-icon" style="background:#FEF3E2;">&#128176;</div>
+        <div>
+          <div class="pay-method-name">Daviplata</div>
+          <div class="pay-method-desc">Pay with your Daviplata account</div>
+        </div>
+        <div class="pay-method-radio"></div>
+      </div>
+
+      <div class="pay-method-item" onclick="selectPayMethod(this,'efecty')">
+        <div class="pay-method-icon" style="background:#FFF3F3;">&#128181;</div>
+        <div>
+          <div class="pay-method-name">Efecty / Cash</div>
+          <div class="pay-method-desc">Pay at any Efecty point nationwide</div>
+        </div>
+        <div class="pay-method-radio"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRICE BREAKDOWN -->
+  <div class="pay-section">
+    <div class="pay-section-title">Price breakdown</div>
+    <div class="pay-breakdown">
+      <div class="pay-breakdown-row">
+        <span class="label" id="pay-hours-label">6 hrs x $85k/hr</span>
+        <span class="value" id="pay-subtotal">$510k</span>
+      </div>
+      <div class="pay-breakdown-row">
+        <span class="label">ServiCasa fee (10%)</span>
+        <span class="value" id="pay-fee">$51k</span>
+      </div>
+      <div class="pay-breakdown-row total">
+        <span class="label">Total</span>
+        <span class="value" id="pay-total">$561k</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:100px;"></div>
+
+  <!-- STICKY PAY BUTTON -->
+  <div class="pay-btn-wrap">
+    <button class="pay-confirm-btn" id="pay-confirm-btn" onclick="processPayment()">
+      &#128274; Confirm &amp; Pay
+    </button>
+    <div class="pay-security-note">&#9989; Secure payment &nbsp;&#183;&nbsp; &#9989; ServiCasa guarantee &nbsp;&#183;&nbsp; &#9989; Cancel anytime</div>
+  </div>
+
+</div>
+
+<!-- ============ SCREEN: PAYMENT SUCCESS ============ -->
+<div class="screen" id="screen-payment-success">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showScreen('screen-home')">Home</button>
+    </div>
+  </nav>
+
+  <div class="pay-success-screen">
+    <div class="pay-success-icon">&#9989;</div>
+    <div class="pay-success-title">Booking Confirmed!</div>
+    <div class="pay-success-sub">
+      Your technician has been notified and will contact you within 2 hours to confirm the appointment.
+    </div>
+
+    <div class="pay-confirm-box">
+      <div class="pay-confirm-label">Confirmation number</div>
+      <div class="pay-confirm-num" id="pay-confirm-num">SC-00000</div>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;width:100%;max-width:320px;margin-bottom:28px;text-align:left;">
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Booking summary</div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+        <span>Technician</span><strong id="success-name">Mario Restrepo</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+        <span>Service</span><strong id="success-trade">Painting</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+        <span>Date</span><strong id="success-date">-</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;">
+        <span>Total paid</span><strong id="success-total" style="color:var(--brand);">$561k</strong>
+      </div>
+    </div>
+
+    <button class="btn-gold" style="width:100%;max-width:320px;padding:14px;margin-bottom:12px;" onclick="contactAfterPayment()">
+      &#128172; Message technician
+    </button>
+    <button class="btn-outline" style="width:100%;max-width:320px;padding:13px;" onclick="showScreen('screen-home')">
+      &#8592; Back to home
+    </button>
+  </div>
+</div>
 </body>
 </html>
