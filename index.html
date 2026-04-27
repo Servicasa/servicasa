@@ -43,280 +43,6 @@
     {"@type": "City", "name": "Barranquilla"}
   ]
 }
-
-// ===== STEP 15: BLOG DATA =====
-var blogArticles = [
-  {
-    id: 1,
-    tag: "tips",
-    tagLabel: "Tips",
-    emoji: "&#127912;",
-    bg: "#FFF3E0",
-    title: "How to choose a painter in Bogota: 7 things to check before hiring",
-    excerpt: "Not all painters charge the same or deliver the same quality. Here is how to avoid costly mistakes when hiring for your home.",
-    date: "April 10, 2026",
-    readTime: "4 min read",
-    city: "Bogota",
-    featured: true,
-    content: [
-      {type:"p", text:"Hiring a painter seems simple until the job goes wrong. Walls peeling after two months, uneven coverage, or a contractor who disappears halfway through the job are all too common in Bogota. This guide helps you avoid those problems."},
-      {type:"h2", text:"1. Always ask for a physical visit first"},
-      {type:"p", text:"A good painter will want to see the space before quoting. Any estimate given over the phone without seeing the walls, current paint condition, and ceiling height is likely to change once they arrive."},
-      {type:"h2", text:"2. Check what the price includes"},
-      {type:"p", text:"Ask specifically: does the price include materials (paint, primer, masking tape, plastic sheeting)? In Bogota, most standard quotes include labor only. Premium services include materials. Always clarify in writing."},
-      {type:"tip", text:"Pro tip: For a standard bedroom (12m2), a good painter in Bogota charges between $150,000 and $280,000 COP including basic materials. Exterior work costs 30 to 50 percent more."},
-      {type:"h2", text:"3. Ask for before and after photos"},
-      {type:"p", text:"Any experienced painter will have photos of past jobs on their phone. If they cannot show you at least five examples, that is a red flag. On ServiCasa, every technician profile includes a before and after portfolio."},
-      {type:"h2", text:"4. Verify they are registered"},
-      {type:"p", text:"Ask for their cedula number and verify it at the Registraduria website. Legitimate professionals have nothing to hide. ServiCasa verifies ID for every technician on the platform."},
-      {type:"h2", text:"5. Get at least three quotes"},
-      {type:"p", text:"Prices in Bogota vary significantly by neighborhood and painter experience. Getting three quotes takes less than 30 minutes on ServiCasa and gives you real market data to negotiate from."},
-      {type:"h2", text:"6. Agree on a payment schedule"},
-      {type:"p", text:"Never pay 100% upfront. A standard schedule is 30% to start, 40% at halfway, and 30% when complete. This protects you if the work stops midway."},
-      {type:"h2", text:"7. Check reviews from previous clients"},
-      {type:"p", text:"Star ratings are useful but read the written reviews for details. Look for comments about punctuality, cleanup, and whether the final result matched the quote."}
-    ]
-  },
-  {
-    id: 2,
-    tag: "prices",
-    tagLabel: "Prices",
-    emoji: "&#128717;",
-    bg: "#E8F5E9",
-    title: "How much does it cost to renovate a bathroom in Colombia in 2026?",
-    excerpt: "Bathroom renovations vary widely in price. We break down costs by city, scope, and materials so you know what to expect.",
-    date: "April 15, 2026",
-    readTime: "5 min read",
-    city: "Colombia",
-    featured: false,
-    content: [
-      {type:"p", text:"A bathroom renovation is one of the highest-value home improvements you can make in Colombia. It increases property value and daily quality of life. But costs vary enormously depending on scope, city, and materials."},
-      {type:"h2", text:"Price ranges by renovation type"},
-      {type:"table", rows:[
-        {label:"Basic refresh (paint, fixtures)", price:"$800k - $1.5M COP"},
-        {label:"Mid-range (tiles, vanity, toilet)", price:"$2M - $5M COP"},
-        {label:"Full renovation (gut and rebuild)", price:"$6M - $15M COP"},
-        {label:"Premium (designer finishes)", price:"$15M - $40M COP"}
-      ]},
-      {type:"h2", text:"Cost differences by city"},
-      {type:"p", text:"Bogota is typically 15 to 25 percent more expensive than Medellin or Cali for the same scope of work. This is due to higher labor rates and transport costs for materials. Barranquilla tends to be closest to Medellin in pricing."},
-      {type:"tip", text:"Money-saving tip: Buying your own tiles and fixtures directly from a wholesaler in the San Andresito market (Bogota) or El Hueco (Medellin) can cut material costs by 20 to 35 percent."},
-      {type:"h2", text:"What drives the cost up"},
-      {type:"p", text:"Moving plumbing pipes or changing the bathroom layout dramatically increases cost. If you can keep the same layout and only replace surfaces and fixtures, you will save 40 to 60 percent compared to a full structural renovation."},
-      {type:"h2", text:"How to get the best price"},
-      {type:"p", text:"Post your bathroom renovation job on ServiCasa and receive up to 5 quotes from verified contractors in your city. Comparing quotes is the single most effective way to avoid overpaying."}
-    ]
-  },
-  {
-    id: 3,
-    tag: "tips",
-    tagLabel: "Tips",
-    emoji: "&#128268;",
-    bg: "#E3F2FD",
-    title: "5 warning signs your plumbing needs attention right now",
-    excerpt: "Small plumbing problems become expensive emergencies fast. Learn to spot the early warning signs before water damage takes over.",
-    date: "April 18, 2026",
-    readTime: "3 min read",
-    city: "Colombia",
-    featured: false,
-    content: [
-      {type:"p", text:"In Colombia, many homeowners ignore plumbing issues until they become emergencies. A small leak that costs $80,000 COP to fix today can turn into water damage costing $3 million or more if ignored for six months."},
-      {type:"h2", text:"Sign 1: Water pressure drops suddenly"},
-      {type:"p", text:"Sudden pressure loss usually means a blockage, a partially closed valve, or a hidden leak somewhere in your pipes. Do not assume it will fix itself. Call a plumber for a diagnostic check."},
-      {type:"h2", text:"Sign 2: Gurgling sounds from drains"},
-      {type:"p", text:"Gurgling after you flush or drain the sink means air is trapped in the pipes, which usually indicates a partial blockage forming. Catching it early is a 30-minute job. Waiting until it fully blocks can flood your bathroom."},
-      {type:"tip", text:"Quick check: Pour a bucket of water quickly down each drain once a month. If it backs up even slightly, you have a partial blockage building up."},
-      {type:"h2", text:"Sign 3: Water stains on walls or ceilings"},
-      {type:"p", text:"Brown or yellow stains on walls near pipes or on ceilings below a bathroom are never cosmetic. They mean water is leaking somewhere inside the wall or floor. The longer you wait, the more structural damage accumulates."},
-      {type:"h2", text:"Sign 4: Unusually high water bill"},
-      {type:"p", text:"If your water bill spikes without a change in usage, you likely have a hidden leak. A running toilet alone can waste 200 liters per day. Check by turning off all taps and watching the meter. If it still moves, you have a leak."},
-      {type:"h2", text:"Sign 5: Slow drains throughout the house"},
-      {type:"p", text:"One slow drain is usually a local blockage. Multiple slow drains across different rooms points to a main line problem, which is more serious and more expensive the longer it goes unaddressed."}
-    ]
-  },
-  {
-    id: 4,
-    tag: "howto",
-    tagLabel: "How-to",
-    emoji: "&#9889;",
-    bg: "#FFF9C4",
-    title: "Electrical safety at home: what every Colombian homeowner must know",
-    excerpt: "Electrical fires cause 30 percent of all home fires in Colombia. A few simple checks can protect your family and your property.",
-    date: "April 21, 2026",
-    readTime: "4 min read",
-    city: "Colombia",
-    featured: false,
-    content: [
-      {type:"p", text:"According to the IDIGER (Bogota risk management institute), electrical faults are the leading cause of residential fires in Colombia. The good news is that most are preventable with basic maintenance and awareness."},
-      {type:"h2", text:"The most common electrical hazards in Colombian homes"},
-      {type:"p", text:"Overloaded power strips, old aluminum wiring (common in buildings built before 1990), missing ground connections, and DIY wiring done without permits are the top four causes of electrical fires in urban homes."},
-      {type:"tip", text:"Important: In Colombia, any electrical installation work must be done by a certified electrician registered with RETIE (Technical Regulation for Electrical Installations). Unlicensed work voids your home insurance."},
-      {type:"h2", text:"5 checks you can do yourself today"},
-      {type:"list", items:[
-        "Check for outlets that feel warm to the touch — this means overloading or faulty wiring",
-        "Look for flickering lights, which indicate a loose connection somewhere",
-        "Count how many devices are plugged into each power strip — maximum 1,500 watts per strip",
-        "Check if your circuit breaker panel has labeled breakers — unlabeled panels are a safety risk",
-        "Look for any exposed wiring, even small gaps in insulation"
-      ]},
-      {type:"h2", text:"When to call a certified electrician"},
-      {type:"p", text:"Call immediately if you notice burning smells from outlets or panels, sparks when plugging in appliances, breakers that trip repeatedly, or any outlets that stop working without explanation. These are not DIY situations."},
-      {type:"h2", text:"Cost of an electrical inspection in Colombia"},
-      {type:"p", text:"A full home electrical inspection by a certified RETIE electrician costs between $150,000 and $400,000 COP depending on home size and city. It is one of the best investments you can make as a homeowner."}
-    ]
-  },
-  {
-    id: 5,
-    tag: "howto",
-    tagLabel: "How-to",
-    emoji: "&#129529;",
-    bg: "#F3E5F5",
-    title: "Deep cleaning your home in Medellin: what to expect and how to prepare",
-    excerpt: "A professional deep clean is not the same as a regular tidy-up. Here is exactly what is included and how to get the most out of it.",
-    date: "April 23, 2026",
-    readTime: "3 min read",
-    city: "Medellin",
-    featured: false,
-    content: [
-      {type:"p", text:"A professional deep cleaning in Medellin covers areas that regular weekly cleaning skips entirely: inside appliances, behind furniture, grout lines, window tracks, and air conditioning filters. Done every 3 to 6 months, it significantly improves air quality and extends the life of your floors and surfaces."},
-      {type:"h2", text:"What a deep clean includes"},
-      {type:"list", items:[
-        "Inside and outside of all appliances (fridge, oven, microwave)",
-        "Cleaning inside all cabinets and drawers",
-        "Scrubbing grout lines in bathrooms and kitchen",
-        "Washing walls and baseboards",
-        "Cleaning window tracks, blinds and curtain rails",
-        "Vacuuming under and behind all furniture",
-        "Disinfecting all high-touch surfaces"
-      ]},
-      {type:"h2", text:"How to prepare"},
-      {type:"p", text:"Remove clutter from surfaces before the cleaner arrives. This lets them spend time actually cleaning instead of organizing. Put away valuables. Have all rooms accessible. The cleaner will bring their own products unless you specify otherwise."},
-      {type:"tip", text:"Medellin tip: Due to the city altitude and climate, mold can form quickly in bathrooms. Ask your cleaning professional to use an anti-fungal product on grout lines and silicone seals."},
-      {type:"h2", text:"How long does it take?"},
-      {type:"p", text:"A standard 2-bedroom apartment in Medellin takes 4 to 6 hours for a thorough deep clean. Larger homes or spaces with heavy buildup take longer. Most professional cleaners on ServiCasa charge between $60,000 and $90,000 COP per hour."}
-    ]
-  }
-];
-
-var activeBlogFilter = "all";
-var currentArticleId = 0;
-
-// ===== STEP 15: BLOG FUNCTIONS =====
-function openBlog() {
-  activeBlogFilter = "all";
-  renderBlog("all");
-  showScreen("screen-blog");
-}
-
-function renderBlog(filter) {
-  activeBlogFilter = filter;
-  var chips = document.querySelectorAll(".blog-chip");
-  for (var i = 0; i < chips.length; i++) {
-    chips[i].classList.remove("active");
-    if (chips[i].getAttribute("data-filter") === filter) chips[i].classList.add("active");
-  }
-  var filtered = [];
-  for (var j = 0; j < blogArticles.length; j++) {
-    if (filter === "all" || blogArticles[j].tag === filter) filtered.push(blogArticles[j]);
-  }
-  var featuredWrap = document.getElementById("blog-featured-wrap");
-  var listWrap = document.getElementById("blog-list-wrap");
-  if (!featuredWrap || !listWrap) return;
-  var featured = null;
-  var rest = [];
-  for (var k = 0; k < filtered.length; k++) {
-    if (!featured && filtered[k].featured && filter === "all") {
-      featured = filtered[k];
-    } else {
-      rest.push(filtered[k]);
-    }
-  }
-  if (filter !== "all") { featured = null; rest = filtered; }
-  var fhtml = "";
-  if (featured) {
-    fhtml =
-      "<div class=\"blog-featured\" onclick=\"openArticle(" + featured.id + ")\">" +
-        "<div class=\"blog-featured-thumb\" style=\"background:" + featured.bg + ";\">" + featured.emoji + "</div>" +
-        "<div class=\"blog-featured-body\">" +
-          "<span class=\"blog-tag " + featured.tag + "\">" + featured.tagLabel + "</span>" +
-          "<div class=\"blog-featured-title\">" + featured.title + "</div>" +
-          "<div class=\"blog-featured-excerpt\">" + featured.excerpt + "</div>" +
-          "<div class=\"blog-meta\">&#128197; " + featured.date + " &nbsp;&#183;&nbsp; &#9201; " + featured.readTime + "</div>" +
-        "</div>" +
-      "</div>";
-  }
-  featuredWrap.innerHTML = fhtml;
-  var lhtml = "";
-  for (var n = 0; n < rest.length; n++) {
-    var a = rest[n];
-    lhtml +=
-      "<div class=\"blog-card\" onclick=\"openArticle(" + a.id + ")\">" +
-        "<div class=\"blog-card-thumb\" style=\"background:" + a.bg + ";\">" + a.emoji + "</div>" +
-        "<div class=\"blog-card-body\">" +
-          "<span class=\"blog-tag " + a.tag + "\">" + a.tagLabel + "</span>" +
-          "<div class=\"blog-card-title\">" + a.title + "</div>" +
-          "<div class=\"blog-card-excerpt\">" + a.excerpt + "</div>" +
-          "<div class=\"blog-card-meta\">&#128197; " + a.date + " &nbsp;&#183;&nbsp; &#9201; " + a.readTime + "</div>" +
-        "</div>" +
-      "</div>";
-  }
-  if (!lhtml && !fhtml) {
-    lhtml = "<div style=\"text-align:center;padding:32px;color:var(--text-muted)\">No articles in this category yet.</div>";
-  }
-  listWrap.innerHTML = lhtml;
-}
-
-function openArticle(id) {
-  var article = null;
-  for (var i = 0; i < blogArticles.length; i++) {
-    if (blogArticles[i].id === id) { article = blogArticles[i]; break; }
-  }
-  if (!article) return;
-  currentArticleId = id;
-  var titleEl = document.getElementById("article-title");
-  var dateEl = document.getElementById("article-date");
-  var timeEl = document.getElementById("article-read-time");
-  var emojiEl = document.getElementById("article-emoji");
-  var bodyEl = document.getElementById("article-body");
-  var tagEl = document.getElementById("article-tag");
-  if (titleEl) titleEl.textContent = article.title;
-  if (dateEl) dateEl.textContent = article.date;
-  if (timeEl) timeEl.textContent = article.readTime;
-  if (emojiEl) { emojiEl.innerHTML = article.emoji; emojiEl.style.background = article.bg; }
-  if (tagEl) { tagEl.textContent = article.tagLabel; tagEl.className = "blog-tag " + article.tag; }
-  var bhtml = "";
-  for (var j = 0; j < article.content.length; j++) {
-    var block = article.content[j];
-    if (block.type === "h2") {
-      bhtml += "<h2>" + block.text + "</h2>";
-    } else if (block.type === "p") {
-      bhtml += "<p>" + block.text + "</p>";
-    } else if (block.type === "tip") {
-      bhtml += "<div class=\"article-tip\">&#128161; " + block.text + "</div>";
-    } else if (block.type === "list") {
-      bhtml += "<ul>";
-      for (var li = 0; li < block.items.length; li++) {
-        bhtml += "<li>" + block.items[li] + "</li>";
-      }
-      bhtml += "</ul>";
-    } else if (block.type === "table") {
-      bhtml += "<div class=\"article-price-table\">";
-      bhtml += "<div class=\"apt-row header\"><span>Service scope</span><span class=\"price\">Price range</span></div>";
-      for (var tr = 0; tr < block.rows.length; tr++) {
-        bhtml += "<div class=\"apt-row\"><span>" + block.rows[tr].label + "</span><span class=\"price\">" + block.rows[tr].price + "</span></div>";
-      }
-      bhtml += "</div>";
-    }
-  }
-  bhtml +=
-    "<div class=\"article-cta\">" +
-      "<h3>Need help with this?</h3>" +
-      "<p>Post your job on ServiCasa and get quotes from verified technicians in your city.</p>" +
-      "<button class=\"btn-gold\" style=\"padding:11px 28px;\" onclick=\"showScreen('screen-post')\">Post a job &#128640;</button>" +
-    "</div>";
-  if (bodyEl) bodyEl.innerHTML = bhtml;
-  showScreen("screen-article");
-}
 </script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -6051,6 +5777,277 @@ function switchFaqTab(btn, group) {
   for (var j = 0; j < groups.length; j++) groups[j].classList.remove("active");
   var target = document.getElementById("faq-group-" + group);
   if (target) target.classList.add("active");
+}
+
+// ===== STEP 15: BLOG DATA =====
+var blogArticles = [
+  {
+    id: 1,
+    tag: "tips",
+    tagLabel: "Tips",
+    emoji: "&#127912;",
+    bg: "#FFF3E0",
+    title: "How to choose a painter in Bogota: 7 things to check before hiring",
+    excerpt: "Not all painters charge the same or deliver the same quality. Here is how to avoid costly mistakes when hiring for your home.",
+    date: "April 10, 2026",
+    readTime: "4 min read",
+    city: "Bogota",
+    featured: true,
+    content: [
+      {type:"p", text:"Hiring a painter seems simple until the job goes wrong. Walls peeling after two months, uneven coverage, or a contractor who disappears halfway through are all too common in Bogota. This guide helps you avoid those problems."},
+      {type:"h2", text:"1. Always ask for a physical visit first"},
+      {type:"p", text:"A good painter will want to see the space before quoting. Any estimate given over the phone without seeing the walls, current paint condition, and ceiling height is likely to change once they arrive."},
+      {type:"h2", text:"2. Check what the price includes"},
+      {type:"p", text:"Ask specifically: does the price include materials like paint, primer, masking tape, and plastic sheeting? In Bogota, most standard quotes include labor only. Premium services include materials. Always clarify in writing."},
+      {type:"tip", text:"Pro tip: For a standard bedroom (12m2), a good painter in Bogota charges between $150,000 and $280,000 COP including basic materials. Exterior work costs 30 to 50 percent more."},
+      {type:"h2", text:"3. Ask for before and after photos"},
+      {type:"p", text:"Any experienced painter will have photos of past jobs on their phone. If they cannot show you at least five examples, that is a red flag. On ServiCasa, every technician profile includes a before and after portfolio."},
+      {type:"h2", text:"4. Verify they are registered"},
+      {type:"p", text:"Ask for their cedula number and verify it at the Registraduria website. Legitimate professionals have nothing to hide. ServiCasa verifies ID for every technician on the platform."},
+      {type:"h2", text:"5. Get at least three quotes"},
+      {type:"p", text:"Prices in Bogota vary significantly by neighborhood and painter experience. Getting three quotes takes less than 30 minutes on ServiCasa and gives you real market data to negotiate from."},
+      {type:"h2", text:"6. Agree on a payment schedule"},
+      {type:"p", text:"Never pay 100% upfront. A standard schedule is 30% to start, 40% at halfway, and 30% when complete. This protects you if the work stops midway."},
+      {type:"h2", text:"7. Check reviews from previous clients"},
+      {type:"p", text:"Star ratings are useful but read the written reviews for details. Look for comments about punctuality, cleanup, and whether the final result matched the quote."}
+    ]
+  },
+  {
+    id: 2,
+    tag: "prices",
+    tagLabel: "Prices",
+    emoji: "&#128717;",
+    bg: "#E8F5E9",
+    title: "How much does it cost to renovate a bathroom in Colombia in 2026?",
+    excerpt: "Bathroom renovations vary widely in price. We break down costs by city, scope, and materials so you know what to expect.",
+    date: "April 15, 2026",
+    readTime: "5 min read",
+    city: "Colombia",
+    featured: false,
+    content: [
+      {type:"p", text:"A bathroom renovation is one of the highest-value home improvements you can make in Colombia. It increases property value and daily quality of life. But costs vary enormously depending on scope, city, and materials."},
+      {type:"h2", text:"Price ranges by renovation type"},
+      {type:"table", rows:[
+        {label:"Basic refresh (paint, fixtures)", price:"$800k - $1.5M COP"},
+        {label:"Mid-range (tiles, vanity, toilet)", price:"$2M - $5M COP"},
+        {label:"Full renovation (gut and rebuild)", price:"$6M - $15M COP"},
+        {label:"Premium (designer finishes)", price:"$15M - $40M COP"}
+      ]},
+      {type:"h2", text:"Cost differences by city"},
+      {type:"p", text:"Bogota is typically 15 to 25 percent more expensive than Medellin or Cali for the same scope of work. This is due to higher labor rates and transport costs for materials. Barranquilla tends to be closest to Medellin in pricing."},
+      {type:"tip", text:"Money-saving tip: Buying your own tiles and fixtures directly from a wholesaler can cut material costs by 20 to 35 percent."},
+      {type:"h2", text:"What drives the cost up"},
+      {type:"p", text:"Moving plumbing pipes or changing the bathroom layout dramatically increases cost. If you can keep the same layout and only replace surfaces and fixtures, you will save 40 to 60 percent."},
+      {type:"h2", text:"How to get the best price"},
+      {type:"p", text:"Post your bathroom renovation job on ServiCasa and receive up to 5 quotes from verified contractors in your city. Comparing quotes is the single most effective way to avoid overpaying."}
+    ]
+  },
+  {
+    id: 3,
+    tag: "tips",
+    tagLabel: "Tips",
+    emoji: "&#128268;",
+    bg: "#E3F2FD",
+    title: "5 warning signs your plumbing needs attention right now",
+    excerpt: "Small plumbing problems become expensive emergencies fast. Learn to spot the early warning signs before water damage takes over.",
+    date: "April 18, 2026",
+    readTime: "3 min read",
+    city: "Colombia",
+    featured: false,
+    content: [
+      {type:"p", text:"In Colombia, many homeowners ignore plumbing issues until they become emergencies. A small leak that costs $80,000 COP to fix today can turn into water damage costing millions if ignored for six months."},
+      {type:"h2", text:"Sign 1: Water pressure drops suddenly"},
+      {type:"p", text:"Sudden pressure loss usually means a blockage, a partially closed valve, or a hidden leak somewhere in your pipes. Do not assume it will fix itself. Call a plumber for a diagnostic check."},
+      {type:"h2", text:"Sign 2: Gurgling sounds from drains"},
+      {type:"p", text:"Gurgling after you flush or drain the sink means air is trapped in the pipes, which usually indicates a partial blockage forming. Catching it early is a 30-minute job."},
+      {type:"tip", text:"Quick check: Pour a bucket of water quickly down each drain once a month. If it backs up even slightly, you have a partial blockage building up."},
+      {type:"h2", text:"Sign 3: Water stains on walls or ceilings"},
+      {type:"p", text:"Brown or yellow stains on walls near pipes or on ceilings below a bathroom are never cosmetic. They mean water is leaking somewhere inside the wall or floor."},
+      {type:"h2", text:"Sign 4: Unusually high water bill"},
+      {type:"p", text:"If your water bill spikes without a change in usage, you likely have a hidden leak. A running toilet alone can waste 200 liters per day."},
+      {type:"h2", text:"Sign 5: Slow drains throughout the house"},
+      {type:"p", text:"One slow drain is usually a local blockage. Multiple slow drains across different rooms points to a main line problem, which is more serious and more expensive the longer it goes unaddressed."}
+    ]
+  },
+  {
+    id: 4,
+    tag: "howto",
+    tagLabel: "How-to",
+    emoji: "&#9889;",
+    bg: "#FFF9C4",
+    title: "Electrical safety at home: what every Colombian homeowner must know",
+    excerpt: "Electrical fires cause 30 percent of all home fires in Colombia. A few simple checks can protect your family and your property.",
+    date: "April 21, 2026",
+    readTime: "4 min read",
+    city: "Colombia",
+    featured: false,
+    content: [
+      {type:"p", text:"Electrical faults are the leading cause of residential fires in Colombia. The good news is that most are preventable with basic maintenance and awareness."},
+      {type:"h2", text:"The most common electrical hazards"},
+      {type:"p", text:"Overloaded power strips, old aluminum wiring from buildings built before 1990, missing ground connections, and DIY wiring done without permits are the top four causes of electrical fires in urban homes."},
+      {type:"tip", text:"Important: In Colombia, any electrical installation work must be done by a certified electrician registered with RETIE. Unlicensed work voids your home insurance."},
+      {type:"h2", text:"5 checks you can do yourself today"},
+      {type:"list", items:[
+        "Check for outlets that feel warm to the touch",
+        "Look for flickering lights which indicate a loose connection",
+        "Count how many devices are plugged into each power strip - maximum 1500 watts",
+        "Check if your circuit breaker panel has labeled breakers",
+        "Look for any exposed wiring or gaps in insulation"
+      ]},
+      {type:"h2", text:"When to call a certified electrician"},
+      {type:"p", text:"Call immediately if you notice burning smells from outlets, sparks when plugging in appliances, breakers that trip repeatedly, or outlets that stop working without explanation."},
+      {type:"h2", text:"Cost of an electrical inspection"},
+      {type:"p", text:"A full home electrical inspection by a certified RETIE electrician costs between $150,000 and $400,000 COP depending on home size and city."}
+    ]
+  },
+  {
+    id: 5,
+    tag: "howto",
+    tagLabel: "How-to",
+    emoji: "&#129529;",
+    bg: "#F3E5F5",
+    title: "Deep cleaning your home in Medellin: what to expect and how to prepare",
+    excerpt: "A professional deep clean is not the same as a regular tidy-up. Here is exactly what is included and how to get the most out of it.",
+    date: "April 23, 2026",
+    readTime: "3 min read",
+    city: "Medellin",
+    featured: false,
+    content: [
+      {type:"p", text:"A professional deep cleaning covers areas that regular weekly cleaning skips entirely: inside appliances, behind furniture, grout lines, window tracks, and air conditioning filters."},
+      {type:"h2", text:"What a deep clean includes"},
+      {type:"list", items:[
+        "Inside and outside of all appliances (fridge, oven, microwave)",
+        "Cleaning inside all cabinets and drawers",
+        "Scrubbing grout lines in bathrooms and kitchen",
+        "Washing walls and baseboards",
+        "Cleaning window tracks, blinds and curtain rails",
+        "Vacuuming under and behind all furniture",
+        "Disinfecting all high-touch surfaces"
+      ]},
+      {type:"h2", text:"How to prepare"},
+      {type:"p", text:"Remove clutter from surfaces before the cleaner arrives. This lets them spend time actually cleaning instead of organizing. Put away valuables. Have all rooms accessible."},
+      {type:"tip", text:"Medellin tip: Due to the city altitude and climate, mold can form quickly in bathrooms. Ask your cleaning professional to use an anti-fungal product on grout lines and silicone seals."},
+      {type:"h2", text:"How long does it take?"},
+      {type:"p", text:"A standard 2-bedroom apartment in Medellin takes 4 to 6 hours for a thorough deep clean. Most professional cleaners on ServiCasa charge between $60,000 and $90,000 COP per hour."}
+    ]
+  }
+];
+
+var activeBlogFilter = "all";
+var currentArticleId = 0;
+
+// ===== STEP 15: BLOG FUNCTIONS =====
+function openBlog() {
+  activeBlogFilter = "all";
+  renderBlog("all");
+  showScreen("screen-blog");
+}
+
+function renderBlog(filter) {
+  activeBlogFilter = filter;
+  var chips = document.querySelectorAll(".blog-chip");
+  for (var i = 0; i < chips.length; i++) {
+    chips[i].classList.remove("active");
+    if (chips[i].getAttribute("data-filter") === filter) chips[i].classList.add("active");
+  }
+  var filtered = [];
+  for (var j = 0; j < blogArticles.length; j++) {
+    if (filter === "all" || blogArticles[j].tag === filter) filtered.push(blogArticles[j]);
+  }
+  var featuredWrap = document.getElementById("blog-featured-wrap");
+  var listWrap = document.getElementById("blog-list-wrap");
+  if (!featuredWrap || !listWrap) return;
+  var featured = null;
+  var rest = [];
+  for (var k = 0; k < filtered.length; k++) {
+    if (!featured && filtered[k].featured && filter === "all") {
+      featured = filtered[k];
+    } else {
+      rest.push(filtered[k]);
+    }
+  }
+  if (filter !== "all") { featured = null; rest = filtered; }
+  var fhtml = "";
+  if (featured) {
+    fhtml = "<div class=\"blog-featured\" onclick=\"openArticle(" + featured.id + ")\">" +
+      "<div class=\"blog-featured-thumb\" style=\"background:" + featured.bg + "\">" + featured.emoji + "</div>" +
+      "<div class=\"blog-featured-body\">" +
+        "<span class=\"blog-tag " + featured.tag + "\">" + featured.tagLabel + "</span>" +
+        "<div class=\"blog-featured-title\">" + featured.title + "</div>" +
+        "<div class=\"blog-featured-excerpt\">" + featured.excerpt + "</div>" +
+        "<div class=\"blog-meta\">&#128197; " + featured.date + " &nbsp;&#183;&nbsp; &#9201; " + featured.readTime + "</div>" +
+      "</div>" +
+    "</div>";
+  }
+  featuredWrap.innerHTML = fhtml;
+  var lhtml = "";
+  for (var n = 0; n < rest.length; n++) {
+    var a = rest[n];
+    lhtml += "<div class=\"blog-card\" onclick=\"openArticle(" + a.id + ")\">" +
+      "<div class=\"blog-card-thumb\" style=\"background:" + a.bg + "\">" + a.emoji + "</div>" +
+      "<div class=\"blog-card-body\">" +
+        "<span class=\"blog-tag " + a.tag + "\">" + a.tagLabel + "</span>" +
+        "<div class=\"blog-card-title\">" + a.title + "</div>" +
+        "<div class=\"blog-card-excerpt\">" + a.excerpt + "</div>" +
+        "<div class=\"blog-card-meta\">&#128197; " + a.date + " &nbsp;&#183;&nbsp; &#9201; " + a.readTime + "</div>" +
+      "</div>" +
+    "</div>";
+  }
+  if (!lhtml && !fhtml) {
+    lhtml = "<div style=\"text-align:center;padding:32px;color:var(--text-muted)\">No articles in this category yet.</div>";
+  }
+  listWrap.innerHTML = lhtml;
+}
+
+function openArticle(id) {
+  var article = null;
+  for (var i = 0; i < blogArticles.length; i++) {
+    if (blogArticles[i].id === id) { article = blogArticles[i]; break; }
+  }
+  if (!article) return;
+  currentArticleId = id;
+  var titleEl = document.getElementById("article-title");
+  var dateEl = document.getElementById("article-date");
+  var timeEl = document.getElementById("article-read-time");
+  var emojiEl = document.getElementById("article-emoji");
+  var bodyEl = document.getElementById("article-body");
+  var tagEl = document.getElementById("article-tag");
+  if (titleEl) titleEl.textContent = article.title;
+  if (dateEl) dateEl.textContent = article.date;
+  if (timeEl) timeEl.textContent = article.readTime;
+  if (emojiEl) { emojiEl.innerHTML = article.emoji; emojiEl.style.background = article.bg; }
+  if (tagEl) { tagEl.textContent = article.tagLabel; tagEl.className = "blog-tag " + article.tag; }
+  var bhtml = "";
+  for (var j = 0; j < article.content.length; j++) {
+    var block = article.content[j];
+    if (block.type === "h2") {
+      bhtml += "<h2>" + block.text + "</h2>";
+    } else if (block.type === "p") {
+      bhtml += "<p>" + block.text + "</p>";
+    } else if (block.type === "tip") {
+      bhtml += "<div class=\"article-tip\">&#128161; " + block.text + "</div>";
+    } else if (block.type === "list") {
+      bhtml += "<ul>";
+      for (var li = 0; li < block.items.length; li++) {
+        bhtml += "<li>" + block.items[li] + "</li>";
+      }
+      bhtml += "</ul>";
+    } else if (block.type === "table") {
+      bhtml += "<div class=\"article-price-table\">";
+      bhtml += "<div class=\"apt-row header\"><span>Service scope</span><span class=\"price\">Price range</span></div>";
+      for (var tr = 0; tr < block.rows.length; tr++) {
+        bhtml += "<div class=\"apt-row\"><span>" + block.rows[tr].label + "</span><span class=\"price\">" + block.rows[tr].price + "</span></div>";
+      }
+      bhtml += "</div>";
+    }
+  }
+  bhtml += "<div class=\"article-cta\">" +
+    "<h3>Need help with this?</h3>" +
+    "<p>Post your job on ServiCasa and get quotes from verified technicians in your city.</p>" +
+    "<button class=\"btn-gold\" style=\"padding:11px 28px;\" onclick=\"showScreen('screen-post')\">Post a job &#128640;</button>" +
+  "</div>";
+  if (bodyEl) bodyEl.innerHTML = bhtml;
+  showScreen("screen-article");
 }
 </script>
 
