@@ -2776,6 +2776,198 @@
     font-size: 15px;
     font-weight: 600;
   }
+  /* ===== STEP 14: FAQ ===== */
+  .faq-hero {
+    background: var(--brand);
+    padding: 36px 24px 40px;
+    text-align: center;
+    color: #fff;
+  }
+  .faq-hero h1 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .faq-hero p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.72);
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  .faq-steps-section {
+    padding: 28px 20px 8px;
+  }
+  .faq-steps-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .faq-step-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .faq-step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    font-family: Syne,sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .faq-step-body h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .faq-step-body p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .faq-step-connector {
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+    margin-left: 19px;
+    margin-bottom: 4px;
+  }
+  .faq-trust-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 20px 28px;
+  }
+  .faq-trust-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .faq-trust-icon {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+  .faq-trust-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .faq-trust-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .faq-section-label {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text);
+    padding: 0 20px 16px;
+  }
+  .faq-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .faq-tabs::-webkit-scrollbar { display: none; }
+  .faq-tab {
+    white-space: nowrap;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .faq-tab.active {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+    font-weight: 700;
+  }
+  .faq-group {
+    padding: 0 20px;
+    margin-bottom: 8px;
+    display: none;
+  }
+  .faq-group.active { display: block; }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    gap: 12px;
+  }
+  .faq-q span {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--brand);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .faq-a {
+    display: none;
+    padding: 0 16px 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+  .faq-a.open { display: block; }
+  .faq-cta-banner {
+    margin: 20px;
+    background: var(--brand);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .faq-cta-banner h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .faq-cta-banner p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .faq-footer-link {
+    color: var(--gold);
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 13px;
+  }
 </style>
 </head>
 <body>
@@ -2896,6 +3088,7 @@
     <span class="logo">Servi<span style="color:var(--gold);">Casa</span></span>
     <p>Bogotá · Medellín · Cali</p>
     <p style="margin-top:6px;">© 2026 ServiCasa. Todos los derechos reservados.</p>
+    <p style="margin-top:10px;"><span class="faq-footer-link" onclick="openFaq()">&#128214; Help &amp; FAQ</span></p>
   </div>
 </div>
 
@@ -5261,6 +5454,34 @@ function contactAfterPayment() {
     showScreen("screen-chat-list");
   }
 }
+
+// ===== STEP 14: FAQ FUNCTIONS =====
+function openFaq() {
+  showScreen("screen-faq");
+}
+
+function toggleFaqItem(el) {
+  var answer = el.nextElementSibling;
+  var span = el.querySelector("span");
+  if (!answer || !span) return;
+  if (answer.classList.contains("open")) {
+    answer.classList.remove("open");
+    span.innerHTML = "&#43;";
+  } else {
+    answer.classList.add("open");
+    span.innerHTML = "&#8722;";
+  }
+}
+
+function switchFaqTab(btn, group) {
+  var tabs = document.querySelectorAll(".faq-tab");
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+  btn.classList.add("active");
+  var groups = document.querySelectorAll(".faq-group");
+  for (var j = 0; j < groups.length; j++) groups[j].classList.remove("active");
+  var target = document.getElementById("faq-group-" + group);
+  if (target) target.classList.add("active");
+}
 </script>
 
 <!-- ============ SCREEN: AUTH (LOGIN / SIGNUP) ============ -->
@@ -5410,6 +5631,10 @@ function contactAfterPayment() {
         <div class="qa-icon">🛠️</div>
         <div class="qa-label">Soy técnico</div>
         <div class="qa-sub">Gestionar perfil</div>
+      </div>
+      <div class="quick-action" onclick="openFaq()">
+        <div class="quick-action-icon">&#128214;</div>
+        <div class="quick-action-label">Help &amp; FAQ</div>
       </div>
       <div class="quick-action" onclick="showScreen('screen-profile-user')">
         <div class="qa-icon">👤</div>
@@ -7334,6 +7559,235 @@ function contactAfterPayment() {
       &#8592; Back to home
     </button>
   </div>
+</div>
+
+<!-- ============ SCREEN: FAQ / HOW IT WORKS ============ -->
+<div class="screen" id="screen-faq">
+  <nav>
+    <div class="logo">Servi<span>Casa</span></div>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="goBack()">&#8592; Back</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="faq-hero">
+    <h1>&#128214; Help &amp; FAQ</h1>
+    <p>Everything you need to know about ServiCasa</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="faq-steps-section">
+    <div class="faq-steps-title">How it works</div>
+
+    <div class="faq-step-row">
+      <div class="faq-step-num">1</div>
+      <div class="faq-step-body">
+        <h4>Post your job for free</h4>
+        <p>Describe what you need, your neighborhood, and when you want it done. Takes less than 2 minutes.</p>
+      </div>
+    </div>
+    <div class="faq-step-connector"></div>
+
+    <div class="faq-step-row">
+      <div class="faq-step-num">2</div>
+      <div class="faq-step-body">
+        <h4>Get quotes from verified technicians</h4>
+        <p>Up to 5 verified professionals send you their prices and availability within hours.</p>
+      </div>
+    </div>
+    <div class="faq-step-connector"></div>
+
+    <div class="faq-step-row">
+      <div class="faq-step-num">3</div>
+      <div class="faq-step-body">
+        <h4>Compare profiles and reviews</h4>
+        <p>Browse ratings, photos of past work, and verified badges to choose with confidence.</p>
+      </div>
+    </div>
+    <div class="faq-step-connector"></div>
+
+    <div class="faq-step-row">
+      <div class="faq-step-num">4</div>
+      <div class="faq-step-body">
+        <h4>Book and pay securely</h4>
+        <p>Pay with Mercado Pago, PSE, Nequi, Daviplata, or Efecty. Your money is held safely until the job is done.</p>
+      </div>
+    </div>
+    <div class="faq-step-connector"></div>
+
+    <div class="faq-step-row">
+      <div class="faq-step-num">5</div>
+      <div class="faq-step-body">
+        <h4>Rate your technician</h4>
+        <p>After the job, leave a review to help the community find great professionals.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST BADGES -->
+  <div class="faq-trust-row">
+    <div class="faq-trust-card">
+      <div class="faq-trust-icon">&#9989;</div>
+      <div class="faq-trust-title">Verified pros</div>
+      <div class="faq-trust-desc">Every technician passes ID and background checks</div>
+    </div>
+    <div class="faq-trust-card">
+      <div class="faq-trust-icon">&#128274;</div>
+      <div class="faq-trust-title">Secure payments</div>
+      <div class="faq-trust-desc">Money held in escrow until job is complete</div>
+    </div>
+    <div class="faq-trust-card">
+      <div class="faq-trust-icon">&#127919;</div>
+      <div class="faq-trust-title">Satisfaction guarantee</div>
+      <div class="faq-trust-desc">Not happy? We help resolve it at no extra cost</div>
+    </div>
+    <div class="faq-trust-card">
+      <div class="faq-trust-icon">&#128241;</div>
+      <div class="faq-trust-title">Real-time chat</div>
+      <div class="faq-trust-desc">Message your technician directly in the app</div>
+    </div>
+  </div>
+
+  <!-- FAQ TABS -->
+  <div class="faq-section-label">Frequently asked questions</div>
+  <div class="faq-tabs">
+    <div class="faq-tab active" onclick="switchFaqTab(this,'general')">General</div>
+    <div class="faq-tab" onclick="switchFaqTab(this,'clients')">For clients</div>
+    <div class="faq-tab" onclick="switchFaqTab(this,'technicians')">For technicians</div>
+    <div class="faq-tab" onclick="switchFaqTab(this,'payments')">Payments</div>
+  </div>
+
+  <!-- GENERAL -->
+  <div class="faq-group active" id="faq-group-general">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">What is ServiCasa?<span>&#43;</span></div>
+      <div class="faq-a">ServiCasa is a marketplace that connects homeowners in Colombia with verified local technicians for painting, cleaning, plumbing, carpentry, electrical work, drywall, and more. Think of it as the easiest way to find a trustworthy professional in your city.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">Which cities does ServiCasa cover?<span>&#43;</span></div>
+      <div class="faq-a">We currently operate in Bogota, Medellin, Cali, and Barranquilla. We are expanding to more Colombian cities every month. Not in your city yet? Sign up and we will notify you when we launch there.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">Is ServiCasa free to use?<span>&#43;</span></div>
+      <div class="faq-a">Yes! Posting a job and receiving quotes is completely free for homeowners. ServiCasa charges a small 10% service fee on completed bookings, which is included in the price you see before you pay.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">How are technicians verified?<span>&#43;</span></div>
+      <div class="faq-a">Every technician goes through our 4-step verification: government ID check, phone number confirmation, skills assessment, and reference check. Verified technicians display a blue checkmark on their profile.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">What services are available?<span>&#43;</span></div>
+      <div class="faq-a">Painting (interior and exterior), deep cleaning, plumbing, carpentry and custom furniture, electrical installations and repairs, drywall installation and finishing, and general home maintenance. More services are being added regularly.</div>
+    </div>
+
+  </div>
+
+  <!-- FOR CLIENTS -->
+  <div class="faq-group" id="faq-group-clients">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">How do I post a job?<span>&#43;</span></div>
+      <div class="faq-a">Tap the gold button on the home screen. Choose your service, describe the work, enter your neighborhood and preferred date, and submit. You will start receiving quotes within a few hours.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">How many quotes will I receive?<span>&#43;</span></div>
+      <div class="faq-a">You can receive up to 5 quotes from different verified technicians for each job. You are never obligated to accept any of them.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">Can I see a technician's past work?<span>&#43;</span></div>
+      <div class="faq-a">Yes. Each technician profile includes before and after photos of real completed jobs, star ratings, and written reviews from previous clients. You can also chat with the technician before hiring.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">What if I am not happy with the work?<span>&#43;</span></div>
+      <div class="faq-a">Open a dispute from your Job Tracker screen. Our team reviews the case within 24 hours. If the work is not up to standard, you can request a redo or a full refund depending on the situation.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">Can I cancel a booking?<span>&#43;</span></div>
+      <div class="faq-a">Yes. Cancel for free up to 24 hours before the scheduled service. Cancellations within 24 hours may incur a small fee depending on the technician. Check the cancellation policy on the booking screen.</div>
+    </div>
+
+  </div>
+
+  <!-- FOR TECHNICIANS -->
+  <div class="faq-group" id="faq-group-technicians">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">How do I join as a technician?<span>&#43;</span></div>
+      <div class="faq-a">Tap "Join as technician" from the home screen or sign up page. Complete your profile, upload your ID and a photo, and select the services you offer. Our team verifies your account within 48 hours.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">How does ServiCasa make money from technicians?<span>&#43;</span></div>
+      <div class="faq-a">ServiCasa takes a 10% commission from each completed job. There are no monthly fees or signup costs. You only pay when you earn.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">How and when do I get paid?<span>&#43;</span></div>
+      <div class="faq-a">Payment is released to your account within 24 hours after the client confirms the job is complete. You can withdraw to your bank account, Nequi, or Daviplata at any time.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">Can I set my own rates?<span>&#43;</span></div>
+      <div class="faq-a">Yes. You set your hourly rate and can adjust it at any time from your profile settings. We show market rate benchmarks to help you price competitively.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">What if a client disputes my work?<span>&#43;</span></div>
+      <div class="faq-a">You will be notified and asked to provide your side of the case with photos and notes. Our team mediates fairly. Technicians with strong ratings and clear photo documentation almost always win legitimate disputes.</div>
+    </div>
+
+  </div>
+
+  <!-- PAYMENTS -->
+  <div class="faq-group" id="faq-group-payments">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">What payment methods are accepted?<span>&#43;</span></div>
+      <div class="faq-a">We accept Mercado Pago (credit and debit cards), PSE bank transfers, Nequi, Daviplata, and cash payments via Efecty. All digital payments are processed securely through Mercado Pago.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">Is my payment information safe?<span>&#43;</span></div>
+      <div class="faq-a">Yes. ServiCasa never stores your card details. All payments are encrypted and processed through Mercado Pago, which is PCI DSS compliant and used by millions of people across Latin America.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">When is my payment charged?<span>&#43;</span></div>
+      <div class="faq-a">Your payment is authorized at the time of booking but only captured once the technician confirms the appointment. If no technician is assigned, you are never charged.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">Can I get a refund?<span>&#43;</span></div>
+      <div class="faq-a">Full refunds are issued if: the job is cancelled more than 24 hours before the service date, no technician is assigned, or a dispute is resolved in your favor. Refunds are processed within 3 to 5 business days.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaqItem(this)">What is the ServiCasa service fee?<span>&#43;</span></div>
+      <div class="faq-a">We charge a 10% service fee on the total job amount. This fee covers payment protection, customer support, insurance guarantee, and platform maintenance. The fee is always shown clearly before you confirm payment.</div>
+    </div>
+
+  </div>
+
+  <!-- CTA BANNER -->
+  <div class="faq-cta-banner">
+    <h3>Ready to get started?</h3>
+    <p>Post your first job for free and get quotes from verified technicians in your city.</p>
+    <button class="btn-gold" style="padding:12px 32px;" onclick="showScreen('screen-post')">
+      Post a job &#128640;
+    </button>
+  </div>
+
+  <div style="height:32px;"></div>
 </div>
 </body>
 </html>
