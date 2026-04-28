@@ -345,27 +345,32 @@ function goTabProfile() {
   /* CONTRACTOR CARDS */
   .contractors-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
   }
+  .contractors-list::-webkit-scrollbar { display: none; }
 
   .contractor-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 16px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
+    flex-shrink: 0;
+    width: 170px;
+    background: #181818;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 0;
+    display: block;
+    overflow: hidden;
     cursor: pointer;
-    transition: box-shadow 0.15s, transform 0.15s;
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--brand);
+    transition: transform 0.15s, border-color 0.15s;
   }
 
   .contractor-card:hover {
-    box-shadow: 0 6px 24px rgba(194,65,12,0.12);
-    transform: translateY(-2px);
-    border-left-color: var(--gold);
+    transform: translateY(-3px);
+    border-color: rgba(244,161,0,0.5);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
   }
 
   .avatar {
@@ -3319,7 +3324,7 @@ function goTabProfile() {
   }
 
   /* ===== STEP 18: DARK THEME OVERRIDES ===== */
-  body { background: var(--bg); color: var(--text); }
+  html, body { background: var(--bg); color: var(--text); min-height: 100vh; }
   nav {
     background: #0A0A0A;
     border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -3664,6 +3669,45 @@ function goTabProfile() {
   .post-label { color: rgba(255,255,255,0.7); }
   .urgency-option { background: #1A1A1A; border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
   .urgency-option.selected { border-color: var(--gold); background: rgba(244,161,0,0.1); color: var(--gold); }
+
+  /* ===== DESKTOP RESPONSIVE ===== */
+  @media (min-width: 768px) {
+    .screen { max-width: 1200px; margin: 0 auto; }
+
+    .hero { padding: 80px 48px 96px; }
+    .hero h1 { font-size: 52px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .hero p { font-size: 18px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .search-bar { max-width: 600px; margin-left: auto; margin-right: auto; padding: 14px 20px; }
+    .search-bar input { font-size: 16px; }
+
+    .trust-strip { padding: 18px 48px; }
+    .trust-num { font-size: 20px; }
+
+    .section { padding: 32px 48px 12px; }
+
+    .categories-grid { gap: 14px; }
+    .cat-card { width: 100px; padding: 20px 10px 16px; }
+    .cat-icon { font-size: 28px; margin-bottom: 8px; }
+    .cat-label { font-size: 12px; }
+
+    .contractor-card { width: 200px; }
+    .contractors-list { gap: 16px; }
+
+    .how-it-works { padding: 40px 48px; }
+    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+    .bottom-tab-nav { max-width: 1200px; left: 50%; transform: translateX(-50%); border-radius: 16px 16px 0 0; }
+
+    nav { max-width: 100%; padding: 0 48px; }
+
+    .footer { padding: 40px 48px; }
+  }
+
+  @media (min-width: 1200px) {
+    .hero h1 { font-size: 62px; }
+    .contractor-card { width: 220px; }
+    .cat-card { width: 110px; }
+  }
 </style>
 </head>
 <body>
