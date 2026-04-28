@@ -43,25 +43,64 @@
     {"@type": "City", "name": "Barranquilla"}
   ]
 }
+
+// ===== STEP 18: BOTTOM TAB NAV =====
+function setActiveTab(id) {
+  var tabs = ["tab-home","tab-search","tab-chats","tab-profile"];
+  for (var i = 0; i < tabs.length; i++) {
+    var el = document.getElementById(tabs[i]);
+    if (el) el.classList.remove("active");
+  }
+  var active = document.getElementById(id);
+  if (active) active.classList.add("active");
+}
+
+function goTabHome() {
+  setActiveTab("tab-home");
+  showScreen("screen-home");
+}
+
+function goTabSearch() {
+  setActiveTab("tab-search");
+  showScreen("screen-map");
+  renderMapContractors("Bogota", "all");
+  setTimeout(function() { initMap("Bogota"); }, 200);
+}
+
+function goTabChats() {
+  setActiveTab("tab-chats");
+  openChatList();
+}
+
+function goTabProfile() {
+  setActiveTab("tab-profile");
+  if (currentUser) {
+    showScreen("screen-dashboard");
+  } else {
+    showScreen("screen-auth");
+  }
+}
 </script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --brand: #C2410C;
-    --brand-light: #EA580C;
-    --brand-accent: #FFF7ED;
-    --brand-trust: #1B4332;
-    --brand-trust-light: #40916C;
+    --brand: #F4A100;
+    --brand-light: #F59E0B;
+    --brand-accent: rgba(244,161,0,0.12);
+    --brand-trust: #22C55E;
+    --brand-trust-light: #16A34A;
     --gold: #F4A100;
-    --gold-light: #FFF3CD;
-    --bg: #FFF7ED;
-    --white: #FFFFFF;
-    --text: #1C1917;
-    --text-muted: #78716C;
-    --text-light: #A8A29E;
-    --border: #FED7AA;
-    --card-shadow: 0 2px 16px rgba(194,65,12,0.08);
+    --gold-light: rgba(244,161,0,0.1);
+    --bg: #0A0A0A;
+    --surface: #141414;
+    --surface2: #1F1F1F;
+    --white: #181818;
+    --text: #FFFFFF;
+    --text-muted: rgba(255,255,255,0.55);
+    --text-light: rgba(255,255,255,0.3);
+    --border: rgba(255,255,255,0.08);
+    --card-shadow: 0 4px 24px rgba(0,0,0,0.5);
     --radius: 16px;
     --radius-sm: 10px;
   }
@@ -3278,6 +3317,353 @@
     font-size: 13px;
     margin-left: 12px;
   }
+
+  /* ===== STEP 18: DARK THEME OVERRIDES ===== */
+  body { background: var(--bg); color: var(--text); }
+  nav {
+    background: #0A0A0A;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo { color: var(--gold); }
+  .logo span { color: #fff; opacity: 1; }
+  .nav-btn {
+    color: rgba(255,255,255,0.6);
+    background: transparent;
+    border: none;
+  }
+  .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  .nav-btn.active {
+    background: var(--gold);
+    color: #000;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+  .hero {
+    background: #0A0A0A;
+    padding: 52px 20px 64px;
+  }
+  .hero::before { display: none; }
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 40px;
+    background: var(--bg);
+    clip-path: ellipse(60% 100% at 50% 100%);
+  }
+  .hero h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 20px; }
+  .search-bar {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 50px;
+    box-shadow: none;
+  }
+  .search-bar input { color: #fff; font-size: 14px; }
+  .search-bar input::placeholder { color: rgba(255,255,255,0.35); }
+  .btn-primary {
+    background: var(--gold);
+    color: #000;
+    font-weight: 700;
+    border-radius: 50px;
+  }
+  .screen { background: var(--bg); }
+  .section { padding: 24px 20px 8px; }
+  .section-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 14px;
+    letter-spacing: -0.2px;
+  }
+  .categories-grid {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .categories-grid::-webkit-scrollbar { display: none; }
+  .cat-card {
+    flex-shrink: 0;
+    width: 76px;
+    background: #181818;
+    border-radius: 14px;
+    padding: 14px 6px 12px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .cat-card:hover, .cat-card.active {
+    border-color: var(--gold);
+    background: rgba(244,161,0,0.1);
+    transform: translateY(-2px);
+  }
+  .cat-icon { font-size: 22px; margin-bottom: 6px; }
+  .cat-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+  }
+  .cat-card.active .cat-label, .cat-card:hover .cat-label { color: var(--gold); }
+  .contractors-list {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+  }
+  .contractors-list::-webkit-scrollbar { display: none; }
+  .contractor-card {
+    flex-shrink: 0;
+    width: 160px;
+    background: #181818;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: none;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .contractor-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(244,161,0,0.4);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  }
+  .cc-header {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Syne, sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .cc-body { padding: 10px 12px 12px; }
+  .cc-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cc-trade { font-size: 11px; color: var(--gold); margin-bottom: 3px; }
+  .cc-rating { font-size: 10px; color: rgba(255,255,255,0.45); margin-bottom: 5px; }
+  .cc-price {
+    font-family: Syne, sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+  .cc-badge {
+    display: inline-block;
+    background: rgba(34,197,94,0.15);
+    color: #22C55E;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom: 14px;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .chip.active, .chip:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #000;
+    font-weight: 700;
+  }
+  .how-it-works {
+    background: #111;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 20px;
+    margin: 8px 0;
+  }
+  .how-it-works .section-title { color: #fff; }
+  .step-num {
+    background: var(--gold);
+    color: #000;
+    font-weight: 800;
+  }
+  .step h4 { color: #fff; }
+  .step p { color: rgba(255,255,255,0.45); }
+  .footer {
+    background: #0A0A0A;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 20px;
+  }
+  .profile-hero {
+    background: #111;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .profile-hero .profile-name { color: #fff; }
+  .profile-hero .profile-trade { color: var(--gold); }
+  .profile-hero .stat-num { color: #fff; }
+  .profile-hero .stat-label { color: rgba(255,255,255,0.45); }
+  .pay-hero { background: #111; }
+  .faq-hero { background: #111; }
+  .blog-hero { background: #111; }
+  .article-hero { background: #111; }
+  .bottom-cta {
+    background: #0A0A0A;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .card, .pkg-card, .promo-card, .ba-card, .dispute-card {
+    background: #181818;
+    border-color: rgba(255,255,255,0.07);
+    color: #fff;
+  }
+  input, select, textarea {
+    background: #1A1A1A;
+    border-color: rgba(255,255,255,0.12);
+    color: #fff;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--gold);
+    outline: none;
+  }
+  .modal-overlay { background: rgba(0,0,0,0.85); }
+  .modal {
+    background: #1A1A1A;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  /* === BOTTOM TAB NAV === */
+  .bottom-tab-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 12px;
+    z-index: 1000;
+  }
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    padding: 4px 12px;
+    border-radius: 12px;
+    transition: background 0.15s;
+    min-width: 52px;
+  }
+  .tab-item:hover { background: rgba(255,255,255,0.06); }
+  .tab-icon { font-size: 18px; line-height: 1; }
+  .tab-label { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 500; }
+  .tab-item.active .tab-label { color: var(--gold); }
+  .tab-post-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #000;
+    font-weight: 800;
+    line-height: 1;
+    margin-top: -8px;
+    box-shadow: 0 4px 16px rgba(244,161,0,0.4);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .tab-post-btn:hover { transform: scale(1.08); }
+  /* Add padding to screens so content clears bottom nav */
+  .screen { padding-bottom: 72px; }
+  /* === TRUST STRIP === */
+  .trust-strip {
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 8px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .trust-item { text-align: center; }
+  .trust-num {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--gold);
+    font-family: Syne, sans-serif;
+  }
+  .trust-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+  .trust-label { font-size: 9px; color: rgba(255,255,255,0.35); margin-top: 1px; }
+  /* === ROW HEADER with see-all === */
+  .row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .row-see-all {
+    font-size: 11px;
+    color: var(--gold);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  /* Auth screen dark */
+  .auth-card { background: #181818; border: 1px solid rgba(255,255,255,0.08); }
+  .auth-tab { color: rgba(255,255,255,0.45); }
+  .auth-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  /* Profile page dark */
+  .profile-tabs { border-bottom-color: rgba(255,255,255,0.08); }
+  .profile-tab { color: rgba(255,255,255,0.45); }
+  .profile-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .review-card { background: #1A1A1A; border-color: rgba(255,255,255,0.07); }
+  .reviewer { color: rgba(255,255,255,0.6); }
+  .badge { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+  .badge.gold { background: rgba(244,161,0,0.15); color: var(--gold); }
+  .badge-verified { background: rgba(34,197,94,0.12); color: #22C55E; }
+  /* Dashboard dark */
+  .dashboard-card { background: #181818; border-color: rgba(255,255,255,0.07); }
+  .quick-action { background: #1A1A1A; border-color: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); }
+  .quick-action:hover { background: #222; border-color: var(--gold); color: var(--gold); }
+  .dash-stat-num { color: #fff; }
+  .dash-stat-label { color: rgba(255,255,255,0.45); }
+  /* Post job screen */
+  .post-label { color: rgba(255,255,255,0.7); }
+  .urgency-option { background: #1A1A1A; border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+  .urgency-option.selected { border-color: var(--gold); background: rgba(244,161,0,0.1); color: var(--gold); }
 </style>
 </head>
 <body>
@@ -3311,30 +3697,21 @@
     <p style="color:rgba(255,255,255,0.55);font-size:11px;margin-top:10px;position:relative;z-index:1;cursor:pointer;"><span onclick="openMap()">&#128205; Map</span> &nbsp;|&nbsp; <span onclick="openPhotos()">&#128247; Before &amp; After</span> &nbsp;|&nbsp; <span onclick="openPackages()">&#128230; Packages</span> &nbsp;|&nbsp; <span onclick="openPromos()">&#127881; Offers</span> &nbsp;|&nbsp; <span onclick="openPriceEstimator()">&#128200; Prices</span></p>
   </div>
 
-  <div style="background:#fff;display:flex;justify-content:space-around;padding:14px 12px;border-bottom:1px solid var(--border);">
-    <div style="text-align:center;">
-      <div style="font-size:15px;font-weight:800;color:var(--brand);font-family:Syne,sans-serif;">500+</div>
-      <div style="font-size:10px;color:var(--text-muted);">Technicians</div>
-    </div>
-    <div style="width:1px;background:var(--border);"></div>
-    <div style="text-align:center;">
-      <div style="font-size:15px;font-weight:800;color:var(--brand);font-family:Syne,sans-serif;">4.9 ★</div>
-      <div style="font-size:10px;color:var(--text-muted);">Avg. rating</div>
-    </div>
-    <div style="width:1px;background:var(--border);"></div>
-    <div style="text-align:center;">
-      <div style="font-size:15px;font-weight:800;color:var(--brand);font-family:Syne,sans-serif;">4 cities</div>
-      <div style="font-size:10px;color:var(--text-muted);">Colombia</div>
-    </div>
-    <div style="width:1px;background:var(--border);"></div>
-    <div style="text-align:center;">
-      <div style="font-size:15px;font-weight:800;color:var(--brand);font-family:Syne,sans-serif;">Free</div>
-      <div style="font-size:10px;color:var(--text-muted);">To post a job</div>
-    </div>
+  <div class="trust-strip">
+    <div class="trust-item"><div class="trust-num">500+</div><div class="trust-label">Technicians</div></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><div class="trust-num">4.9 &#9733;</div><div class="trust-label">Avg rating</div></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><div class="trust-num">4 cities</div><div class="trust-label">Colombia</div></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><div class="trust-num">Free</div><div class="trust-label">To post</div></div>
   </div>
 
   <div class="section">
-    <div class="section-title">¿Qué necesitas hoy?</div>
+    <div class="row-header">
+      <div class="section-title" style="margin-bottom:0;">What do you need?</div>
+      <div class="row-see-all" onclick="showScreen('screen-post')">Post job +</div>
+    </div>
     <div class="categories-grid">
       <div class="cat-card" onclick="filterCategory('Pintura')">
         <div class="cat-icon">🎨</div>
@@ -3377,7 +3754,10 @@
   </div>
 
   <div class="section" style="padding-top: 0;">
-    <div class="section-title">Técnicos mejor valorados</div>
+    <div class="row-header">
+      <div class="section-title" style="margin-bottom:0;">Top rated near you</div>
+      <div class="row-see-all" onclick="showScreen('screen-results')">See all →</div>
+    </div>
     <div class="chips">
       <div class="chip active" onclick="setChip(this, 'all')">Todos</div>
       <div class="chip" onclick="setChip(this, 'Bogotá')">Bogotá</div>
@@ -8451,6 +8831,29 @@ function openArticle(id) {
   <div class="article-body" id="article-body"></div>
 
   <div style="height:32px;"></div>
+</div>
+
+<div class="bottom-tab-nav" id="bottom-tab-nav">
+  <div class="tab-item active" id="tab-home" onclick="goTabHome()">
+    <span class="tab-icon">&#127968;</span>
+    <span class="tab-label">Home</span>
+  </div>
+  <div class="tab-item" id="tab-search" onclick="goTabSearch()">
+    <span class="tab-icon">&#128269;</span>
+    <span class="tab-label">Search</span>
+  </div>
+  <div class="tab-item" onclick="showScreen('screen-post')">
+    <div class="tab-post-btn">+</div>
+    <span class="tab-label" style="color:var(--gold);">Post</span>
+  </div>
+  <div class="tab-item" id="tab-chats" onclick="goTabChats()">
+    <span class="tab-icon">&#128172;</span>
+    <span class="tab-label">Chats</span>
+  </div>
+  <div class="tab-item" id="tab-profile" onclick="goTabProfile()">
+    <span class="tab-icon">&#128100;</span>
+    <span class="tab-label">Profile</span>
+  </div>
 </div>
 </body>
 </html>
