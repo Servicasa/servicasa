@@ -8862,5 +8862,39 @@ function openArticle(id) {
     <span class="tab-label">Profile</span>
   </div>
 </div>
+
+<script>
+function setActiveTab(id) {
+  var tabs = ["tab-home","tab-search","tab-chats","tab-profile"];
+  for (var i = 0; i < tabs.length; i++) {
+    var el = document.getElementById(tabs[i]);
+    if (el) el.classList.remove("active");
+  }
+  var active = document.getElementById(id);
+  if (active) active.classList.add("active");
+}
+function goTabHome() {
+  setActiveTab("tab-home");
+  showScreen("screen-home");
+}
+function goTabSearch() {
+  setActiveTab("tab-search");
+  showScreen("screen-map");
+  renderMapContractors("Bogota","all");
+  setTimeout(function() { initMap("Bogota"); }, 200);
+}
+function goTabChats() {
+  setActiveTab("tab-chats");
+  openChatList();
+}
+function goTabProfile() {
+  setActiveTab("tab-profile");
+  if (typeof currentUser !== "undefined" && currentUser) {
+    showScreen("screen-dashboard");
+  } else {
+    showScreen("screen-auth");
+  }
+}
+</script>
 </body>
 </html>
