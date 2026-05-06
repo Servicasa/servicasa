@@ -3807,6 +3807,7 @@
     <span class="logo">Servi<span style="color:var(--gold);">Casa</span></span>
     <p>Bogotá · Medellín · Cali</p>
     <p style="margin-top:6px;">© 2026 ServiCasa. Todos los derechos reservados.</p>
+    <p style="margin-top:8px;"><a href="https://wa.me/16172021549" style="color:var(--gold);text-decoration:none;">&#128172; WhatsApp us</a></p>
     <p style="margin-top:10px;"><span class="faq-footer-link" onclick="openFaq()">&#128214; Help &amp; FAQ</span><span class="blog-footer-link" onclick="openBlog()">&#128240; Blog</span></p>
   </div>
 </div>
@@ -4348,7 +4349,7 @@ function msgContractor() {
 function leaveReview() {
   if (!currentContractor) return;
   var msg = encodeURIComponent('Hola, quiero dejar una resena para ' + currentContractor.name + ' en ServiCasa.');
-  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  window.open('https://wa.me/16172021549?text=' + msg, '_blank');
 }
 
 function doSearch() {
@@ -4462,7 +4463,7 @@ function submitJob() {
     '%0ADescripcion: ' + encodeURIComponent(description) +
     '%0ACliente: ' + encodeURIComponent(name) +
     '%0ATelefono: ' + encodeURIComponent(phone);
-  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  window.open('https://wa.me/16172021549?text=' + msg, '_blank');
   addNotification('jobs','&#10003;','ni-green','Trabajo publicado','Tu trabajo de ' + category + ' fue enviado a tecnicos verificados en ' + city + '.');
   showScreen('screen-success');
 }
@@ -4478,7 +4479,7 @@ function joinAsContractor() {
     '%0AEspecialidad: ' + encodeURIComponent(trade) +
     '%0ACiudad: ' + encodeURIComponent(city) +
     '%0AWhatsApp: ' + encodeURIComponent(phone);
-  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  window.open('https://wa.me/16172021549?text=' + msg, '_blank');
   addNotification('jobs','&#10003;','ni-green','Trabajo publicado','Tu trabajo de ' + category + ' fue enviado a tecnicos verificados en ' + city + '.');
   showScreen('screen-success');
 }
@@ -4815,7 +4816,7 @@ function submitVerification() {
   }
   var msg = 'Solicitud Verificacion - ServiCasa%0A%0ANombre: ' + encodeURIComponent(name) +
     '%0ACedula: ' + encodeURIComponent(cedula);
-  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  window.open('https://wa.me/16172021549?text=' + msg, '_blank');
   alert('Solicitud enviada. Te contactaremos en 24-48 horas para completar el proceso.');
   showScreen('screen-contractors');
 }
@@ -5298,7 +5299,7 @@ function bookPackage(pkgId) {
   addNotification('jobs', '&#128230;', 'ni-green',
     'Package booked: ' + pkg.title,
     'Your booking request was sent. A technician will confirm soon.');
-  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  window.open('https://wa.me/16172021549?text=' + msg, '_blank');
   showToast('&#128230; Booking request sent!');
 }
 
@@ -5520,7 +5521,7 @@ function submitDispute() {
   addNotification('system', '&#9878;', 'ni-blue',
     'Dispute submitted',
     'Your dispute has been received. A mediator will contact you within 24 hours.');
-  window.open('https://wa.me/15551234567?text=' + msg, '_blank');
+  window.open('https://wa.me/16172021549?text=' + msg, '_blank');
   showToast('Dispute submitted — mediator will contact you within 24h');
   showScreen('screen-home');
 }
@@ -7648,7 +7649,7 @@ function openArticle(id) {
 </div>
 
 <!-- ============ SCREEN: BOOKING HISTORY & REPEAT ============ -->
-<div class="screen" id="screen-bookings">
+<div class="screen" id="screen-bookings-b">
   <nav>
     <div class="logo">Servi<span>Casa</span></div>
     <div class="nav-right">
@@ -7843,7 +7844,7 @@ function openArticle(id) {
 </div>
 
 <!-- ============ SCREEN: BOOK AGAIN CONFIRM ============ -->
-<div class="screen" id="screen-book-again">
+<div class="screen" id="screen-book-again-b">
   <nav>
     <div class="logo">Servi<span>Casa</span></div>
     <div class="nav-right">
