@@ -1,0 +1,45 @@
+{
+  "name": "ServiCasa",
+  "short_name": "ServiCasa",
+  "description": "Find trusted home service technicians in Colombia",
+  "start_url": "/servicasa/",
+  "scope": "/servicasa/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A0A0A",
+  "theme_color": "#F4A100",
+  "lang": "es-CO",
+  "categories": [
+    "business",
+    "lifestyle",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

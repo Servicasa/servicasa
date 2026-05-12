@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="114" fill="#0A0A0A"/>
+  <rect width="512" height="512" rx="114" fill="none" stroke="#F4A100" stroke-width="4" opacity="0.25"/>
+  <g transform="translate(106, 52)">
+    <polyline points="0,122 150,0 300,122" fill="none" stroke="#F4A100" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"/>
+    <polyline points="0,122 0,298 300,298 300,122" fill="none" stroke="#F4A100" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"/>
+    <rect x="76" y="184" width="148" height="114" rx="6" fill="none" stroke="#F4A100" stroke-width="13"/>
+    <line x1="150" y1="184" x2="150" y2="298" stroke="#F4A100" stroke-width="9" opacity="0.45"/>
+    <polygon points="150,0 300,122 150,122" fill="#F4A100" opacity="0.08"/>
+    <circle cx="248" cy="222" r="24" fill="#0A0A0A"/>
+    <circle cx="248" cy="222" r="17" fill="none" stroke="#F4A100" stroke-width="11"/>
+    <line x1="260" y1="234" x2="280" y2="254" stroke="#F4A100" stroke-width="11" stroke-linecap="round"/>
+  </g>
+  <text x="256" y="398" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="68" font-weight="700" fill="#F4A100" letter-spacing="-1">Servi</text>
+  <text x="256" y="398" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="68" font-weight="300" fill="#FFFFFF" letter-spacing="-1" dx="122">Casa</text>
+  <text x="256" y="460" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="22" font-weight="400" fill="#F4A100" letter-spacing="4" opacity="0.7">HOME SERVICES</text>
+</svg>
