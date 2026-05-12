@@ -9,7 +9,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'servicasa-secret-change-in-production';
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://servicasa.co',
+    'https://www.servicasa.co',
+    'https://servicasa.github.io'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
