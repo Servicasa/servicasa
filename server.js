@@ -1,5 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+var { Pool } = require('pg');
+var pgPool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+var COMMISSION_RATE = 0.15;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
@@ -343,6 +347,153 @@ app.get('/api/stats', (req, res) => {
     cityCounts,
     categoryCounts
   });
+});
+// ============================================================
+// STRIPE PAYMENT ENDPOINTS
+// ============================================================
+
+// POST /api/payments/create-intent
+app.post('/api/payments/create-intent', authenticateToken, function(req, res) {
+  var amountCop = parseInt(req.body.amountCop) || 0;
+  var contractorId = req.body.contractorId || '';
+  var jobId = req.body.jobId || '';
+  var jobTitle = req.body.jobTitle || 'Servicio ServiCasa';
+  var homeownerId = req.user.id || req.user.userId || '';
+
+  if (!amountCop || amountCop < 1000) {
+    return res.status(400).json({ error: 'Monto invalido. Minimo 1000 COP' });
+  }
+  if (!contractorId) {
+    return res.status(400).json({ error: 'Contratista requerido' });
+  }
+
+  var commissionCop = Math.round(amountCop * COMMISSION_RATE);
+  var contractorAmountCop = amountCop - commissionCop;
+
+  stripe.paymentIntents.create({
+    amount: amountCop,
+    currency: 'cop',
+    description: jobTitle,
+    metadata: {
+      jobId: jobId,
+      homeownerId: homeownerId,
+      contractorId: contractorId,
+      commissionCop: commissionCop.toString(),
+      contractorAmountCop: contractorAmountCop.toString()
+    }
+  }, function(err, paymentIntent) {
+    if (err) {
+      console.error('Stripe error:', err);
+      return res.status(500).json({ error: 'Error creando pago: ' + err.message });
+    }
+
+    pgPool.query(
+      'INSERT INTO payments (reference, job_id, homeowner_id, contractor_id, amount_cop, amount_in_cents, commission_cop, contractor_amount_cop, status, wompi_transaction_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) ON CONFLICT (reference) DO NOTHING',
+      [paymentIntent.id, jobId, homeownerId, contractorId, amountCop, amountCop, commissionCop, contractorAmountCop, 'pending', paymentIntent.id],
+      function(dbErr) {
+        if (dbErr) {
+          console.error('DB error saving payment:', dbErr);
+        }
+        res.json({
+          clientSecret: paymentIntent.client_secret,
+          paymentIntentId: paymentIntent.id,
+          amountCop: amountCop,
+          commissionCop: commissionCop,
+          contractorAmountCop: contractorAmountCop,
+          publicKey: process.env.STRIPE_PUBLIC_KEY
+        });
+      }
+    );
+  });
+});
+
+// POST /api/payments/confirm/:paymentIntentId
+app.post('/api/payments/confirm/:paymentIntentId', authenticateToken, function(req, res) {
+  var paymentIntentId = req.params.paymentIntentId;
+
+  stripe.paymentIntents.retrieve(paymentIntentId, function(err, paymentIntent) {
+    if (err) {
+      return res.status(500).json({ error: 'Error verificando pago' });
+    }
+
+    var newStatus = 'pending';
+    if (paymentIntent.status === 'succeeded') {
+      newStatus = 'in_escrow';
+    } else if (paymentIntent.status === 'canceled') {
+      newStatus = 'failed';
+    }
+
+    pgPool.query(
+      'UPDATE payments SET status = $1, paid_at = NOW() WHERE wompi_transaction_id = $2 OR reference = $3',
+      [newStatus, paymentIntentId, paymentIntentId],
+      function(dbErr) {
+        if (dbErr) {
+          console.error('Confirm DB error:', dbErr);
+        }
+        res.json({
+          status: newStatus,
+          stripeStatus: paymentIntent.status,
+          paymentIntentId: paymentIntentId
+        });
+      }
+    );
+  });
+});
+
+// POST /api/payments/release/:paymentIntentId
+app.post('/api/payments/release/:paymentIntentId', authenticateToken, function(req, res) {
+  var paymentIntentId = req.params.paymentIntentId;
+  var homeownerId = req.user.id || req.user.userId || '';
+
+  pgPool.query(
+    'SELECT * FROM payments WHERE wompi_transaction_id = $1 OR reference = $2',
+    [paymentIntentId, paymentIntentId],
+    function(err, result) {
+      if (err || !result.rows || result.rows.length === 0) {
+        return res.status(404).json({ error: 'Pago no encontrado' });
+      }
+
+      var payment = result.rows[0];
+
+      if (payment.homeowner_id !== homeownerId) {
+        return res.status(403).json({ error: 'No autorizado' });
+      }
+      if (payment.status !== 'in_escrow') {
+        return res.status(400).json({ error: 'El pago no esta en escrow' });
+      }
+
+      pgPool.query(
+        'UPDATE payments SET status = $1, released_at = NOW() WHERE id = $2',
+        ['released', payment.id],
+        function(err2) {
+          if (err2) {
+            return res.status(500).json({ error: 'Error liberando fondos' });
+          }
+          res.json({
+            success: true,
+            contractorAmountCop: payment.contractor_amount_cop,
+            message: 'Fondos liberados. El contratista recibira su pago.'
+          });
+        }
+      );
+    }
+  );
+});
+
+// GET /api/payments/status/:paymentIntentId
+app.get('/api/payments/status/:paymentIntentId', function(req, res) {
+  var paymentIntentId = req.params.paymentIntentId;
+
+  pgPool.query(
+    'SELECT reference, status, amount_cop, commission_cop, contractor_amount_cop, created_at, paid_at, released_at FROM payments WHERE wompi_transaction_id = $1 OR reference = $2',
+    [paymentIntentId, paymentIntentId],
+    function(err, result) {
+      if (err || !result.rows || result.rows.length === 0) {
+        return res.status(404).json({ error: 'Pago no encontrado' });
+      }
+      res.json(result.rows[0]);
+    }
+  );
 });
 
 // ─────────────────────────────────────────
